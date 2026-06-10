@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Luxe Nails Studio — Premium Nagelpflege Dortmund</title>
+  <style>
+    :root {
+      --rosa: #D4A0B5;
+      --gold: #C8A84B;
+      --bg: #0a0808;
+      --card: #120d0e;
+      --border: rgba(212,160,181,0.12);
+      --muted: rgba(255,255,255,0.48);
+      --banner-h: 36px;
+      --nav-h: 68px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: #fff; font-family: Georgia, 'Times New Roman', serif; line-height: 1.6; }
+
+    /* ── Demo Banner ── */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--banner-h);
+      background: #050505;
+      border-bottom: 1px solid rgba(200,168,75,0.25);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999;
+      font-family: -apple-system, sans-serif;
+      font-size: 12px; color: var(--gold);
+      text-align: center; padding: 0 16px; gap: 6px;
+    }
+    .demo-banner a { color: var(--gold); font-weight: 700; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: var(--banner-h); left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(10,8,8,0.96); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 999; display: flex; align-items: center; padding: 0 40px;
+    }
+    .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 17px; font-weight: 700; color: var(--rosa); text-decoration: none; letter-spacing: 0.04em; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 13px; font-family: -apple-system, sans-serif; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--rosa); }
+    .btn-nav { background: var(--rosa); color: #0a0808; border: none; padding: 9px 22px; border-radius: 999px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; font-family: -apple-system, sans-serif; transition: opacity 0.2s; }
+    .btn-nav:hover { opacity: 0.82; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: calc(var(--banner-h) + var(--nav-h)); left: 0; right: 0; background: rgba(10,8,8,0.98); border-bottom: 1px solid var(--border); padding: 20px 32px; flex-direction: column; gap: 4px; z-index: 998; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 16px; font-family: -apple-system, sans-serif; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .mobile-menu .btn-nav { margin-top: 8px; text-align: center; border-radius: 8px; }
+    main { padding-top: calc(var(--banner-h) + var(--nav-h)); }
+
+    /* ── Layout ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 96px 0; }
+    .section-alt { background: #0d0a0b; }
+    .section-label { font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 14px; font-family: -apple-system, sans-serif; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 700; color: #fff; margin-bottom: 14px; }
+    .gold-line { width: 40px; height: 2px; background: var(--gold); margin: 16px 0 32px; }
+    .section-sub { font-size: 15px; color: var(--muted); max-width: 520px; font-family: -apple-system, sans-serif; line-height: 1.75; margin-bottom: 48px; }
+
+    /* ── Hero ── */
+    .hero { min-height: 92vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-glow { position: absolute; top: 10%; left: 40%; width: 700px; height: 700px; background: radial-gradient(circle, rgba(212,160,181,0.10) 0%, transparent 65%); pointer-events: none; border-radius: 50%; }
+    .hero-glow2 { position: absolute; bottom: 5%; left: 5%; width: 400px; height: 400px; background: radial-gradient(circle, rgba(200,168,75,0.05) 0%, transparent 65%); pointer-events: none; border-radius: 50%; }
+    .hero-content { position: relative; z-index: 1; max-width: 660px; }
+    .hero-eyebrow { font-size: 11px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; font-family: -apple-system, sans-serif; display: block; }
+    .hero h1 { font-size: clamp(38px, 6vw, 72px); font-weight: 700; line-height: 1.08; color: #fff; margin-bottom: 24px; }
+    .hero h1 em { color: var(--rosa); font-style: normal; }
+    .hero p { font-size: 17px; color: var(--muted); margin-bottom: 38px; max-width: 480px; font-family: -apple-system, sans-serif; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-primary { display: inline-block; background: var(--rosa); color: #0a0808; padding: 14px 32px; border-radius: 999px; font-size: 14px; font-weight: 700; text-decoration: none; font-family: -apple-system, sans-serif; transition: opacity 0.2s; }
+    .btn-primary:hover { opacity: 0.84; }
+    .btn-ghost { display: inline-block; border: 1.5px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.65); padding: 14px 32px; border-radius: 999px; font-size: 14px; font-weight: 600; text-decoration: none; font-family: -apple-system, sans-serif; transition: border-color 0.2s, color 0.2s; }
+    .btn-ghost:hover { border-color: var(--rosa); color: var(--rosa); }
+
+    /* ── Cards ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; transition: border-color 0.25s, transform 0.25s; }
+    .card:hover { border-color: rgba(212,160,181,0.35); transform: translateY(-5px); }
+    .card-icon { font-size: 30px; margin-bottom: 18px; }
+    .card-name { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+    .card-price { font-size: 13px; color: var(--rosa); font-weight: 600; margin-bottom: 12px; font-family: -apple-system, sans-serif; }
+    .card-desc { font-size: 14px; color: var(--muted); font-family: -apple-system, sans-serif; line-height: 1.65; }
+
+    /* ── Gallery ── */
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 8px; }
+    .gallery-item { aspect-ratio: 1; border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 36px; }
+
+    /* ── About ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+    .about-visual { background: linear-gradient(135deg, rgba(212,160,181,0.10) 0%, rgba(200,168,75,0.05) 100%); border: 1px solid var(--border); border-radius: 20px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 90px; }
+    .about-text { font-size: 15px; color: rgba(255,255,255,0.58); font-family: -apple-system, sans-serif; line-height: 1.85; margin-bottom: 18px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 36px; padding-top: 28px; border-top: 1px solid var(--border); }
+    .stat-num { font-size: 30px; font-weight: 700; color: var(--rosa); font-family: -apple-system, sans-serif; }
+    .stat-label { font-size: 11px; color: var(--muted); font-family: -apple-system, sans-serif; margin-top: 2px; }
+
+    /* ── Preise ── */
+    .price-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 32px 28px; text-align: center; }
+    .price-card.featured { border-color: rgba(212,160,181,0.5); background: rgba(212,160,181,0.04); }
+    .price-badge { display: inline-block; background: var(--rosa); color: #0a0808; font-size: 10px; font-weight: 700; letter-spacing: 0.1em; padding: 4px 14px; border-radius: 999px; margin-bottom: 16px; font-family: -apple-system, sans-serif; }
+    .price-tier { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; font-family: -apple-system, sans-serif; }
+    .price-num { font-size: 52px; font-weight: 700; color: #fff; line-height: 1; }
+    .price-num sup { font-size: 22px; color: var(--gold); vertical-align: super; font-weight: 400; }
+    .price-divider { height: 1px; background: var(--border); margin: 22px 0; }
+    .price-features { list-style: none; text-align: left; display: flex; flex-direction: column; gap: 10px; margin-bottom: 26px; }
+    .price-features li { font-size: 13px; color: var(--muted); font-family: -apple-system, sans-serif; display: flex; align-items: center; gap: 9px; }
+    .price-features li::before { content: '✓'; color: var(--rosa); font-size: 11px; flex-shrink: 0; }
+    .btn-price-primary { display: block; background: var(--rosa); color: #0a0808; text-decoration: none; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 700; font-family: -apple-system, sans-serif; transition: opacity 0.2s; }
+    .btn-price-primary:hover { opacity: 0.84; }
+    .btn-price-ghost { display: block; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); text-decoration: none; padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 600; font-family: -apple-system, sans-serif; transition: border-color 0.2s; }
+    .btn-price-ghost:hover { border-color: var(--rosa); color: var(--rosa); }
+
+    /* ── Kontakt ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 8px; font-family: -apple-system, sans-serif; }
+    .form-input, .form-textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 12px 16px; color: #fff; font-size: 14px; font-family: -apple-system, sans-serif; outline: none; transition: border-color 0.2s; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--rosa); }
+    .form-textarea { height: 120px; resize: vertical; }
+    .btn-submit { width: 100%; background: var(--rosa); color: #0a0808; border: none; padding: 14px; border-radius: 999px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: -apple-system, sans-serif; margin-top: 8px; transition: opacity 0.2s; }
+    .btn-submit:hover { opacity: 0.84; }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item { display: flex; gap: 16px; align-items: flex-start; }
+    .contact-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .c-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 5px; font-family: -apple-system, sans-serif; }
+    .c-value { font-size: 14px; color: rgba(255,255,255,0.65); font-family: -apple-system, sans-serif; line-height: 1.6; }
+
+    /* ── Footer ── */
+    footer { background: #050305; border-top: 1px solid var(--border); padding: 24px 40px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .footer-text { font-size: 12px; color: var(--muted); font-family: -apple-system, sans-serif; }
+    .footer-text a { color: var(--gold); text-decoration: none; font-weight: 600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .grid-3 { grid-template-columns: 1fr; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-visual { display: none; }
+      .gallery-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      nav { padding: 0 20px; }
+      footer { padding: 24px 20px; }
+      .nav-links, .btn-nav { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 64px 0; }
+      .hero { min-height: auto; padding: 56px 0 72px; }
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .stats { grid-template-columns: repeat(3, 1fr); }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  🎨 Demo von AVÈLON STUDIOS — Wir bauen deine Website → <a href="https://avelonstudios.de" target="_blank">avelonstudios.de</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">✦ Luxe Nails</a>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#galerie">Galerie</a>
+      <a href="#preise">Preise</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <a href="#kontakt" class="btn-nav">Termin buchen</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#leistungen">Leistungen</a>
+  <a href="#galerie">Galerie</a>
+  <a href="#preise">Preise</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="#kontakt" class="btn-nav">Termin buchen</a>
+</div>
+
+<main>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Luxe Nails Studio · Dortmund</span>
+      <h1>Schönheit beginnt mit den <em>Details</em></h1>
+      <p>Premium Nageldesign & Pflege — für Frauen die das Besondere schätzen.</p>
+      <div class="hero-btns">
+        <a href="#kontakt" class="btn-primary">Termin buchen →</a>
+        <a href="#leistungen" class="btn-ghost">Leistungen ansehen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Leistungen -->
+<section class="section section-alt" id="leistungen">
+  <div class="container">
+    <span class="section-label">Unsere Leistungen</span>
+    <h2 class="section-title">Was wir für dich tun</h2>
+    <div class="gold-line"></div>
+    <p class="section-sub">Jede Behandlung mit höchster Sorgfalt und ausschließlich hochwertigen Produkten.</p>
+    <div class="grid-3">
+      <div class="card">
+        <div class="card-icon">💅</div>
+        <div class="card-name">Gel Nails</div>
+        <div class="card-price">ab €35</div>
+        <div class="card-desc">Langanhaltende Farbe, perfekte Form — für Nägel die tagelang makellos aussehen.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">🎨</div>
+        <div class="card-name">Nageldesign</div>
+        <div class="card-price">ab €45</div>
+        <div class="card-desc">Individuelle Kunstwerke für deine Nägel — von dezent bis extravagant, ganz nach deinem Stil.</div>
+      </div>
+      <div class="card">
+        <div class="card-icon">✨</div>
+        <div class="card-name">Maniküre & Pflege</div>
+        <div class="card-price">ab €25</div>
+        <div class="card-desc">Verwöhnprogramm für deine Hände — Pflege, Entspannung und strahlende Ergebnisse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Galerie -->
+<section class="section" id="galerie">
+  <div class="container">
+    <span class="section-label">Galerie</span>
+    <h2 class="section-title">Unsere Arbeiten</h2>
+    <div class="gold-line"></div>
+    <div class="gallery-grid">
+      <div class="gallery-item" style="background:linear-gradient(135deg,rgba(212,160,181,0.15),rgba(200,168,75,0.06));">💅</div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,rgba(200,168,75,0.10),rgba(212,160,181,0.08));">🌸</div>
+      <div class="gallery-item" style="background:linear-gradient(135deg,rgba(212,160,181,0.12),rgba(10,8,8,0.5));">✨</div>
+    </div>
+  </div>
+</section>
+
+<!-- Über uns -->
+<section class="section section-alt" id="ueber-uns">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="section-label">Über uns</span>
+        <h2 class="section-title">Mit Leidenschaft & Präzision</h2>
+        <div class="gold-line"></div>
+        <p class="about-text">Seit 2018 verwandeln wir Nägel in Kunstwerke. Unser Studio steht für Qualität, Hygiene und individuelle Beratung — jede Kundin ist einzigartig und verdient eine einzigartige Behandlung.</p>
+        <p class="about-text">Wir verwenden ausschließlich Premium-Produkte und sterilisierte Werkzeuge. Deine Gesundheit und Zufriedenheit haben bei uns höchste Priorität.</p>
+        <div class="stats">
+          <div><div class="stat-num">6+</div><div class="stat-label">Jahre Erfahrung</div></div>
+          <div><div class="stat-num">2k+</div><div class="stat-label">Kundinnen</div></div>
+          <div><div class="stat-num">5★</div><div class="stat-label">Bewertung</div></div>
+        </div>
+      </div>
+      <div class="about-visual">💅</div>
+    </div>
+  </div>
+</section>
+
+<!-- Preise -->
+<section class="section" id="preise">
+  <div class="container">
+    <span class="section-label">Preise</span>
+    <h2 class="section-title">Faire Preise, Premium Qualität</h2>
+    <div class="gold-line"></div>
+    <p class="section-sub">Alle Preise inklusive Beratung und Nachbearbeitung. Keine versteckten Kosten.</p>
+    <div class="grid-3">
+      <div class="price-card">
+        <div class="price-tier">Basis</div>
+        <div class="price-num"><sup>€</sup>25</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Klassische Maniküre</li>
+          <li>Nagelpflege & Form</li>
+          <li>Basis-Nagellack</li>
+          <li>Handmassage</li>
+        </ul>
+        <a href="#kontakt" class="btn-price-ghost">Buchen</a>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Beliebt</div>
+        <div class="price-tier">Standard</div>
+        <div class="price-num"><sup>€</sup>45</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Gel-Nails & Design</li>
+          <li>Individuelle Beratung</li>
+          <li>Langzeit-Versiegelung</li>
+          <li>Cuticle Care</li>
+          <li>Finishing-Öl</li>
+        </ul>
+        <a href="#kontakt" class="btn-price-primary">Buchen</a>
+      </div>
+      <div class="price-card">
+        <div class="price-tier">Premium</div>
+        <div class="price-num"><sup>€</sup>75</div>
+        <div class="price-divider"></div>
+        <ul class="price-features">
+          <li>Full-Set Nageldesign</li>
+          <li>Individuelle Motive</li>
+          <li>Gel & Extensions</li>
+          <li>Paraffin-Behandlung</li>
+          <li>Handpeeling</li>
+        </ul>
+        <a href="#kontakt" class="btn-price-ghost">Buchen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Kontakt -->
+<section class="section section-alt" id="kontakt">
+  <div class="container">
+    <span class="section-label">Kontakt</span>
+    <h2 class="section-title">Termin anfragen</h2>
+    <div class="gold-line"></div>
+    <div class="contact-grid">
+      <form onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-input" placeholder="Dein Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-Mail</label>
+          <input type="email" class="form-input" placeholder="deine@email.de">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Gewünschte Leistung</label>
+          <input type="text" class="form-input" placeholder="z. B. Gel Nails, Nageldesign …">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nachricht</label>
+          <textarea class="form-textarea" placeholder="Terminwunsch oder besondere Wünsche …"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Termin anfragen →</button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="c-label">Adresse</div><div class="c-value">Musterstraße 12<br>44135 Dortmund</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="c-label">Telefon</div><div class="c-value">+49 231 123 4567</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div><div class="c-label">E-Mail</div><div class="c-value">info@luxenails-dortmund.de</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div><div class="c-label">Öffnungszeiten</div><div class="c-value">Mo–Fr: 9:00–19:00<br>Sa: 9:00–17:00</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">© 2025 Luxe Nails Studio · Alle Rechte vorbehalten</div>
+    <div class="footer-text">Website by <a href="https://avelonstudios.de" target="_blank">AVÈLON STUDIOS</a></div>
+  </div>
+</footer>
+
+<script>
+  var ham = document.getElementById('hamburger');
+  var mob = document.getElementById('mobileMenu');
+  ham.addEventListener('click', function() { mob.classList.toggle('open'); });
+  mob.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mob.classList.remove('open'); }); });
+</script>
+</body>
+</html>

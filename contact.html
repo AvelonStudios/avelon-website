@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html data-lang="de" lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt — AVÈLON STUDIOS</title>
+  <meta name="description" content="Kostenloses Erstgespräch buchen. Nur 3 Projektplätze verfügbar im Juni. Avèlon Studios — Premium Brand & Web Design." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    (function(){ var l=localStorage.getItem('avelon-lang')||'de'; document.documentElement.dataset.lang=l; })();
+  </script>
+  <style>
+    /* ── Package selection box ── */
+    .package-box {
+      background: rgba(8,8,8,0.95);
+      border: 0.5px solid rgba(232,201,107,0.3);
+      border-left: 3px solid #E8C96B;
+      border-radius: 6px;
+      padding: 16px 20px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .package-box-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      color: rgba(232,201,107,0.6);
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+    .package-box-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 4px;
+    }
+    .package-box-meta {
+      font-size: 13px;
+      color: #E8C96B;
+      font-weight: 500;
+    }
+    .package-box-close {
+      background: none;
+      border: 0.5px solid rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.4);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: border-color 0.2s, color 0.2s;
+      line-height: 1;
+    }
+    .package-box-close:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+
+    /* ── Sidebar direct contact ── */
+    .sidebar-contact-block {
+      background: var(--black-card, #0d0d0d);
+      border: 1px solid var(--black-border, #1a1a1a);
+      border-radius: var(--r-md, 8px);
+      padding: 28px;
+      margin-bottom: 16px;
+    }
+    .sidebar-contact-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #E8C96B;
+      margin-bottom: 20px;
+    }
+    .sidebar-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 0;
+      border-bottom: 0.5px solid rgba(255,255,255,0.06);
+    }
+    .sidebar-contact-item:last-child { border-bottom: none; }
+    .sidebar-contact-icon { font-size: 15px; width: 20px; text-align: center; flex-shrink: 0; }
+    .sidebar-contact-text { font-size: 13px; color: rgba(255,255,255,0.55); }
+    .sidebar-contact-text a { color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s; }
+    .sidebar-contact-text a:hover { color: #E8C96B; }
+    .sidebar-scarcity {
+      margin-top: 16px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #E8C96B;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ══════════════════════════
+     HERO
+══════════════════════════ -->
+<section class="page-hero" style="background:linear-gradient(180deg,rgba(232,201,107,0.04) 0%,transparent 100%);padding-bottom:48px;">
+  <div class="container">
+    <span class="section-label de">Kontakt</span>
+    <span class="section-label en">Contact</span>
+    <div class="gold-line gold-line-center"></div>
+    <h1>
+      <span class="de">Lass uns zusammenarbeiten</span>
+      <span class="en">Let's work together</span>
+    </h1>
+    <p>
+      <span class="de">Erzähl uns von deinem Projekt — wir melden uns innerhalb von 24 Stunden.</span>
+      <span class="en">Tell us about your project — we'll get back to you within 24 hours.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     CONTACT GRID
+══════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="contact-grid">
+
+      <!-- FORM -->
+      <div class="contact-form-wrap">
+
+        <!-- Package selection area (hidden until URL params present) -->
+        <div id="packageArea" style="display:none; position:relative; margin-bottom:24px;">
+          <button class="package-box-close" id="packageAreaClose" aria-label="Schließen"
+            style="position:absolute;top:8px;right:8px;z-index:2;">✕</button>
+
+          <!-- Setup box -->
+          <div id="setupBox" class="package-box" style="display:none; margin-bottom:8px; padding-right:40px;">
+            <div>
+              <div class="package-box-label">
+                <span class="de">Einmalige Setup-Gebühr</span>
+                <span class="en">One-Time Setup Fee</span>
+              </div>
+              <div class="package-box-name" id="setupBoxName"></div>
+              <div class="package-box-meta" id="setupBoxMeta"></div>
+            </div>
+          </div>
+
+          <!-- Paket / Retainer box -->
+          <div id="paketBox" class="package-box" style="display:none; padding-right:40px;">
+            <div>
+              <div class="package-box-label">
+                <span class="de" id="paketLabelDe">Aktive Store Betreuung</span>
+                <span class="en" id="paketLabelEn">Active Store Management</span>
+              </div>
+              <div class="package-box-name" id="paketBoxName"></div>
+              <div class="package-box-meta" id="paketBoxMeta"></div>
+            </div>
+          </div>
+
+          <!-- Total line (shown when both setup + paket present) -->
+          <div id="totalLine" style="display:none; padding-top:12px; border-top:0.5px solid #1a1a1a; font-size:13px; color:#fff; font-family:-apple-system,sans-serif; margin-top:4px;">
+            <span class="de">Gesamtstart: <strong id="totalAmountDe" style="color:#E8C96B;"></strong> <span style="color:rgba(255,255,255,0.38);font-size:12px;">(Setup + erster Monat)</span></span>
+            <span class="en">Total start: <strong id="totalAmountEn" style="color:#E8C96B;"></strong> <span style="color:rgba(255,255,255,0.38);font-size:12px;">(Setup + first month)</span></span>
+          </div>
+        </div>
+
+        <form id="contactForm" action="#" method="POST" novalidate>
+
+          <!-- Hidden package field -->
+          <input type="hidden" id="selectedPackage" name="paket" />
+
+          <div class="form-group">
+            <label class="form-label" for="name">
+              <span class="de">Name *</span>
+              <span class="en">Name *</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="form-input"
+              required
+              autocomplete="name"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="email">
+              <span class="de">E-Mail *</span>
+              <span class="en">Email *</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-input"
+              required
+              autocomplete="email"
+              placeholder="deine@email.com"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="company">
+              <span class="de">Unternehmen / Markenname</span>
+              <span class="en">Company / Brand Name</span>
+            </label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="form-input"
+              autocomplete="organization"
+            />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="message">
+              <span class="de">Nachricht *</span>
+              <span class="en">Message *</span>
+            </label>
+            <textarea
+              id="message"
+              name="message"
+              class="form-textarea"
+              required
+            ></textarea>
+            <div class="form-note de">Was ist deine Marke? Wer ist deine Zielgruppe? Was möchtest du erreichen?</div>
+            <div class="form-note en">What is your brand? Who is your target audience? What do you want to achieve?</div>
+          </div>
+
+          <!-- Honeypot anti-spam -->
+          <input type="text" name="_honeypot" style="display:none;" tabindex="-1" autocomplete="off" />
+
+          <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">
+            <span class="de">Anfrage senden →</span>
+            <span class="en">Send Request →</span>
+          </button>
+
+          <p style="font-size:0.78rem;color:var(--white-muted);text-align:center;margin-top:12px;">
+            <span class="de">Wir melden uns innerhalb von 24 Stunden.</span>
+            <span class="en">We'll get back to you within 24 hours.</span>
+          </p>
+
+          <p style="font-size:11px;color:rgba(255,255,255,0.3);text-align:center;margin-top:8px;line-height:1.6;">
+            <span class="de">Mit dem Absenden stimmst du unserer <a href="datenschutz.html" style="color:rgba(255,255,255,0.42);text-decoration:underline;text-underline-offset:2px;transition:color 0.2s;" onmouseover="this.style.color='#E8C96B'" onmouseout="this.style.color='rgba(255,255,255,0.42)'">Datenschutzerklärung</a> zu.</span>
+            <span class="en">By submitting you agree to our <a href="datenschutz.html" style="color:rgba(255,255,255,0.42);text-decoration:underline;text-underline-offset:2px;transition:color 0.2s;" onmouseover="this.style.color='#E8C96B'" onmouseout="this.style.color='rgba(255,255,255,0.42)'">privacy policy</a>.</span>
+          </p>
+
+        </form>
+
+        <!-- Success message -->
+        <div id="successMsg" style="display:none;text-align:center;padding:40px 32px;background:rgba(107,232,171,0.05);border:1px solid rgba(107,232,171,0.18);border-radius:var(--r-md);">
+          <div style="font-size:2rem;margin-bottom:12px;">✓</div>
+          <h4 style="color:#6be8ab;margin-bottom:8px;">
+            <span class="de">Anfrage gesendet!</span>
+            <span class="en">Request sent!</span>
+          </h4>
+          <p style="color:var(--white-muted);font-size:0.9rem;line-height:1.7;">
+            <span class="de">Vielen Dank. Wir melden uns innerhalb von 24 Stunden bei dir.</span>
+            <span class="en">Thank you. We'll get back to you within 24 hours.</span>
+          </p>
+        </div>
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <div>
+
+        <!-- Direct contact -->
+        <div class="sidebar-contact-block">
+          <div class="sidebar-contact-label">
+            <span class="de">Direkt Kontakt</span>
+            <span class="en">Direct Contact</span>
+          </div>
+
+          <div class="sidebar-contact-item">
+            <div class="sidebar-contact-icon">✉</div>
+            <div class="sidebar-contact-text">
+              <a href="mailto:avelon.business1@gmail.com">avelon.business1@gmail.com</a>
+            </div>
+          </div>
+
+          <div class="sidebar-contact-item">
+            <div class="sidebar-contact-icon">📸</div>
+            <div class="sidebar-contact-text">
+              <a href="#" aria-label="Instagram">@avelon_studios</a>
+            </div>
+          </div>
+
+          <div class="sidebar-contact-item">
+            <div class="sidebar-contact-icon">🎵</div>
+            <div class="sidebar-contact-text">
+              <a href="#" aria-label="TikTok">@avelonstudios</a>
+            </div>
+          </div>
+
+          <div class="sidebar-contact-item">
+            <div class="sidebar-contact-icon">⚡</div>
+            <div class="sidebar-contact-text">
+              <span class="de">Antwortzeit: &lt; 24h</span>
+              <span class="en">Response time: &lt; 24h</span>
+            </div>
+          </div>
+
+          <div class="sidebar-scarcity">
+            <span>⚡</span>
+            <span class="de">Nur 3 Projektplätze verfügbar</span>
+            <span class="en">Only 3 project slots available</span>
+          </div>
+        </div>
+
+        <!-- What happens next -->
+        <div style="background:var(--black-card);border:1px solid var(--black-border);border-radius:var(--r-md);padding:28px;">
+          <h4 style="font-size:0.95rem;margin-bottom:16px;">
+            <span class="de">Was passiert als nächstes?</span>
+            <span class="en">What happens next?</span>
+          </h4>
+          <div style="display:flex;flex-direction:column;gap:14px;">
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,201,107,0.1);border:1px solid rgba(232,201,107,0.2);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--gold);font-weight:700;flex-shrink:0;">1</div>
+              <div style="font-size:0.875rem;color:var(--white-muted);padding-top:4px;">
+                <span class="de">Wir lesen deine Anfrage und melden uns innerhalb 24h</span>
+                <span class="en">We read your request and reply within 24h</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,201,107,0.1);border:1px solid rgba(232,201,107,0.2);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--gold);font-weight:700;flex-shrink:0;">2</div>
+              <div style="font-size:0.875rem;color:var(--white-muted);padding-top:4px;">
+                <span class="de">Kostenloses Erstgespräch (30 Min. via Video)</span>
+                <span class="en">Free discovery call (30 min via video)</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,201,107,0.1);border:1px solid rgba(232,201,107,0.2);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--gold);font-weight:700;flex-shrink:0;">3</div>
+              <div style="font-size:0.875rem;color:var(--white-muted);padding-top:4px;">
+                <span class="de">Detailliertes Angebot innerhalb 48h</span>
+                <span class="en">Detailed proposal within 48h</span>
+              </div>
+            </div>
+            <div style="display:flex;gap:12px;align-items:flex-start;">
+              <div style="width:28px;height:28px;border-radius:50%;background:rgba(232,201,107,0.1);border:1px solid rgba(232,201,107,0.2);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:var(--gold);font-weight:700;flex-shrink:0;">4</div>
+              <div style="font-size:0.875rem;color:var(--white-muted);padding-top:4px;">
+                <span class="de">Projektstart bei Auftragserteilung</span>
+                <span class="en">Project kick-off upon commissioning</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     SOCIAL PROOF
+══════════════════════════ -->
+<section class="section bg-card bg-border-v">
+  <div class="container">
+    <div class="center">
+      <span class="section-label de">Das sagen unsere Kunden</span>
+      <span class="section-label en">What our clients say</span>
+      <h2 class="section-title" style="font-size:1.8rem;">
+        <span class="de">Warum Avèlon Studios?</span>
+        <span class="en">Why Avèlon Studios?</span>
+      </h2>
+      <div class="gold-line gold-line-center"></div>
+    </div>
+
+    <div class="grid-3">
+      <div class="testimonial">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-text de">„Von der ersten Anfrage bis zur Übergabe war alles professionell und reibungslos. Das Ergebnis hat unsere Erwartungen deutlich übertroffen."</div>
+        <div class="t-text en">"From the first enquiry to handover, everything was professional and seamless. The result clearly exceeded our expectations."</div>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#E8C96B;">S</div>
+          <div>
+            <div class="t-name">Sarah M.</div>
+            <div class="t-role">Noire Cosmetics</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-text de">„Schnell, zuverlässig, kreativ. Ich werde Avèlon Studios für alle zukünftigen Projekte nutzen. Wirklich beeindruckende Qualität."</div>
+        <div class="t-text en">"Fast, reliable, creative. I'll use Avèlon Studios for all future projects. Truly impressive quality."</div>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#6be8ab;">T</div>
+          <div>
+            <div class="t-name">Thomas K.</div>
+            <div class="t-role">Vitra Home Store</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testimonial">
+        <div class="t-stars">★★★★★</div>
+        <div class="t-text de">„Das Standard-Paket war die beste Investition für unser Unternehmen. Marke, Website und Social Kit — alles perfekt."</div>
+        <div class="t-text en">"The Standard Package was the best investment for our company. Brand, website and social kit — all perfect."</div>
+        <div class="t-author">
+          <div class="t-avatar" style="background:#6bb4e8;">L</div>
+          <div>
+            <div class="t-name">Lisa B.</div>
+            <div class="t-role">Alpine Retreat</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     CTA
+══════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-pill de">🔥 Nur 3 Plätze im Juni</div>
+    <div class="cta-pill en">🔥 Only 3 Slots in June</div>
+    <h2>
+      <span class="de">Sicher deinen Platz jetzt</span>
+      <span class="en">Secure Your Slot Now</span>
+    </h2>
+    <p>
+      <span class="de">Wir nehmen im Juni nur 3 neue Projekte an — damit jeder Kunde die volle Aufmerksamkeit bekommt, die er verdient.</span>
+      <span class="en">We take on only 3 new projects in June — so every client gets the full attention they deserve.</span>
+    </p>
+    <div class="cta-btns">
+      <a href="#contactForm" class="btn btn-primary btn-lg">
+        <span class="de">Jetzt Platz sichern →</span>
+        <span class="en">Secure Your Slot Now →</span>
+      </a>
+    </div>
+    <div class="urgency" style="justify-content:center;margin-top:16px;">
+      <div class="urgency-dot"></div>
+      <span class="de">Plätze füllen sich schnell — jetzt handeln</span>
+      <span class="en">Slots filling up fast — act now</span>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="nav.js"></script>
+<script>
+(function () {
+  /* ── Read URL params and show package boxes ── */
+  var params     = new URLSearchParams(window.location.search);
+  var paket      = params.get('paket');
+  var preis      = params.get('preis');
+  var laufzeit   = params.get('laufzeit');
+  var setup      = params.get('setup');
+  var setupPreis = params.get('setup_preis');
+
+  var packageArea      = document.getElementById('packageArea');
+  var setupBox         = document.getElementById('setupBox');
+  var paketBox         = document.getElementById('paketBox');
+  var totalLine        = document.getElementById('totalLine');
+  var setupBoxName     = document.getElementById('setupBoxName');
+  var setupBoxMeta     = document.getElementById('setupBoxMeta');
+  var paketBoxName     = document.getElementById('paketBoxName');
+  var paketBoxMeta     = document.getElementById('paketBoxMeta');
+  var paketLabelDe     = document.getElementById('paketLabelDe');
+  var paketLabelEn     = document.getElementById('paketLabelEn');
+  var packageAreaClose = document.getElementById('packageAreaClose');
+  var hiddenField      = document.getElementById('selectedPackage');
+
+  var hasSetup = !!setup;
+  var hasPaket = !!paket;
+
+  if (hasSetup || hasPaket) {
+    if (packageArea) packageArea.style.display = 'block';
+
+    /* Setup box */
+    if (hasSetup && setupBox) {
+      setupBox.style.display = 'flex';
+      if (setupBoxName) setupBoxName.textContent = setup.replace(/\+/g, ' ');
+      if (setupBoxMeta) setupBoxMeta.textContent = setupPreis ? 'ab €' + setupPreis : '';
+    }
+
+    /* Paket / Retainer box */
+    if (hasPaket && paketBox) {
+      paketBox.style.display = 'flex';
+
+      /* Use generic label when no laufzeit (e.g. service from services.html) */
+      if (!laufzeit) {
+        if (paketLabelDe) paketLabelDe.textContent = 'Ausgewähltes Paket';
+        if (paketLabelEn) paketLabelEn.textContent = 'Selected Package';
+      }
+
+      var paketDisplay = paket.replace(/\+/g, ' ');
+      if (laufzeit) paketDisplay += ' · ' + laufzeit.replace(/\+/g, ' ');
+      if (paketBoxName) paketBoxName.textContent = paketDisplay;
+
+      var metaStr = preis ? 'ab €' + preis : '';
+      if (laufzeit) metaStr += '/Monat';
+      if (paketBoxMeta) paketBoxMeta.textContent = metaStr;
+
+      if (hiddenField) hiddenField.value = paket.replace(/\+/g, ' ');
+    }
+
+    /* Total line — only when both setup + paket present */
+    if (hasSetup && hasPaket && setupPreis && preis) {
+      var total = parseInt(setupPreis, 10) + parseInt(preis, 10);
+      if (!isNaN(total) && totalLine) {
+        totalLine.style.display = 'block';
+        var elDe = document.getElementById('totalAmountDe');
+        var elEn = document.getElementById('totalAmountEn');
+        if (elDe) elDe.textContent = '€' + total;
+        if (elEn) elEn.textContent = '€' + total;
+      }
+    }
+  }
+
+  if (packageAreaClose) {
+    packageAreaClose.addEventListener('click', function () {
+      if (packageArea) packageArea.style.display = 'none';
+      if (hiddenField) hiddenField.value = '';
+    });
+  }
+
+  /* ── Form submission handler ── */
+  var form       = document.getElementById('contactForm');
+  var successMsg = document.getElementById('successMsg');
+  var submitBtn  = document.getElementById('submitBtn');
+
+  if (!form) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    var required = form.querySelectorAll('[required]');
+    var valid = true;
+    required.forEach(function (field) {
+      if (!field.value.trim()) {
+        field.style.borderColor = '#e86b6b';
+        valid = false;
+      } else {
+        field.style.borderColor = '';
+      }
+    });
+    if (!valid) return;
+
+    submitBtn.disabled = true;
+    submitBtn.style.opacity = '0.6';
+
+    setTimeout(function () {
+      form.style.display = 'none';
+      if (packageBox) packageBox.style.display = 'none';
+      if (successMsg) successMsg.style.display = 'block';
+    }, 800);
+  });
+
+  form.querySelectorAll('.form-input, .form-textarea').forEach(function (el) {
+    el.addEventListener('input', function () { el.style.borderColor = ''; });
+  });
+})();
+</script>
+</body>
+</html>

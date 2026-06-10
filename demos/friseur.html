@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Atelier Hair — Wo Haare zur Kunst werden</title>
+  <style>
+    :root {
+      --creme: #F5ECD7;
+      --gold: #C8A84B;
+      --bg: #080808;
+      --card: #0d0d0d;
+      --border: rgba(245,236,215,0.10);
+      --muted: rgba(255,255,255,0.45);
+      --banner-h: 36px;
+      --nav-h: 68px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: #fff; font-family: 'Georgia', 'Times New Roman', serif; line-height: 1.6; }
+
+    /* ── Demo Banner ── */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--banner-h);
+      background: #050505;
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; font-family: -apple-system, sans-serif;
+      font-size: 12px; color: var(--gold);
+      text-align: center; padding: 0 16px; gap: 6px;
+    }
+    .demo-banner a { color: var(--gold); font-weight: 700; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: var(--banner-h); left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(8,8,8,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 999; display: flex; align-items: center; padding: 0 40px;
+    }
+    .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 15px; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: 0.22em; text-transform: uppercase; font-family: -apple-system, sans-serif; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 12px; font-family: -apple-system, sans-serif; letter-spacing: 0.08em; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold); }
+    .btn-nav { background: var(--gold); color: #080808; border: none; padding: 9px 22px; border-radius: 4px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; cursor: pointer; text-decoration: none; font-family: -apple-system, sans-serif; transition: opacity 0.2s; }
+    .btn-nav:hover { opacity: 0.85; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 1.5px; background: #fff; }
+    .mobile-menu { display: none; position: fixed; top: calc(var(--banner-h) + var(--nav-h)); left: 0; right: 0; background: rgba(8,8,8,0.99); border-bottom: 1px solid var(--border); padding: 20px 32px; flex-direction: column; gap: 4px; z-index: 998; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 16px; font-family: -apple-system, sans-serif; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); letter-spacing: 0.04em; }
+    .mobile-menu .btn-nav { margin-top: 8px; text-align: center; }
+    main { padding-top: calc(var(--banner-h) + var(--nav-h)); }
+
+    /* ── Layout ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 100px 0; }
+    .section-alt { background: #0b0b0b; }
+    .section-label { font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 14px; font-family: -apple-system, sans-serif; }
+    .section-title { font-size: clamp(28px, 4vw, 48px); font-weight: 700; color: #fff; margin-bottom: 14px; line-height: 1.08; }
+    .gold-line { width: 32px; height: 1.5px; background: var(--gold); margin: 18px 0 32px; }
+    .section-sub { font-size: 15px; color: var(--muted); max-width: 480px; font-family: -apple-system, sans-serif; line-height: 1.8; margin-bottom: 52px; }
+
+    /* ── Hero ── */
+    .hero { min-height: 92vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-glow { position: absolute; top: 15%; right: 10%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(200,168,75,0.07) 0%, transparent 65%); pointer-events: none; border-radius: 50%; }
+    .hero-content { position: relative; z-index: 1; max-width: 600px; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--gold); margin-bottom: 24px; font-family: -apple-system, sans-serif; display: block; }
+    .hero h1 { font-size: clamp(42px, 7vw, 84px); font-weight: 700; line-height: 1.05; color: #fff; margin-bottom: 24px; }
+    .hero h1 em { display: block; color: var(--creme); font-style: normal; }
+    .hero p { font-size: 16px; color: var(--muted); margin-bottom: 38px; max-width: 420px; font-family: -apple-system, sans-serif; line-height: 1.8; }
+    .btn-gold { display: inline-block; background: var(--gold); color: #080808; padding: 14px 36px; border-radius: 4px; font-size: 13px; font-weight: 700; text-decoration: none; letter-spacing: 0.06em; font-family: -apple-system, sans-serif; transition: opacity 0.2s; }
+    .btn-gold:hover { opacity: 0.86; }
+
+    /* ── Leistungen ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+    .service-card { background: var(--bg); padding: 40px 32px; transition: background 0.25s; }
+    .service-card:hover { background: #0f0f0f; }
+    .service-num { font-size: 11px; letter-spacing: 0.2em; color: var(--gold); font-family: -apple-system, sans-serif; margin-bottom: 20px; display: block; }
+    .service-name { font-size: 20px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+    .service-price { font-size: 12px; color: var(--gold); font-family: -apple-system, sans-serif; font-weight: 600; margin-bottom: 16px; letter-spacing: 0.06em; }
+    .service-desc { font-size: 14px; color: var(--muted); font-family: -apple-system, sans-serif; line-height: 1.7; }
+
+    /* ── Team ── */
+    .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .team-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .team-avatar { height: 180px; background: linear-gradient(180deg, rgba(245,236,215,0.06) 0%, rgba(8,8,8,0) 100%); display: flex; align-items: center; justify-content: center; }
+    .team-silhouette { width: 80px; height: 80px; border-radius: 50%; background: rgba(245,236,215,0.08); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 32px; }
+    .team-body { padding: 22px 24px; }
+    .team-role { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-family: -apple-system, sans-serif; }
+    .team-name { font-size: 17px; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .team-bio { font-size: 13px; color: var(--muted); font-family: -apple-system, sans-serif; line-height: 1.65; }
+
+    /* ── Preise table ── */
+    .preise-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .preise-block { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; }
+    .preise-block-head { padding: 20px 28px; border-bottom: 1px solid var(--border); }
+    .preise-block-title { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--creme); font-family: -apple-system, sans-serif; }
+    .preise-table { width: 100%; }
+    .preise-row { display: flex; justify-content: space-between; align-items: center; padding: 14px 28px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .preise-row:last-child { border-bottom: none; }
+    .preise-service { font-size: 14px; color: rgba(255,255,255,0.65); font-family: -apple-system, sans-serif; }
+    .preise-price { font-size: 14px; font-weight: 600; color: var(--gold); font-family: -apple-system, sans-serif; }
+
+    /* ── About ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-visual { aspect-ratio: 1; background: linear-gradient(135deg, rgba(200,168,75,0.06) 0%, rgba(245,236,215,0.04) 100%); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 80px; }
+    .about-text { font-size: 16px; color: rgba(255,255,255,0.55); font-family: -apple-system, sans-serif; line-height: 1.9; margin-bottom: 18px; }
+
+    /* ── Kontakt ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; font-family: -apple-system, sans-serif; }
+    .form-input, .form-textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.09); border-radius: 4px; padding: 12px 16px; color: #fff; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--gold); }
+    .form-textarea { height: 120px; resize: vertical; }
+    .btn-submit { width: 100%; background: var(--gold); color: #080808; border: none; padding: 14px; font-size: 13px; font-weight: 700; cursor: pointer; font-family: -apple-system, sans-serif; letter-spacing: 0.06em; margin-top: 8px; transition: opacity 0.2s; }
+    .btn-submit:hover { opacity: 0.86; }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item { display: flex; gap: 16px; }
+    .contact-icon { font-size: 18px; flex-shrink: 0; margin-top: 2px; }
+    .c-label { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; font-family: -apple-system, sans-serif; }
+    .c-value { font-size: 14px; color: rgba(255,255,255,0.6); font-family: -apple-system, sans-serif; line-height: 1.65; }
+
+    /* ── Footer ── */
+    footer { background: #050505; border-top: 1px solid var(--border); padding: 24px 40px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .footer-text { font-size: 12px; color: var(--muted); font-family: -apple-system, sans-serif; letter-spacing: 0.04em; }
+    .footer-text a { color: var(--gold); text-decoration: none; font-weight: 600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .grid-3 { display: flex; flex-direction: column; background: none; gap: 12px; border: none; }
+      .service-card { border: 1px solid var(--border); }
+      .team-grid, .preise-grid, .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-visual { display: none; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      nav { padding: 0 20px; }
+      footer { padding: 24px 20px; }
+      .nav-links, .btn-nav { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 64px 0; }
+      .hero { min-height: auto; padding: 60px 0 72px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  🎨 Demo von AVÈLON STUDIOS — Wir bauen deine Website → <a href="https://avelonstudios.de" target="_blank">avelonstudios.de</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">ATELIER <span>HAIR</span></a>
+    <div class="nav-links">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#team">Team</a>
+      <a href="#preise">Preise</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <a href="#kontakt" class="btn-nav">Termin buchen</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#leistungen">Leistungen</a>
+  <a href="#team">Team</a>
+  <a href="#preise">Preise</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="#kontakt" class="btn-nav">Termin buchen</a>
+</div>
+
+<main>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-glow"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-eyebrow">Atelier Hair · Dortmund</span>
+      <h1>Dein Haar.<em>Dein Statement.</em></h1>
+      <p>Premium Haardesign für Menschen die ihren Stil kennen.</p>
+      <a href="#kontakt" class="btn-gold">Termin buchen →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Leistungen -->
+<section class="section section-alt" id="leistungen">
+  <div class="container">
+    <span class="section-label">Leistungen</span>
+    <h2 class="section-title">Unsere Dienstleistungen</h2>
+    <div class="gold-line"></div>
+    <div class="grid-3">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <div class="service-name">Schnitt & Styling</div>
+        <div class="service-price">ab €45</div>
+        <div class="service-desc">Präzisionsschnitte für jeden Haartyp — angepasst an deine Gesichtsform, deinen Lifestyle und deinen Stil.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <div class="service-name">Coloration</div>
+        <div class="service-price">ab €65</div>
+        <div class="service-desc">Von natürlich bis extravagant — Farben die leuchten, Töne die überzeugen, Techniken die begeistern.</div>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <div class="service-name">Behandlung</div>
+        <div class="service-price">ab €35</div>
+        <div class="service-desc">Tiefenpflege für gesundes, strahlendes Haar — mit professionellen Produkten für langanhaltende Ergebnisse.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="section" id="team">
+  <div class="container">
+    <span class="section-label">Unser Team</span>
+    <h2 class="section-title">Experten für dein Haar</h2>
+    <div class="gold-line"></div>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="team-silhouette">✂️</div>
+        </div>
+        <div class="team-body">
+          <div class="team-role">Head Stylist</div>
+          <div class="team-name">Sophia M.</div>
+          <div class="team-bio">12 Jahre Erfahrung. Spezialisiert auf Precision Cuts und moderne Schnitt-Techniken.</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="team-silhouette">🎨</div>
+        </div>
+        <div class="team-body">
+          <div class="team-role">Colorist</div>
+          <div class="team-name">Laura K.</div>
+          <div class="team-bio">Balayage-Expertin und Farbspezialistin mit internationalem Ausbildungshintergrund.</div>
+        </div>
+      </div>
+      <div class="team-card">
+        <div class="team-avatar">
+          <div class="team-silhouette">⭐</div>
+        </div>
+        <div class="team-body">
+          <div class="team-role">Junior Stylist</div>
+          <div class="team-name">Nina R.</div>
+          <div class="team-bio">Frischer Blick, moderne Trends. Spezialisiert auf Styling und Haarbehandlungen.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Preise -->
+<section class="section section-alt" id="preise">
+  <div class="container">
+    <span class="section-label">Preise</span>
+    <h2 class="section-title">Transparente Preisübersicht</h2>
+    <div class="gold-line"></div>
+    <div class="preise-grid">
+      <div class="preise-block">
+        <div class="preise-block-head">
+          <div class="preise-block-title">Damen</div>
+        </div>
+        <div class="preise-table">
+          <div class="preise-row"><span class="preise-service">Schnitt & Styling</span><span class="preise-price">€45</span></div>
+          <div class="preise-row"><span class="preise-service">Coloration (komplett)</span><span class="preise-price">€65</span></div>
+          <div class="preise-row"><span class="preise-service">Balayage / Strähnen</span><span class="preise-price">€85</span></div>
+          <div class="preise-row"><span class="preise-service">Tiefenpflege</span><span class="preise-price">€35</span></div>
+          <div class="preise-row"><span class="preise-service">Hochsteckfrisur</span><span class="preise-price">€55</span></div>
+        </div>
+      </div>
+      <div class="preise-block">
+        <div class="preise-block-head">
+          <div class="preise-block-title">Herren</div>
+        </div>
+        <div class="preise-table">
+          <div class="preise-row"><span class="preise-service">Haarschnitt</span><span class="preise-price">€25</span></div>
+          <div class="preise-row"><span class="preise-service">Bartpflege</span><span class="preise-price">€15</span></div>
+          <div class="preise-row"><span class="preise-service">Schnitt + Bart Kombi</span><span class="preise-price">€35</span></div>
+          <div class="preise-row"><span class="preise-service">Farbe / Tönung</span><span class="preise-price">€40</span></div>
+          <div class="preise-row"><span class="preise-service">Haarkur</span><span class="preise-price">€20</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Über uns -->
+<section class="section" id="ueber-uns">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="section-label">Über uns</span>
+        <h2 class="section-title">Wo Haare zur Kunst werden</h2>
+        <div class="gold-line"></div>
+        <p class="about-text">Atelier Hair ist mehr als ein Friseursalon — es ist ein Ort, an dem Stil entsteht. Unser Team vereint Handwerkskunst, Kreativität und Leidenschaft zu unvergesslichen Ergebnissen.</p>
+        <p class="about-text">Seit Jahren vertrauen uns Kunden aus Dortmund und Umgebung für Schnitte, Colorationen und Haarpflege auf höchstem Niveau. Wir verwenden ausschließlich Premium-Produkte.</p>
+      </div>
+      <div class="about-visual">✂️</div>
+    </div>
+  </div>
+</section>
+
+<!-- Kontakt -->
+<section class="section section-alt" id="kontakt">
+  <div class="container">
+    <span class="section-label">Kontakt</span>
+    <h2 class="section-title">Online Terminbuchung</h2>
+    <div class="gold-line"></div>
+    <div class="contact-grid">
+      <form onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-input" placeholder="Dein Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-Mail</label>
+          <input type="email" class="form-input" placeholder="deine@email.de">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Gewünschte Leistung</label>
+          <input type="text" class="form-input" placeholder="z. B. Schnitt & Coloration">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Wunschtermin</label>
+          <input type="text" class="form-input" placeholder="z. B. Dienstag Nachmittag">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nachricht</label>
+          <textarea class="form-textarea" placeholder="Besondere Wünsche oder Fragen …"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Termin anfragen →</button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="c-label">Adresse</div><div class="c-value">Stilstraße 8<br>44135 Dortmund</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="c-label">Telefon</div><div class="c-value">+49 231 456 7890</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div><div class="c-label">E-Mail</div><div class="c-value">hello@atelierhair-do.de</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div><div class="c-label">Öffnungszeiten</div><div class="c-value">Di–Fr: 9:00–19:00<br>Sa: 9:00–16:00</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">© 2025 Atelier Hair · Alle Rechte vorbehalten</div>
+    <div class="footer-text">Website by <a href="https://avelonstudios.de" target="_blank">AVÈLON STUDIOS</a></div>
+  </div>
+</footer>
+
+<script>
+  var ham = document.getElementById('hamburger');
+  var mob = document.getElementById('mobileMenu');
+  ham.addEventListener('click', function() { mob.classList.toggle('open'); });
+  mob.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mob.classList.remove('open'); }); });
+</script>
+</body>
+</html>

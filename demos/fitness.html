@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elite Performance — Personal Training Dortmund</title>
+  <style>
+    :root {
+      --red: #E63946;
+      --red-dark: #b82d38;
+      --bg: #080808;
+      --card: #0d0d0d;
+      --border: rgba(230,57,70,0.15);
+      --border-dim: rgba(255,255,255,0.07);
+      --muted: rgba(255,255,255,0.45);
+      --gold: #C8A84B;
+      --banner-h: 36px;
+      --nav-h: 68px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; line-height: 1.6; }
+
+    /* ── Demo Banner ── */
+    .demo-banner {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--banner-h);
+      background: #050505;
+      border-bottom: 1px solid rgba(200,168,75,0.2);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 9999; font-size: 12px; color: var(--gold);
+      text-align: center; padding: 0 16px; gap: 6px;
+    }
+    .demo-banner a { color: var(--gold); font-weight: 700; }
+
+    /* ── Nav ── */
+    nav {
+      position: fixed; top: var(--banner-h); left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(8,8,8,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-dim);
+      z-index: 999; display: flex; align-items: center; padding: 0 40px;
+    }
+    .nav-inner { width: 100%; max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-size: 16px; font-weight: 800; color: #fff; text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase; }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 13px; font-weight: 500; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--red); }
+    .btn-nav { background: var(--red); color: #fff; border: none; padding: 9px 22px; border-radius: 6px; font-size: 13px; font-weight: 700; cursor: pointer; text-decoration: none; transition: background 0.2s; }
+    .btn-nav:hover { background: var(--red-dark); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: #fff; border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; top: calc(var(--banner-h) + var(--nav-h)); left: 0; right: 0; background: rgba(8,8,8,0.99); border-bottom: 1px solid var(--border-dim); padding: 20px 32px; flex-direction: column; gap: 4px; z-index: 998; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { color: rgba(255,255,255,0.7); text-decoration: none; font-size: 16px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-weight: 500; }
+    .mobile-menu .btn-nav { margin-top: 8px; text-align: center; }
+    main { padding-top: calc(var(--banner-h) + var(--nav-h)); }
+
+    /* ── Layout ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+    .section { padding: 96px 0; }
+    .section-alt { background: #0b0b0b; }
+    .section-label { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--red); display: block; margin-bottom: 14px; }
+    .section-title { font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #fff; margin-bottom: 14px; line-height: 1.08; }
+    .red-line { width: 40px; height: 3px; background: var(--red); margin: 16px 0 32px; border-radius: 1px; }
+    .section-sub { font-size: 15px; color: var(--muted); max-width: 520px; line-height: 1.75; margin-bottom: 48px; }
+
+    /* ── Hero ── */
+    .hero { min-height: 95vh; display: flex; align-items: center; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 30%, rgba(230,57,70,0.12) 0%, transparent 60%); }
+    .hero-accent { position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent 0%, var(--red) 20%, var(--red) 80%, transparent 100%); }
+    .hero-content { position: relative; z-index: 1; max-width: 680px; }
+    .hero-tag { display: inline-flex; align-items: center; gap: 8px; background: rgba(230,57,70,0.12); border: 1px solid rgba(230,57,70,0.25); border-radius: 999px; padding: 6px 16px; margin-bottom: 28px; }
+    .hero-tag-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--red); }
+    .hero-tag-text { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--red); font-weight: 700; }
+    .hero h1 { font-size: clamp(36px, 6vw, 72px); font-weight: 900; line-height: 1.05; color: #fff; margin-bottom: 24px; }
+    .hero h1 em { color: var(--red); font-style: normal; }
+    .hero p { font-size: 17px; color: var(--muted); margin-bottom: 38px; max-width: 520px; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-red { display: inline-block; background: var(--red); color: #fff; padding: 15px 34px; border-radius: 6px; font-size: 14px; font-weight: 700; text-decoration: none; transition: background 0.2s; }
+    .btn-red:hover { background: var(--red-dark); }
+    .btn-ghost { display: inline-block; border: 1.5px solid rgba(255,255,255,0.18); color: rgba(255,255,255,0.6); padding: 15px 34px; border-radius: 6px; font-size: 14px; font-weight: 600; text-decoration: none; transition: border-color 0.2s; }
+    .btn-ghost:hover { border-color: var(--red); color: var(--red); }
+    .hero-proof { display: flex; gap: 32px; margin-top: 44px; padding-top: 32px; border-top: 1px solid var(--border-dim); }
+    .hero-proof-item { }
+    .hero-proof-num { font-size: 28px; font-weight: 900; color: #fff; }
+    .hero-proof-label { font-size: 12px; color: var(--muted); font-weight: 500; margin-top: 2px; }
+
+    /* ── Training Cards ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .training-card { background: var(--card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 32px 28px; position: relative; overflow: hidden; transition: border-color 0.25s, transform 0.25s; }
+    .training-card:hover { border-color: rgba(230,57,70,0.3); transform: translateY(-4px); }
+    .training-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .training-card:hover::before { transform: scaleX(1); }
+    .training-icon { width: 48px; height: 48px; background: rgba(230,57,70,0.1); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 20px; }
+    .training-name { font-size: 18px; font-weight: 800; color: #fff; margin-bottom: 12px; }
+    .training-desc { font-size: 14px; color: var(--muted); line-height: 1.65; }
+
+    /* ── Über mich ── */
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .about-visual { aspect-ratio: 1; background: linear-gradient(135deg, rgba(230,57,70,0.10) 0%, rgba(8,8,8,0) 100%); border: 1px solid var(--border-dim); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 80px; position: relative; overflow: hidden; }
+    .about-visual::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--red); }
+    .about-text { font-size: 15px; color: var(--muted); line-height: 1.85; margin-bottom: 20px; }
+    .cert-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(230,57,70,0.08); border: 1px solid rgba(230,57,70,0.2); border-radius: 6px; padding: 10px 16px; font-size: 13px; font-weight: 600; color: rgba(255,255,255,0.7); margin-top: 12px; }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; padding-top: 28px; border-top: 1px solid var(--border-dim); }
+    .stat-num { font-size: 30px; font-weight: 900; color: var(--red); }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    /* ── Pakete ── */
+    .pakete-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .paket-card { background: var(--card); border: 1px solid var(--border-dim); border-radius: 10px; padding: 32px 28px; position: relative; }
+    .paket-card.featured { border-color: var(--red); background: rgba(230,57,70,0.04); }
+    .paket-badge { position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--red); color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 4px 14px; border-radius: 999px; white-space: nowrap; }
+    .paket-name { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .paket-price { font-size: 48px; font-weight: 900; color: #fff; line-height: 1; }
+    .paket-price sup { font-size: 22px; color: var(--red); vertical-align: super; font-weight: 700; }
+    .paket-price sub { font-size: 14px; font-weight: 500; color: var(--muted); vertical-align: baseline; }
+    .paket-divider { height: 1px; background: var(--border-dim); margin: 22px 0; }
+    .paket-features { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+    .paket-features li { font-size: 13px; color: var(--muted); display: flex; align-items: flex-start; gap: 9px; line-height: 1.45; }
+    .paket-features li::before { content: '✓'; color: var(--red); font-size: 11px; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+    .btn-paket-red { display: block; background: var(--red); color: #fff; text-align: center; text-decoration: none; padding: 13px; border-radius: 6px; font-size: 13px; font-weight: 700; transition: background 0.2s; }
+    .btn-paket-red:hover { background: var(--red-dark); }
+    .btn-paket-ghost { display: block; border: 1.5px solid rgba(255,255,255,0.14); color: rgba(255,255,255,0.55); text-align: center; text-decoration: none; padding: 13px; border-radius: 6px; font-size: 13px; font-weight: 600; transition: border-color 0.2s; }
+    .btn-paket-ghost:hover { border-color: var(--red); color: var(--red); }
+
+    /* ── Kontakt ── */
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; margin-top: 40px; }
+    .form-group { margin-bottom: 18px; }
+    .form-label { display: block; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 8px; }
+    .form-input, .form-textarea { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 6px; padding: 12px 16px; color: #fff; font-size: 14px; font-family: inherit; outline: none; transition: border-color 0.2s; }
+    .form-input:focus, .form-textarea:focus { border-color: var(--red); }
+    .form-textarea { height: 120px; resize: vertical; }
+    .btn-submit { width: 100%; background: var(--red); color: #fff; border: none; padding: 14px; border-radius: 6px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; margin-top: 8px; transition: background 0.2s; }
+    .btn-submit:hover { background: var(--red-dark); }
+    .contact-info { display: flex; flex-direction: column; gap: 28px; }
+    .contact-item { display: flex; gap: 16px; }
+    .contact-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+    .c-label { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 5px; }
+    .c-value { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.65; }
+
+    /* ── Footer ── */
+    footer { background: #050505; border-top: 1px solid var(--border-dim); padding: 24px 40px; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
+    .footer-text { font-size: 12px; color: var(--muted); }
+    .footer-text a { color: var(--gold); text-decoration: none; font-weight: 600; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .grid-3, .pakete-grid { grid-template-columns: 1fr; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-visual { display: none; }
+      .hero-proof { gap: 20px; }
+    }
+    @media (max-width: 640px) {
+      .container { padding: 0 20px; }
+      nav { padding: 0 20px; }
+      footer { padding: 24px 20px; }
+      .nav-links, .btn-nav { display: none; }
+      .hamburger { display: flex; }
+      .section { padding: 64px 0; }
+      .hero { min-height: auto; padding: 56px 0 72px; }
+      .hero-proof { display: none; }
+      .footer-inner { flex-direction: column; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="demo-banner">
+  🎨 Demo von AVÈLON STUDIOS — Wir bauen deine Website → <a href="https://avelonstudios.de" target="_blank">avelonstudios.de</a>
+</div>
+
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">ELITE <span>PERFORMANCE</span></a>
+    <div class="nav-links">
+      <a href="#training">Training</a>
+      <a href="#pakete">Pakete</a>
+      <a href="#ueber-mich">Über mich</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <a href="#kontakt" class="btn-nav">Jetzt starten</a>
+    <button class="hamburger" id="hamburger" aria-label="Menü öffnen">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#training">Training</a>
+  <a href="#pakete">Pakete</a>
+  <a href="#ueber-mich">Über mich</a>
+  <a href="#kontakt">Kontakt</a>
+  <a href="#kontakt" class="btn-nav">Jetzt starten</a>
+</div>
+
+<main>
+
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-accent"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-tag">
+        <div class="hero-tag-dot"></div>
+        <div class="hero-tag-text">Personal Training · Dortmund</div>
+      </div>
+      <h1>Verwandle deinen Körper in <em>90 Tagen</em></h1>
+      <p>Personal Training & Ernährungsberatung in Dortmund — individuell, intensiv, effektiv.</p>
+      <div class="hero-btns">
+        <a href="#kontakt" class="btn-red">Kostenlos testen →</a>
+        <a href="#training" class="btn-ghost">Mehr erfahren</a>
+      </div>
+      <div class="hero-proof">
+        <div class="hero-proof-item">
+          <div class="hero-proof-num">200+</div>
+          <div class="hero-proof-label">Transformationen</div>
+        </div>
+        <div class="hero-proof-item">
+          <div class="hero-proof-num">8 J.</div>
+          <div class="hero-proof-label">Erfahrung</div>
+        </div>
+        <div class="hero-proof-item">
+          <div class="hero-proof-num">5★</div>
+          <div class="hero-proof-label">Google Bewertung</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Training -->
+<section class="section section-alt" id="training">
+  <div class="container">
+    <span class="section-label">Training</span>
+    <h2 class="section-title">Dein Weg zum Ziel</h2>
+    <div class="red-line"></div>
+    <p class="section-sub">Drei Trainingsformate — eines davon passt perfekt zu deinen Zielen und deinem Alltag.</p>
+    <div class="grid-3">
+      <div class="training-card">
+        <div class="training-icon">🏋️</div>
+        <div class="training-name">Personal Training</div>
+        <div class="training-desc">1:1 Training nach deinen Zielen — maximale Intensität, maximale Ergebnisse. Jede Einheit ist auf dich zugeschnitten.</div>
+      </div>
+      <div class="training-card">
+        <div class="training-icon">📱</div>
+        <div class="training-name">Online Coaching</div>
+        <div class="training-desc">Trainingsplan & Ernährungsberatung digital — wo und wann du willst. Wöchentliche Check-ins für konstanten Fortschritt.</div>
+      </div>
+      <div class="training-card">
+        <div class="training-icon">👥</div>
+        <div class="training-name">Gruppentraining</div>
+        <div class="training-desc">Motivation im Team, bis zu 6 Personen — gemeinsam stärker. Der perfekte Mix aus sozialem Training und individuellem Fokus.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Über mich -->
+<section class="section" id="ueber-mich">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="section-label">Über mich</span>
+        <h2 class="section-title">Dein Coach. Dein Partner.</h2>
+        <div class="red-line"></div>
+        <p class="about-text">Zertifizierter Personal Trainer mit 8 Jahren Erfahrung im Bereich Kraft-, Ausdauer- und Funktionstraining. Über 200 Kunden haben mit mir ihren Körper und ihr Leben verändert.</p>
+        <p class="about-text">Ich glaube daran, dass jeder das Potential hat, sein bestes Selbst zu werden. Meine Methode kombiniert wissenschaftlich fundiertes Training mit individueller Betreuung — für nachhaltige Ergebnisse die bleiben.</p>
+        <div class="cert-badge">🎓 Zertifizierter Personal Trainer (DSSV)</div>
+        <div class="stats">
+          <div><div class="stat-num">8+</div><div class="stat-label">Jahre Erfahrung</div></div>
+          <div><div class="stat-num">200+</div><div class="stat-label">Transformationen</div></div>
+          <div><div class="stat-num">100%</div><div class="stat-label">Commitment</div></div>
+        </div>
+      </div>
+      <div class="about-visual">💪</div>
+    </div>
+  </div>
+</section>
+
+<!-- Pakete -->
+<section class="section section-alt" id="pakete">
+  <div class="container">
+    <span class="section-label">Pakete</span>
+    <h2 class="section-title">Investiere in dich</h2>
+    <div class="red-line"></div>
+    <p class="section-sub">Drei Pakete — alle inkludieren individuellen Trainingsplan und persönliche Betreuung.</p>
+    <div class="pakete-grid">
+      <div class="paket-card">
+        <div class="paket-name">Starter</div>
+        <div class="paket-price"><sup>€</sup>99<sub>/Mo</sub></div>
+        <div class="paket-divider"></div>
+        <ul class="paket-features">
+          <li>4x Training pro Monat</li>
+          <li>Individueller Trainingsplan</li>
+          <li>Ernährungsplan (Basis)</li>
+          <li>E-Mail Support</li>
+        </ul>
+        <a href="#kontakt" class="btn-paket-ghost">Starter wählen</a>
+      </div>
+      <div class="paket-card featured">
+        <div class="paket-badge">Beliebt</div>
+        <div class="paket-name">Professional</div>
+        <div class="paket-price"><sup>€</sup>199<sub>/Mo</sub></div>
+        <div class="paket-divider"></div>
+        <ul class="paket-features">
+          <li>8x Training pro Monat</li>
+          <li>Detaillierter Trainingsplan</li>
+          <li>Vollständiger Ernährungsplan</li>
+          <li>Wöchentliche Check-ins</li>
+          <li>WhatsApp Support</li>
+        </ul>
+        <a href="#kontakt" class="btn-paket-red">Professional wählen</a>
+      </div>
+      <div class="paket-card">
+        <div class="paket-name">Elite</div>
+        <div class="paket-price"><sup>€</sup>299<sub>/Mo</sub></div>
+        <div class="paket-divider"></div>
+        <ul class="paket-features">
+          <li>Unlimited Training</li>
+          <li>Full Support (täglich)</li>
+          <li>Meal Prep Anleitung</li>
+          <li>Fortschrittsanalyse</li>
+          <li>Priorität & 24h Erreichbarkeit</li>
+        </ul>
+        <a href="#kontakt" class="btn-paket-ghost">Elite wählen</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Kontakt -->
+<section class="section" id="kontakt">
+  <div class="container">
+    <span class="section-label">Kontakt</span>
+    <h2 class="section-title">Kostenloses Erstgespräch</h2>
+    <div class="red-line"></div>
+    <p class="section-sub">Erzähl mir von deinen Zielen — gemeinsam finden wir das perfekte Programm für dich.</p>
+    <div class="contact-grid">
+      <form onsubmit="return false;">
+        <div class="form-group">
+          <label class="form-label">Name</label>
+          <input type="text" class="form-input" placeholder="Dein Name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">E-Mail</label>
+          <input type="email" class="form-input" placeholder="deine@email.de">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefon</label>
+          <input type="tel" class="form-input" placeholder="+49 …">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Dein Ziel</label>
+          <input type="text" class="form-input" placeholder="z. B. 10 kg abnehmen, Muskeln aufbauen …">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Nachricht</label>
+          <textarea class="form-textarea" placeholder="Was möchtest du erreichen? Aktuelles Level, Erfahrung …"></textarea>
+        </div>
+        <button type="submit" class="btn-submit">Kostenloses Erstgespräch anfragen →</button>
+      </form>
+      <div class="contact-info">
+        <div class="contact-item">
+          <div class="contact-icon">📍</div>
+          <div><div class="c-label">Studio</div><div class="c-value">Kraftstraße 22<br>44139 Dortmund</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">📞</div>
+          <div><div class="c-label">Telefon</div><div class="c-value">+49 231 789 0123</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">✉</div>
+          <div><div class="c-label">E-Mail</div><div class="c-value">coach@eliteperformance-do.de</div></div>
+        </div>
+        <div class="contact-item">
+          <div class="contact-icon">⏰</div>
+          <div><div class="c-label">Trainingszeiten</div><div class="c-value">Mo–Fr: 6:00–21:00<br>Sa–So: 8:00–16:00</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-text">© 2025 Elite Performance · Alle Rechte vorbehalten</div>
+    <div class="footer-text">Website by <a href="https://avelonstudios.de" target="_blank">AVÈLON STUDIOS</a></div>
+  </div>
+</footer>
+
+<script>
+  var ham = document.getElementById('hamburger');
+  var mob = document.getElementById('mobileMenu');
+  ham.addEventListener('click', function() { mob.classList.toggle('open'); });
+  mob.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', function() { mob.classList.remove('open'); }); });
+</script>
+</body>
+</html>

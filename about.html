@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html data-lang="de" lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Über uns — AVÈLON STUDIOS</title>
+  <meta name="description" content="Avèlon Studios ist ein Premium Design Studio aus Dortmund — spezialisiert auf Websites, Brand Identity und digitales Wachstum für ambitionierte Unternehmen." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    (function(){ var l=localStorage.getItem('avelon-lang')||'de'; document.documentElement.dataset.lang=l; })();
+  </script>
+  <style>
+    /* ── Fade-up scroll animation ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-up.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-up.delay-1 { transition-delay: 0.08s; }
+    .fade-up.delay-2 { transition-delay: 0.16s; }
+    .fade-up.delay-3 { transition-delay: 0.24s; }
+
+    /* ── Mission + Values ── */
+    .about-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    .mission-card {
+      background: #0d0d0d;
+      border: 0.5px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 36px;
+      height: 100%;
+      box-sizing: border-box;
+    }
+    .mission-card-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #E8C96B;
+      display: block;
+      margin-bottom: 22px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .mission-text {
+      font-size: 14px;
+      color: rgba(255,255,255,0.52);
+      line-height: 1.9;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+    }
+    .values-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .value-card {
+      background: #0d0d0d;
+      border: 0.5px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .value-card:hover { border-color: rgba(232,201,107,0.25); }
+    .value-icon {
+      color: #E8C96B;
+      font-size: 10px;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+    .value-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      margin-bottom: 5px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .value-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.65;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+    }
+
+    /* ── Stats ── */
+    .stats-section-wrap {
+      background: #0a0a0a;
+      border-top: 0.5px solid rgba(232,201,107,0.1);
+      border-bottom: 0.5px solid rgba(232,201,107,0.1);
+    }
+    .stats-section-head {
+      text-align: center;
+      padding: 52px 0 36px;
+    }
+    .about-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+    }
+    .about-stat {
+      text-align: center;
+      padding: 40px 24px 48px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      position: relative;
+    }
+    .about-stat:last-child { border-right: none; }
+    .about-stat-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 700;
+      color: #E8C96B;
+      line-height: 1;
+      margin-bottom: 10px;
+    }
+    .about-stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.38);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.4;
+    }
+    .stat-shimmer-line {
+      position: absolute;
+      bottom: 0; left: 10%; right: 10%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #E8C96B, transparent);
+      opacity: 0;
+      transform: scaleX(0);
+      transform-origin: center;
+    }
+    .about-stat.counted .stat-shimmer-line {
+      animation: stat-line-in 0.8s ease 0.9s forwards;
+    }
+    @keyframes stat-line-in {
+      0%   { opacity: 0; transform: scaleX(0); }
+      50%  { opacity: 1; }
+      100% { opacity: 0.55; transform: scaleX(1); }
+    }
+
+    /* ── How We Work ── */
+    .how-steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      margin-top: 48px;
+      border: 0.5px solid rgba(255,255,255,0.07);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .how-step {
+      padding: 32px 24px;
+      background: #0d0d0d;
+      border-right: 0.5px solid rgba(255,255,255,0.07);
+      position: relative;
+    }
+    .how-step:last-child { border-right: none; }
+    .how-step-num {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      color: rgba(232,201,107,0.45);
+      display: block;
+      margin-bottom: 14px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .how-step-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .how-step-desc {
+      font-size: 12px;
+      color: rgba(255,255,255,0.42);
+      line-height: 1.7;
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+    }
+    .how-step-arrow {
+      position: absolute;
+      right: -12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 24px;
+      background: #0d0d0d;
+      border: 0.5px solid rgba(232,201,107,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #E8C96B;
+      font-size: 10px;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .how-step:last-child .how-step-arrow { display: none; }
+
+    /* ── Founder ── */
+    .founder-grid {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 56px;
+      align-items: start;
+    }
+    .founder-img-box {
+      height: 380px;
+      background: #111;
+      border: 0.5px solid #1a1a1a;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .founder-img-icon { font-size: 28px; color: rgba(232,201,107,0.18); }
+    .founder-img-label {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      color: rgba(232,201,107,0.4);
+      text-transform: uppercase;
+      font-family: 'DM Sans', sans-serif;
+      text-align: center;
+      padding: 0 20px;
+    }
+    .founder-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+    .founder-role-tag {
+      display: block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #E8C96B;
+      margin-bottom: 20px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .founder-divider {
+      width: 40px;
+      height: 1px;
+      background: #E8C96B;
+      margin-bottom: 24px;
+    }
+    .founder-desc {
+      font-size: 14px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.88;
+      margin-bottom: 28px;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .founder-quote {
+      border-left: 2px solid #E8C96B;
+      padding-left: 18px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 15px;
+      font-style: italic;
+      color: rgba(232,201,107,0.65);
+      line-height: 1.65;
+    }
+
+    /* ── Testimonials ── */
+    .about-testimonials {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .about-tcard {
+      background: #0d0d0d;
+      border: 0.5px solid #1a1a1a;
+      border-radius: 8px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      transition: border-color 0.2s;
+    }
+    .about-tcard:hover { border-color: rgba(232,201,107,0.2); }
+    .about-t-stars { color: #E8C96B; font-size: 13px; letter-spacing: 2px; }
+    .about-t-quote {
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.78;
+      font-family: 'DM Sans', sans-serif;
+      flex: 1;
+    }
+    .about-t-author { display: flex; align-items: center; gap: 12px; }
+    .about-t-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(232,201,107,0.15);
+      border: 1px solid rgba(232,201,107,0.3);
+      color: #E8C96B;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Sans', sans-serif;
+      flex-shrink: 0;
+    }
+    .about-t-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.85);
+      font-family: 'DM Sans', sans-serif;
+    }
+    .about-t-role {
+      font-size: 11px;
+      color: rgba(255,255,255,0.3);
+      font-family: 'DM Sans', sans-serif;
+      margin-top: 1px;
+    }
+    .about-t-badge {
+      display: inline-block;
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      color: rgba(232,201,107,0.5);
+      background: rgba(232,201,107,0.06);
+      border: 0.5px solid rgba(232,201,107,0.15);
+      border-radius: 999px;
+      padding: 2px 8px;
+      margin-top: 4px;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── CTA ── */
+    .about-cta-section {
+      text-align: center;
+      padding: 88px 24px 100px;
+      background: linear-gradient(180deg, rgba(232,201,107,0.04) 0%, transparent 100%);
+      border-top: 0.5px solid rgba(232,201,107,0.12);
+    }
+    .about-cta-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(28px, 4vw, 48px);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 12px;
+      line-height: 1.15;
+    }
+    .about-cta-sub {
+      font-size: 14px;
+      color: rgba(255,255,255,0.38);
+      margin-bottom: 36px;
+      line-height: 1.65;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 960px) {
+      .about-two-col    { grid-template-columns: 1fr; }
+      .founder-grid     { grid-template-columns: 1fr; }
+      .founder-img-box  { height: 220px; }
+      .how-steps        { grid-template-columns: 1fr 1fr; }
+      .how-step-arrow   { display: none; }
+      .how-step:nth-child(2) { border-right: none; }
+      .how-step:nth-child(3) { border-top: 0.5px solid rgba(255,255,255,0.07); }
+      .about-stats-grid { grid-template-columns: 1fr 1fr; }
+      .about-stat:nth-child(2) { border-right: none; }
+      .about-stat:nth-child(3) { border-right: 1px solid rgba(255,255,255,0.06); border-top: 1px solid rgba(255,255,255,0.06); }
+      .about-stat:nth-child(4) { border-right: none; border-top: 1px solid rgba(255,255,255,0.06); }
+    }
+    @media (max-width: 640px) {
+      .about-testimonials { grid-template-columns: 1fr; }
+      .how-steps { grid-template-columns: 1fr; }
+      .how-step { border-right: none; border-top: 0.5px solid rgba(255,255,255,0.07); }
+      .how-step:first-child { border-top: none; }
+      .about-stats-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ══════════════════════════
+     HERO
+══════════════════════════ -->
+<section class="page-hero" style="background:linear-gradient(180deg,rgba(232,201,107,0.04) 0%,transparent 100%);">
+  <div class="container">
+    <span class="section-label de">Über uns</span>
+    <span class="section-label en">About us</span>
+    <h1>
+      <span class="de">Wir bauen Brands die<br>in Erinnerung bleiben.</span>
+      <span class="en">We build brands that<br>leave a lasting impression.</span>
+    </h1>
+    <div class="gold-line gold-line-center"></div>
+    <p>
+      <span class="de">Avèlon Studios ist ein Premium Design Studio aus Dortmund — spezialisiert auf Websites, Brand Identity und digitales Wachstum für ambitionierte Unternehmen.</span>
+      <span class="en">Avèlon Studios is a premium design studio from Dortmund — specializing in websites, brand identity and digital growth for ambitious businesses.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     MISSION + VALUES
+══════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="about-two-col">
+
+      <div class="mission-card fade-up">
+        <span class="mission-card-label">
+          <span class="de">Unsere Mission</span>
+          <span class="en">Our Mission</span>
+        </span>
+        <p class="mission-text">
+          <span class="de">Wir glauben, dass jedes Unternehmen das Recht hat, wie eine große Marke aufzutreten — unabhängig von Größe oder Budget. Avèlon Studios wurde gegründet mit einem klaren Ziel: Premium Design für jeden Unternehmer zugänglich machen. Keine Kompromisse bei Qualität. Keine generischen Lösungen.</span>
+          <span class="en">We believe every business has the right to present itself like a major brand — regardless of size or budget. Avèlon Studios was founded with one clear goal: making premium design accessible to every entrepreneur. No compromises on quality. No generic solutions.</span>
+        </p>
+      </div>
+
+      <div class="values-stack">
+        <div class="value-card fade-up">
+          <span class="value-icon">◆</span>
+          <div>
+            <div class="value-title">
+              <span class="de">Qualität über alles</span>
+              <span class="en">Quality above all</span>
+            </div>
+            <p class="value-desc">
+              <span class="de">Kein Projekt verlässt unser Studio ohne den Avèlon Studios Qualitätsstandard zu erfüllen.</span>
+              <span class="en">No project leaves our studio without meeting the Avèlon Studios quality standard.</span>
+            </p>
+          </div>
+        </div>
+        <div class="value-card fade-up delay-1">
+          <span class="value-icon">◆</span>
+          <div>
+            <div class="value-title">
+              <span class="de">Individuell &amp; strategisch</span>
+              <span class="en">Individual &amp; strategic</span>
+            </div>
+            <p class="value-desc">
+              <span class="de">Keine Templates, keine Massenware. Jede Website wird individuell für dein Business gebaut.</span>
+              <span class="en">No templates, no mass production. Every website is built individually for your business.</span>
+            </p>
+          </div>
+        </div>
+        <div class="value-card fade-up delay-2">
+          <span class="value-icon">◆</span>
+          <div>
+            <div class="value-title">
+              <span class="de">Conversion-fokussiert</span>
+              <span class="en">Conversion-focused</span>
+            </div>
+            <p class="value-desc">
+              <span class="de">Schön ist gut — aber verkaufen ist besser. Jedes Design ist auf Wachstum ausgelegt.</span>
+              <span class="en">Beautiful is good — but selling is better. Every design is built for growth.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     STATS
+══════════════════════════ -->
+<div class="stats-section-wrap">
+  <div class="container">
+    <div class="stats-section-head fade-up">
+      <span class="section-label de">Avèlon in Zahlen</span>
+      <span class="section-label en">Avèlon in Numbers</span>
+      <h2 class="section-title" style="margin-top:8px;margin-bottom:0;">
+        <span class="de">Ergebnisse die für sich sprechen</span>
+        <span class="en">Results that speak for themselves</span>
+      </h2>
+    </div>
+    <div class="about-stats-grid">
+      <div class="about-stat fade-up" data-target="50" data-suffix="+">
+        <div class="about-stat-num">50+</div>
+        <div class="about-stat-label">
+          <span class="de">Projekte abgeschlossen</span>
+          <span class="en">Projects completed</span>
+        </div>
+        <div class="stat-shimmer-line"></div>
+      </div>
+      <div class="about-stat fade-up delay-1" data-target="100" data-suffix="%">
+        <div class="about-stat-num">100%</div>
+        <div class="about-stat-label">
+          <span class="de">Kundenzufriedenheit</span>
+          <span class="en">Customer satisfaction</span>
+        </div>
+        <div class="stat-shimmer-line"></div>
+      </div>
+      <div class="about-stat fade-up delay-2" data-target="48" data-suffix="h">
+        <div class="about-stat-num">48h</div>
+        <div class="about-stat-label">
+          <span class="de">Erste Ergebnisse</span>
+          <span class="en">First results</span>
+        </div>
+        <div class="stat-shimmer-line"></div>
+      </div>
+      <div class="about-stat fade-up delay-3" data-target="3" data-suffix="+">
+        <div class="about-stat-num">3+</div>
+        <div class="about-stat-label">
+          <span class="de">Länder Kunden</span>
+          <span class="en">Countries clients</span>
+        </div>
+        <div class="stat-shimmer-line"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     HOW WE WORK
+══════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="center">
+      <span class="section-label de">Wie wir arbeiten</span>
+      <span class="section-label en">How we work</span>
+      <h2 class="section-title">
+        <span class="de">Von der Idee zur fertigen Website</span>
+        <span class="en">From idea to finished website</span>
+      </h2>
+      <div class="gold-line gold-line-center"></div>
+    </div>
+    <div class="how-steps">
+      <div class="how-step fade-up">
+        <span class="how-step-num">01</span>
+        <div class="how-step-title">
+          <span class="de">Briefing</span>
+          <span class="en">Briefing</span>
+        </div>
+        <p class="how-step-desc">
+          <span class="de">Wir verstehen dein Business, deine Ziele und deine Zielgruppe.</span>
+          <span class="en">We understand your business, your goals and your target audience.</span>
+        </p>
+        <span class="how-step-arrow">→</span>
+      </div>
+      <div class="how-step fade-up delay-1">
+        <span class="how-step-num">02</span>
+        <div class="how-step-title">
+          <span class="de">Konzept</span>
+          <span class="en">Concept</span>
+        </div>
+        <p class="how-step-desc">
+          <span class="de">Wir entwickeln ein individuelles Design-Konzept für deine Brand.</span>
+          <span class="en">We develop an individual design concept for your brand.</span>
+        </p>
+        <span class="how-step-arrow">→</span>
+      </div>
+      <div class="how-step fade-up delay-2">
+        <span class="how-step-num">03</span>
+        <div class="how-step-title">
+          <span class="de">Umsetzung</span>
+          <span class="en">Build</span>
+        </div>
+        <p class="how-step-desc">
+          <span class="de">Wir bauen deine Website — schnell, sauber, conversion-optimiert.</span>
+          <span class="en">We build your website — fast, clean, conversion-optimized.</span>
+        </p>
+        <span class="how-step-arrow">→</span>
+      </div>
+      <div class="how-step fade-up delay-3">
+        <span class="how-step-num">04</span>
+        <div class="how-step-title">
+          <span class="de">Launch</span>
+          <span class="en">Launch</span>
+        </div>
+        <p class="how-step-desc">
+          <span class="de">Deine Website geht live — wir begleiten dich beim Start.</span>
+          <span class="en">Your website goes live — we guide you through the launch.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     FOUNDER
+══════════════════════════ -->
+<section class="section bg-card">
+  <div class="container">
+    <div class="center" style="margin-bottom:52px;">
+      <span class="section-label de">Gründer</span>
+      <span class="section-label en">Founder</span>
+      <h2 class="section-title">
+        <span class="de">Wer steckt dahinter?</span>
+        <span class="en">Who's behind it?</span>
+      </h2>
+      <div class="gold-line gold-line-center"></div>
+    </div>
+    <div class="founder-grid">
+
+      <div class="fade-up">
+        <img src="images/founder-photo.png" alt="Can Papenheim - Founder Avèlon Studios" style="width:100%;height:400px;object-fit:cover;object-position:center top;border-radius:8px;border:0.5px solid #1a1a1a;">
+      </div>
+
+      <div class="fade-up delay-1">
+        <div class="founder-name">Can P.</div>
+        <span class="founder-role-tag">Founder &amp; Creative Director · Avèlon Studios</span>
+        <div class="founder-divider"></div>
+        <p class="founder-desc">
+          <span class="de">Mit 18 Jahren und einem tiefen Hintergrund im Clothing- und Brand Design gründete Can Avèlon Studios mit einer klaren Vision: Premium Websites und Brand Identity für jeden Unternehmer zugänglich machen. Kein aufgeblähtes Team, kein Overhead — du arbeitest direkt mit dem Designer.</span>
+          <span class="en">At 18 years old, with a deep background in clothing and brand design, Can founded Avèlon Studios with a clear vision: making premium websites and brand identity accessible to every entrepreneur. No bloated team, no overhead — you work directly with the designer.</span>
+        </p>
+        <div class="founder-quote">
+          <span class="de">„Ich glaube daran, dass jede Brand das Potenzial hat, wie die Großen aufzutreten."</span>
+          <span class="en">"I believe every brand has the potential to present itself like the big players."</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     TESTIMONIALS
+══════════════════════════ -->
+<section class="section">
+  <div class="container">
+    <div class="center">
+      <span class="section-label de">Kundenstimmen</span>
+      <span class="section-label en">Testimonials</span>
+      <h2 class="section-title">
+        <span class="de">Was unsere Kunden sagen</span>
+        <span class="en">What our clients say</span>
+      </h2>
+      <div class="gold-line gold-line-center"></div>
+    </div>
+    <div class="about-testimonials">
+
+      <div class="about-tcard fade-up">
+        <div class="about-t-stars">★★★★★</div>
+        <div class="about-t-quote">
+          <span class="de">„Avèlon Studios hat unseren Store komplett transformiert. Innerhalb von 2 Wochen hatten wir eine Website die unsere Marke perfekt repräsentiert."</span>
+          <span class="en">"Avèlon Studios completely transformed our store. Within 2 weeks we had a website that perfectly represents our brand."</span>
+        </div>
+        <div class="about-t-author">
+          <div class="about-t-avatar">M</div>
+          <div>
+            <div class="about-t-name">Max M.</div>
+            <div class="about-t-role">
+              <span class="de">Fashion Brand · E-Commerce</span>
+              <span class="en">Fashion Brand · E-Commerce</span>
+            </div>
+            <div class="about-t-badge de">Verifizierter Kunde</div>
+            <div class="about-t-badge en">Verified Client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-tcard fade-up delay-1">
+        <div class="about-t-stars">★★★★★</div>
+        <div class="about-t-quote">
+          <span class="de">„Die Brand Identity ist einfach auf einem anderen Niveau. Logo, Visitenkarten, alles perfekt aufeinander abgestimmt. Absolute Empfehlung."</span>
+          <span class="en">"The brand identity is simply on another level. Logo, business cards, everything perfectly coordinated. Absolute recommendation."</span>
+        </div>
+        <div class="about-t-author">
+          <div class="about-t-avatar">S</div>
+          <div>
+            <div class="about-t-name">Sarah K.</div>
+            <div class="about-t-role">
+              <span class="de">Inhaberin · Nagelstudio</span>
+              <span class="en">Owner · Nail Studio</span>
+            </div>
+            <div class="about-t-badge de">Verifizierter Kunde</div>
+            <div class="about-t-badge en">Verified Client</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-tcard fade-up delay-2">
+        <div class="about-t-stars">★★★★★</div>
+        <div class="about-t-quote">
+          <span class="de">„Endlich eine Agentur die versteht was Premium bedeutet. Die monatliche Betreuung ist Gold wert — unsere Website wird kontinuierlich besser."</span>
+          <span class="en">"Finally an agency that understands what premium means. The monthly management is worth its weight in gold — our website keeps getting better."</span>
+        </div>
+        <div class="about-t-author">
+          <div class="about-t-avatar">T</div>
+          <div>
+            <div class="about-t-name">Thomas B.</div>
+            <div class="about-t-role">
+              <span class="de">Geschäftsführer · Handwerk</span>
+              <span class="en">Managing Director · Trades</span>
+            </div>
+            <div class="about-t-badge de">Verifizierter Kunde</div>
+            <div class="about-t-badge en">Verified Client</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     CTA
+══════════════════════════ -->
+<div class="about-cta-section">
+  <div class="container">
+    <h2 class="about-cta-title fade-up">
+      <span class="de">Bereit für deine Premium Website?</span>
+      <span class="en">Ready for your premium website?</span>
+    </h2>
+    <p class="about-cta-sub fade-up">
+      <span class="de">Lass uns gemeinsam etwas aufbauen das verkauft.</span>
+      <span class="en">Let's build something together that sells.</span>
+    </p>
+    <a href="contact.html" class="btn btn-primary btn-lg fade-up">
+      <span class="de">Projekt starten →</span>
+      <span class="en">Start Project →</span>
+    </a>
+  </div>
+</div>
+
+<div id="footer-placeholder"></div>
+<script src="nav.js"></script>
+<script>
+/* ── Fade-up IntersectionObserver ── */
+(function () {
+  var els = document.querySelectorAll('.fade-up');
+  if (!('IntersectionObserver' in window)) {
+    els.forEach(function (el) { el.classList.add('is-visible'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  els.forEach(function (el) { io.observe(el); });
+})();
+
+/* ── Counter animation with shimmer ── */
+(function () {
+  var stats = document.querySelectorAll('.about-stat[data-target]');
+  if (!('IntersectionObserver' in window)) {
+    stats.forEach(function (s) { s.classList.add('counted'); });
+    return;
+  }
+
+  function animateCount(el) {
+    var target   = parseInt(el.dataset.target, 10);
+    var suffix   = el.dataset.suffix || '';
+    var numEl    = el.querySelector('.about-stat-num');
+    var duration = 1100;
+    var interval = 14;
+    var steps    = Math.ceil(duration / interval);
+    var step     = 0;
+
+    el.classList.add('counted');
+
+    var timer = setInterval(function () {
+      step++;
+      var progress = step / steps;
+      var eased    = 1 - Math.pow(1 - progress, 3);
+      var current  = Math.round(eased * target);
+      numEl.textContent = current + suffix;
+      if (step >= steps) {
+        numEl.textContent = target + suffix;
+        clearInterval(timer);
+      }
+    }, interval);
+  }
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        animateCount(entry.target);
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.4 });
+
+  stats.forEach(function (stat) { io.observe(stat); });
+})();
+</script>
+</body>
+</html>

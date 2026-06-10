@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html data-lang="de" lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Leistungen &amp; Preise — AVÈLON STUDIOS</title>
+  <meta name="description" content="Transparente Preise für Brand Design, Web Design und Pakete. Design Starter ab €199, Websites ab €499, Shopify Stores ab €1.499." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <script>
+    (function(){ var l=localStorage.getItem('avelon-lang')||'de'; document.documentElement.dataset.lang=l; })();
+  </script>
+  <style>
+    .management-banner { margin: 32px 0; }
+    .management-banner-inner { background: rgba(232,201,107,0.05); border: 0.5px solid rgba(232,201,107,0.3); border-left: 3px solid #E8C96B; border-radius: 4px; padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+    .management-banner-icon { font-size: 20px; flex-shrink: 0; }
+    .management-banner-left { display: flex; align-items: center; gap: 12px; }
+    .management-banner-title { font-size: 13px; font-weight: 500; color: #E8C96B; margin-bottom: 4px; }
+    .management-banner-sub { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.5; }
+    .management-banner-cta { padding: 8px 20px; background: #E8C96B; color: #080808; border-radius: 4px; font-size: 12px; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s; }
+    .management-banner-cta:hover { background: #f5dfa0; }
+    .management-note { font-size: 11px; color: rgba(232,201,107,0.7); margin-top: 6px; }
+    .management-note a { color: #E8C96B; text-decoration: none; border-bottom: 0.5px solid rgba(232,201,107,0.3); }
+    .management-note a:hover { border-color: #E8C96B; }
+
+    /* ── Section divider ── */
+    .section-divider { display:flex; align-items:center; gap:16px; margin:40px 0 32px; }
+    .divider-line { flex:1; height:0.5px; background:rgba(255,255,255,0.08); }
+    .divider-label { font-size:11px; letter-spacing:0.2em; color:#E8C96B; text-transform:uppercase; white-space:nowrap; font-family:'DM Sans',sans-serif; }
+
+    /* ── Step labels ── */
+    .step-label { font-size:13px; font-weight:700; letter-spacing:0.2em; text-transform:uppercase; color:#E8C96B; display:block; margin-bottom:10px; font-family:'DM Sans',sans-serif; }
+    .step-subtitle { font-size:13px; color:rgba(255,255,255,0.38); line-height:1.65; font-family:'DM Sans',sans-serif; margin-bottom:0; }
+
+    /* ── Setup selection box ── */
+    .setup-select-box { border:0.5px solid rgba(232,201,107,0.2); border-radius:8px; padding:20px 24px; margin-bottom:0; background:#0d0d0d; }
+    .setup-cards-row { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-top:16px; }
+    .svc-setup-card { background:#111; border:0.5px solid #2a2a2a; border-radius:8px; padding:16px; position:relative; cursor:pointer; transition:border-color 0.2s, background 0.2s; }
+    .svc-setup-card:hover { border-color:rgba(232,201,107,0.4); }
+    .svc-setup-card.selected { border:1.5px solid #E8C96B !important; background:#131310 !important; animation:none !important; }
+    @keyframes svc-pulse { 0%{border-color:rgba(232,201,107,0.2);} 50%{border-color:rgba(232,201,107,0.6);} 100%{border-color:rgba(232,201,107,0.2);} }
+    .svc-setup-card.pulsing { animation:svc-pulse 2s ease-in-out infinite; }
+    .svc-check { position:absolute; top:10px; right:10px; width:20px; height:20px; border-radius:50%; background:#E8C96B; color:#080808; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.2s; pointer-events:none; font-family:'DM Sans',sans-serif; }
+    .svc-setup-card.selected .svc-check { opacity:1; }
+    .svc-setup-badge { display:inline-block; background:rgba(74,222,128,0.12); color:#4ade80; border:0.5px solid rgba(74,222,128,0.25); border-radius:999px; font-size:10px; font-weight:700; padding:2px 8px; margin-bottom:4px; font-family:'DM Sans',sans-serif; }
+    .svc-setup-name { font-size:13px; font-weight:600; color:#fff; margin-bottom:3px; font-family:'DM Sans',sans-serif; }
+    .svc-setup-original { font-size:11px; color:rgba(255,255,255,0.22); text-decoration:line-through; margin-bottom:1px; font-family:'DM Sans',sans-serif; }
+    .svc-setup-price { font-size:22px; font-weight:700; color:#fff; font-family:'DM Sans',sans-serif; }
+    .svc-setup-price sup { font-size:13px; color:#E8C96B; vertical-align:super; }
+    .svc-req-box { display:flex; align-items:center; gap:8px; margin-top:14px; font-size:12px; color:rgba(255,255,255,0.38); font-family:'DM Sans',sans-serif; transition:color 0.3s; }
+    .svc-req-box.satisfied { color:rgba(74,222,128,0.8); }
+
+    /* ── Step 2 block ── */
+    .step2-block { margin-top:32px; margin-bottom:16px; }
+
+    /* ── Retainer: duration, save, total, price/mo ── */
+    .pricing-duration { font-size:10px; font-weight:700; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.28); margin-bottom:8px; font-family:'DM Sans',sans-serif; }
+    .pricing-save { font-size:12px; font-weight:600; color:#4CAF50; margin-bottom:4px; font-family:'DM Sans',sans-serif; }
+    .pricing-total { font-size:11px; color:rgba(255,255,255,0.25); margin-bottom:16px; font-family:'DM Sans',sans-serif; }
+    .pricing-price-mo { font-family:'DM Sans',sans-serif; font-size:14px; color:rgba(255,255,255,0.3); font-weight:400; }
+
+    /* ── Retainer button locked/tooltip ── */
+    .retainer-svc-btn { transition:opacity 0.3s; }
+    .retainer-svc-btn.locked { opacity:0.4; pointer-events:none; }
+    .retainer-svc-wrap { position:relative; }
+    .retainer-svc-wrap.btn-locked { cursor:not-allowed; }
+    .svc-tooltip { position:absolute; bottom:calc(100% + 6px); left:50%; transform:translateX(-50%); background:rgba(8,8,8,0.95); border:0.5px solid rgba(232,201,107,0.3); border-radius:6px; padding:5px 12px; font-size:11px; color:rgba(255,255,255,0.55); white-space:nowrap; pointer-events:none; opacity:0; transition:opacity 0.15s; z-index:10; font-family:'DM Sans',sans-serif; }
+    .btn-locked:hover .svc-tooltip { opacity:1; }
+
+    /* ── Scarcity banner ── */
+    .svc-scarcity { display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; border:0.5px solid rgba(232,201,107,0.15); border-left:3px solid #E8C96B; background:rgba(232,201,107,0.03); border-radius:4px; padding:16px 20px; margin-top:24px; }
+    .svc-scarcity-left { display:flex; align-items:flex-start; gap:10px; }
+    .svc-scarcity-icon { font-size:16px; flex-shrink:0; }
+    .svc-scarcity-text { font-size:13px; color:rgba(255,255,255,0.55); line-height:1.6; font-family:'DM Sans',sans-serif; }
+    .svc-scarcity-btn { background:#E8C96B; color:#080808; border:none; padding:9px 20px; border-radius:5px; font-size:12px; font-weight:600; cursor:pointer; text-decoration:none; font-family:'DM Sans',sans-serif; white-space:nowrap; transition:background 0.2s; }
+    .svc-scarcity-btn:hover { background:#f5dfa0; }
+
+    @media (max-width:640px) {
+      .setup-cards-row { grid-template-columns:1fr; }
+      .svc-scarcity { flex-direction:column; }
+    }
+
+    /* ── Active management section background ── */
+    #active-management {
+      background: #0a0a0a;
+      border-top: 0.5px solid rgba(232,201,107,0.15);
+      border-bottom: 0.5px solid rgba(232,201,107,0.15);
+    }
+
+    /* ── Retainer pricing cards override ── */
+    #active-management .pricing-card {
+      background: #111;
+      border: 0.5px solid #222;
+      border-radius: 8px;
+      padding: 28px;
+    }
+    #active-management .pricing-card.featured {
+      border: 1.5px solid #E8C96B;
+      background: #131310;
+    }
+    #active-management .pricing-price {
+      font-size: 32px;
+      font-family: 'Playfair Display', Georgia, serif;
+      color: #E8C96B;
+      margin-bottom: 2px;
+      line-height: 1;
+    }
+    #active-management .pricing-price sup { font-size: 16px; color: #E8C96B; vertical-align: super; }
+
+    /* ── Feature list override ── */
+    #active-management .pricing-features { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
+    #active-management .pricing-features li { font-size: 12px; color: rgba(255,255,255,0.5); display: flex; align-items: flex-start; gap: 8px; }
+    #active-management .pricing-features .check { font-size: 0; display: inline-flex; align-items: center; width: 10px; flex-shrink: 0; margin-top: 2px; }
+    #active-management .pricing-features .check::before { content: '◆'; font-size: 7px; color: #E8C96B; }
+
+    /* ── Section hero ── */
+    .mgmt-section-hero { text-align: center; margin-bottom: 40px; }
+    .mgmt-hero-label { display: block; font-size: 0.56rem; font-weight: 700; letter-spacing: 0.36em; text-transform: uppercase; color: #E8C96B; margin-bottom: 16px; font-family: 'DM Sans', sans-serif; }
+    .mgmt-hero-line { width: 40px; height: 1px; background: #E8C96B; margin: 0 auto 20px; }
+    .mgmt-hero-title { font-family: 'Playfair Display', Georgia, serif; font-size: clamp(26px, 4vw, 44px); font-weight: 700; color: #fff; margin-bottom: 14px; line-height: 1.1; }
+    .mgmt-hero-sub { font-size: 14px; color: rgba(255,255,255,0.38); line-height: 1.75; max-width: 520px; margin: 0 auto; font-family: 'DM Sans', sans-serif; }
+  </style>
+</head>
+<body>
+
+<div id="nav-placeholder"></div>
+
+<!-- ══════════════════════════
+     PAGE HERO
+══════════════════════════ -->
+<section class="page-hero" style="background:linear-gradient(180deg,rgba(232,201,107,0.04) 0%,transparent 100%);">
+  <div class="container">
+    <span class="section-label de">Transparente Preise</span>
+    <span class="section-label en">Transparent Pricing</span>
+    <h1>
+      <span class="de">Leistungen &amp; Preise</span>
+      <span class="en">Services &amp; Pricing</span>
+    </h1>
+    <div class="gold-line gold-line-center"></div>
+    <p>
+      <span class="de">Klare Preise, keine Überraschungen. Alles, was Ihre Marke braucht, aus einer Hand.</span>
+      <span class="en">Clear prices, no surprises. Everything your brand needs, from one source.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     WEB DESIGN
+══════════════════════════ -->
+<section id="web" class="pricing-section">
+  <div class="container">
+    <div class="pricing-section-header">
+      <div class="pricing-icon">◈</div>
+      <div>
+        <h2>
+          <span class="de">Web Design</span>
+          <span class="en">Web Design</span>
+        </h2>
+        <p class="text-muted" style="font-size:0.9rem;margin:0;">
+          <span class="de">Websites und Landing Pages, die konvertieren</span>
+          <span class="en">Websites and landing pages that convert</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Basic -->
+      <div class="pricing-card">
+        <div class="pricing-name de">Basic</div>
+        <div class="pricing-name en">Basic</div>
+        <div class="pricing-from de">ab</div>
+        <div class="pricing-from en">from</div>
+        <div class="pricing-price"><sup>€</sup>399</div>
+        <p class="management-note">💡 <a href="management.html"><span class="de">Oder ab €199 mit Betreuungspaket →</span><span class="en">Or from €199 with management package →</span></a></p>
+        <div class="pricing-desc de">1 Seite · Mobile Ready · SEO · CTA Optimiert</div>
+        <div class="pricing-desc en">1 Page · Mobile Ready · SEO · CTA Optimised</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span class="de">Custom Design (kein Template)</span><span class="en">Custom design (no template)</span></li>
+          <li><span class="check">✓</span><span class="de">Mobile Responsive</span><span class="en">Mobile responsive</span></li>
+          <li><span class="check">✓</span><span class="de">SEO-optimiert</span><span class="en">SEO optimised</span></li>
+          <li><span class="check">✓</span><span class="de">CTA-Optimierung</span><span class="en">CTA optimisation</span></li>
+          <li><span class="check">✓</span><span class="de">Lieferung in 7 Werktagen</span><span class="en">Delivery in 7 business days</span></li>
+        </ul>
+        <div style="margin-top:24px;">
+          <a href="contact.html?paket=Basic&amp;preis=399" class="btn btn-ghost btn-full">
+            <span class="de">Jetzt anfragen</span>
+            <span class="en">Request now</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Standard — FEATURED -->
+      <div class="pricing-card featured">
+        <div class="card-top-badge">
+          <span class="badge badge-popular de">Beliebteste Wahl</span>
+          <span class="badge badge-popular en">Most Popular</span>
+        </div>
+        <div class="pricing-name de">Standard</div>
+        <div class="pricing-name en">Standard</div>
+        <div class="pricing-from de">ab</div>
+        <div class="pricing-from en">from</div>
+        <div class="pricing-price"><sup>€</sup>599</div>
+        <p class="management-note">💡 <a href="management.html"><span class="de">Oder ab €349 mit Betreuungspaket →</span><span class="en">Or from €349 with management package →</span></a></p>
+        <div class="pricing-desc de">Bis 5 Seiten · Custom Layout · Contact Form · Performance</div>
+        <div class="pricing-desc en">Up to 5 Pages · Custom Layout · Contact Form · Performance</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span class="de">Bis zu 5 Seiten</span><span class="en">Up to 5 pages</span></li>
+          <li><span class="check">✓</span><span class="de">Vollständig custom Layout</span><span class="en">Fully custom layout</span></li>
+          <li><span class="check">✓</span><span class="de">Kontaktformulare</span><span class="en">Contact forms</span></li>
+          <li><span class="check">✓</span><span class="de">Performance-optimiert</span><span class="en">Performance optimised</span></li>
+          <li><span class="check">✓</span><span class="de">Mobile Responsive</span><span class="en">Mobile responsive</span></li>
+          <li><span class="check">✓</span><span class="de">SEO-Grundoptimierung</span><span class="en">SEO foundation optimisation</span></li>
+        </ul>
+        <div style="margin-top:20px;">
+          <a href="contact.html?paket=Standard&amp;preis=599" class="btn btn-primary btn-full">
+            <span class="de">Jetzt anfragen</span>
+            <span class="en">Request now</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card">
+        <div class="pricing-name de">Premium</div>
+        <div class="pricing-name en">Premium</div>
+        <div class="pricing-from de">ab</div>
+        <div class="pricing-from en">from</div>
+        <div class="pricing-price"><sup>€</sup>799</div>
+        <p class="management-note">💡 <a href="management.html"><span class="de">Oder ab €499 mit Betreuungspaket →</span><span class="en">Or from €499 with management package →</span></a></p>
+        <div class="pricing-desc de">Full Store · Produktseiten · Payment · KI-Chatbot · Launch Support</div>
+        <div class="pricing-desc en">Full Store · Product Pages · Payment · AI-Chatbot · Launch Support</div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span class="de">Komplettes Store-Setup</span><span class="en">Full store setup</span></li>
+          <li><span class="check">✓</span><span class="de">Produktseiten-Design</span><span class="en">Product page design</span></li>
+          <li><span class="check">✓</span><span class="de">Zahlungsintegration</span><span class="en">Payment integration</span></li>
+          <li><span class="check">✓</span><span class="de">Launch-Support</span><span class="en">Launch support</span></li>
+          <li><span class="check">✓</span><span class="de">Mobile-optimiert</span><span class="en">Mobile optimised</span></li>
+          <li><span class="check">✓</span><span class="de">KI-Chatbot Integration</span><span class="en">AI Chatbot Integration</span></li>
+        </ul>
+        <div class="addon">
+          <span>+</span>
+          <span class="de">Conversion-Audit: +€199</span>
+          <span class="en">Conversion Audit: +€199</span>
+        </div>
+        <div style="margin-top:20px;">
+          <a href="contact.html?paket=Premium&amp;preis=799" class="btn btn-ghost btn-full">
+            <span class="de">Jetzt anfragen</span>
+            <span class="en">Request now</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     MANAGEMENT BANNER
+══════════════════════════ -->
+<div class="container">
+  <div class="management-banner">
+    <div class="management-banner-inner">
+      <div class="management-banner-left">
+        <span class="management-banner-icon">💡</span>
+        <div>
+          <p class="management-banner-title">
+            <span class="de">Spare bis zu 53% auf dein Web Design Paket</span>
+            <span class="en">Save up to 53% on your web design package</span>
+          </p>
+          <p class="management-banner-sub">
+            <span class="de">Mit aktivem Betreuungspaket erhältst du reduzierten Setup-Preis + monatliche Optimierung deiner Website.</span>
+            <span class="en">With an active management package you get reduced setup price + monthly website optimization.</span>
+          </p>
+        </div>
+      </div>
+      <a href="#active-management" class="management-banner-cta">
+        <span class="de">Mehr erfahren →</span>
+        <span class="en">Learn more →</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════
+     ACTIVE STORE MANAGEMENT
+══════════════════════════ -->
+<section id="active-management" class="pricing-section">
+  <div class="container">
+
+    <div class="section-divider">
+      <div class="divider-line"></div>
+      <span class="divider-label">
+        <span class="de">Aktive Store Betreuung</span>
+        <span class="en">Active Store Management</span>
+      </span>
+      <div class="divider-line"></div>
+    </div>
+
+    <!-- Section hero -->
+    <div class="mgmt-section-hero">
+      <span class="mgmt-hero-label">Website Management</span>
+      <div class="mgmt-hero-line"></div>
+      <h2 class="mgmt-hero-title">
+        <span class="de">Aktive Store Betreuung</span>
+        <span class="en">Active Store Management</span>
+      </h2>
+      <p class="mgmt-hero-sub">
+        <span class="de">Erst bauen wir deine Website — dann sorgen wir dafür dass sie wächst. Monat für Monat.</span>
+        <span class="en">First we build your website — then we make sure it grows. Month after month.</span>
+      </p>
+    </div>
+
+    <!-- Step 1 — Website selection -->
+    <div class="setup-select-box">
+      <div class="step-label">
+        <span class="de">SCHRITT 1 — WEBSITE WÄHLEN</span>
+        <span class="en">STEP 1 — SELECT WEBSITE</span>
+      </div>
+      <p class="step-subtitle">
+        <span class="de">Wähle zuerst deine Website-Art — der Preis wird automatisch reduziert.</span>
+        <span class="en">First select your website type — the price will be automatically reduced.</span>
+      </p>
+
+      <div class="setup-cards-row">
+
+        <div class="svc-setup-card" data-setup-name="Basic" data-setup-price="199">
+          <div class="svc-check">✓</div>
+          <div class="svc-setup-badge">-50%</div>
+          <div class="svc-setup-name">Basic</div>
+          <div class="svc-setup-original"><sup>€</sup>399</div>
+          <div class="svc-setup-price"><sup>€</sup>199</div>
+        </div>
+
+        <div class="svc-setup-card" data-setup-name="Standard" data-setup-price="349">
+          <div class="svc-check">✓</div>
+          <div class="svc-setup-badge">-42%</div>
+          <div class="svc-setup-name">Standard</div>
+          <div class="svc-setup-original"><sup>€</sup>599</div>
+          <div class="svc-setup-price"><sup>€</sup>349</div>
+        </div>
+
+        <div class="svc-setup-card" data-setup-name="Premium" data-setup-price="499">
+          <div class="svc-check">✓</div>
+          <div class="svc-setup-badge">-38%</div>
+          <div class="svc-setup-name">Premium</div>
+          <div class="svc-setup-original"><sup>€</sup>799</div>
+          <div class="svc-setup-price"><sup>€</sup>499</div>
+        </div>
+
+      </div>
+
+      <div class="svc-req-box" id="svcReqBox">
+        <span class="de" id="svcReqTextDe">⚠ Bitte zuerst Website wählen</span>
+        <span class="en" id="svcReqTextEn">⚠ Please first select your website type</span>
+      </div>
+    </div>
+
+    <!-- Step 2 — Duration selection -->
+    <div class="step2-block">
+      <div class="step-label">
+        <span class="de">SCHRITT 2 — LAUFZEIT WÄHLEN</span>
+        <span class="en">STEP 2 — SELECT DURATION</span>
+      </div>
+      <p class="step-subtitle">
+        <span class="de">Desto länger die Laufzeit — desto günstiger die monatliche Rate.</span>
+        <span class="en">The longer the term — the lower the monthly rate.</span>
+      </p>
+    </div>
+
+    <div class="pricing-grid">
+
+      <!-- Starter -->
+      <div class="pricing-card">
+        <div class="pricing-duration">
+          <span class="de">3 Monate</span>
+          <span class="en">3 Months</span>
+        </div>
+        <div class="pricing-name de">Starter</div>
+        <div class="pricing-name en">Starter</div>
+        <div class="pricing-price"><sup>€</sup>299<span class="pricing-price-mo">/Mo</span></div>
+        <div class="pricing-total">
+          <span class="de">Gesamt: €897</span>
+          <span class="en">Total: €897</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span class="de">Monatliche Website Optimierung</span><span class="en">Monthly website optimization</span></li>
+          <li><span class="check">✓</span><span class="de">1x Design Update pro Monat</span><span class="en">1x design update per month</span></li>
+          <li><span class="check">✓</span><span class="de">Performance Monitoring</span><span class="en">Performance Monitoring</span></li>
+          <li><span class="check">✓</span><span class="de">E-Mail Support</span><span class="en">Email Support</span></li>
+        </ul>
+        <div class="retainer-svc-wrap" style="margin-top:20px;">
+          <a href="#" class="btn btn-ghost btn-full retainer-svc-btn" data-href="contact.html?paket=Starter+Betreuung&amp;preis=299&amp;laufzeit=3+Monate">
+            <span class="de">Starter wählen →</span>
+            <span class="en">Choose Starter →</span>
+          </a>
+          <div class="svc-tooltip">
+            <span class="de">Bitte zuerst Website wählen</span>
+            <span class="en">Please select website first</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Professional — FEATURED -->
+      <div class="pricing-card featured">
+        <div class="card-top-badge">
+          <span class="badge badge-popular de">Beliebteste Wahl</span>
+          <span class="badge badge-popular en">Most Popular</span>
+        </div>
+        <div class="pricing-duration">
+          <span class="de">6 Monate</span>
+          <span class="en">6 Months</span>
+        </div>
+        <div class="pricing-name de">Professional</div>
+        <div class="pricing-name en">Professional</div>
+        <div class="pricing-price"><sup>€</sup>249<span class="pricing-price-mo">/Mo</span></div>
+        <div class="pricing-save">
+          <span class="de">Du sparst €300</span>
+          <span class="en">You save €300</span>
+        </div>
+        <div class="pricing-total">
+          <span class="de">Gesamt: €1.494</span>
+          <span class="en">Total: €1.494</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span class="de">Monatliche Website Optimierung</span><span class="en">Monthly website optimization</span></li>
+          <li><span class="check">✓</span><span class="de">2x Design Updates pro Monat</span><span class="en">2x design updates per month</span></li>
+          <li><span class="check">✓</span><span class="de">SEO Optimierung</span><span class="en">SEO optimization</span></li>
+          <li><span class="check">✓</span><span class="de">Conversion Optimierung</span><span class="en">Conversion optimization</span></li>
+          <li><span class="check">✓</span><span class="de">Priority E-Mail Support</span><span class="en">Priority Email Support</span></li>
+        </ul>
+        <div class="retainer-svc-wrap" style="margin-top:20px;">
+          <a href="#" class="btn btn-primary btn-full retainer-svc-btn" data-href="contact.html?paket=Professional+Betreuung&amp;preis=249&amp;laufzeit=6+Monate">
+            <span class="de">Professional wählen →</span>
+            <span class="en">Choose Professional →</span>
+          </a>
+          <div class="svc-tooltip">
+            <span class="de">Bitte zuerst Website wählen</span>
+            <span class="en">Please select website first</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Premium -->
+      <div class="pricing-card">
+        <div class="pricing-duration">
+          <span class="de">12 Monate</span>
+          <span class="en">12 Months</span>
+        </div>
+        <div class="pricing-name de">Premium</div>
+        <div class="pricing-name en">Premium</div>
+        <div class="pricing-price"><sup>€</sup>199<span class="pricing-price-mo">/Mo</span></div>
+        <div class="pricing-save">
+          <span class="de">Du sparst €1.200</span>
+          <span class="en">You save €1.200</span>
+        </div>
+        <div class="pricing-total">
+          <span class="de">Gesamt: €2.388</span>
+          <span class="en">Total: €2.388</span>
+        </div>
+        <div class="pricing-divider"></div>
+        <ul class="pricing-features">
+          <li><span class="check">✓</span><span class="de">Monatliche Website Optimierung</span><span class="en">Monthly website optimization</span></li>
+          <li><span class="check">✓</span><span class="de">Unbegrenzte Design Updates</span><span class="en">Unlimited design updates</span></li>
+          <li><span class="check">✓</span><span class="de">SEO + Performance Optimierung</span><span class="en">SEO + Performance optimization</span></li>
+          <li><span class="check">✓</span><span class="de">Conversion Optimierung</span><span class="en">Conversion optimization</span></li>
+          <li><span class="check">✓</span><span class="de">Social Media Updates</span><span class="en">Social Media Updates</span></li>
+          <li><span class="check">✓</span><span class="de">KI-Chatbot Integration</span><span class="en">AI Chatbot Integration</span></li>
+          <li><span class="check">✓</span><span class="de">24h Priority Support</span><span class="en">24h Priority Support</span></li>
+          <li><span class="check">✓</span><span class="de">Monatlicher Report</span><span class="en">Monthly Report</span></li>
+        </ul>
+        <div class="retainer-svc-wrap" style="margin-top:20px;">
+          <a href="#" class="btn btn-ghost btn-full retainer-svc-btn" data-href="contact.html?paket=Premium+Betreuung&amp;preis=199&amp;laufzeit=12+Monate">
+            <span class="de">Premium wählen →</span>
+            <span class="en">Choose Premium →</span>
+          </a>
+          <div class="svc-tooltip">
+            <span class="de">Bitte zuerst Website wählen</span>
+            <span class="en">Please select website first</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Scarcity banner -->
+    <div class="svc-scarcity">
+      <div class="svc-scarcity-left">
+        <span class="svc-scarcity-icon">⚡</span>
+        <span class="svc-scarcity-text">
+          <span class="de">Nur 3 Projektplätze verfügbar diesen Monat — sichere dir jetzt deinen Platz.</span>
+          <span class="en">Only 3 project slots available this month — secure your spot now.</span>
+        </span>
+      </div>
+      <a href="contact.html" class="svc-scarcity-btn">
+        <span class="de">Jetzt starten →</span>
+        <span class="en">Start Now →</span>
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════
+     FAQ
+══════════════════════════ -->
+<section class="section">
+  <div class="container" style="max-width:760px;">
+    <div class="center">
+      <span class="section-label de">Häufige Fragen</span>
+      <span class="section-label en">FAQ</span>
+      <h2 class="section-title">
+        <span class="de">Häufig gestellte Fragen</span>
+        <span class="en">Frequently Asked Questions</span>
+      </h2>
+      <div class="gold-line gold-line-center"></div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:1px;background:var(--black-border);border-radius:var(--r-md);overflow:hidden;">
+
+      <details style="background:var(--black-card);padding:0;">
+        <summary style="padding:20px 24px;cursor:pointer;font-weight:500;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+          <span class="de">Wie läuft der Prozess ab?</span>
+          <span class="en">How does the process work?</span>
+          <span style="color:var(--gold);font-size:1.2rem;margin-left:16px;flex-shrink:0;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px;color:var(--white-muted);font-size:0.9rem;line-height:1.75;">
+          <span class="de">Nach Ihrer Anfrage vereinbaren wir ein kostenloses Erstgespräch. Anschließend senden wir Ihnen ein detailliertes Angebot. Bei Auftragserteilung beginnen wir mit dem Briefing und starten sofort mit der Arbeit.</span>
+          <span class="en">After your enquiry, we schedule a free discovery call. We then send you a detailed proposal. Upon commissioning, we begin with the briefing and start work immediately.</span>
+        </div>
+      </details>
+
+      <details style="background:var(--black-card);padding:0;">
+        <summary style="padding:20px 24px;cursor:pointer;font-weight:500;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+          <span class="de">Was bedeutet „unlimitierte Revisionen"?</span>
+          <span class="en">What does "unlimited revisions" mean?</span>
+          <span style="color:var(--gold);font-size:1.2rem;margin-left:16px;flex-shrink:0;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px;color:var(--white-muted);font-size:0.9rem;line-height:1.75;">
+          <span class="de">Wir überarbeiten Ihr Design so oft wie nötig, bis Sie zu 100% zufrieden sind — keine versteckten Extrakosten, keine Limits.</span>
+          <span class="en">We revise your design as many times as needed until you're 100% satisfied — no hidden extra costs, no limits.</span>
+        </div>
+      </details>
+
+      <details style="background:var(--black-card);padding:0;">
+        <summary style="padding:20px 24px;cursor:pointer;font-weight:500;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+          <span class="de">Welche Zahlungsarten werden akzeptiert?</span>
+          <span class="en">What payment methods are accepted?</span>
+          <span style="color:var(--gold);font-size:1.2rem;margin-left:16px;flex-shrink:0;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px;color:var(--white-muted);font-size:0.9rem;line-height:1.75;">
+          <span class="de">Wir akzeptieren Banküberweisung, PayPal und Kreditkarte. Bei größeren Projekten ist eine Ratenzahlung möglich (50% Anzahlung, 50% bei Lieferung).</span>
+          <span class="en">We accept bank transfer, PayPal and credit card. For larger projects, instalment payment is possible (50% upfront, 50% on delivery).</span>
+        </div>
+      </details>
+
+      <details style="background:var(--black-card);padding:0;">
+        <summary style="padding:20px 24px;cursor:pointer;font-weight:500;font-size:0.95rem;list-style:none;display:flex;justify-content:space-between;align-items:center;">
+          <span class="de">Wie schnell erhalte ich mein fertiges Design?</span>
+          <span class="en">How quickly will I receive my finished design?</span>
+          <span style="color:var(--gold);font-size:1.2rem;margin-left:16px;flex-shrink:0;">+</span>
+        </summary>
+        <div style="padding:0 24px 20px;color:var(--white-muted);font-size:0.9rem;line-height:1.75;">
+          <span class="de">Design Starter: 3–5 Werktage. Brand Identity: 10 Werktage. Social Media Kit: 3–5 Werktage. Websites: 2–3 Wochen. Shopify Stores: 3–4 Wochen. Express-Lieferung auf Anfrage möglich.</span>
+          <span class="en">Design Starter: 3–5 business days. Brand Identity: 10 business days. Social Media Kit: 3–5 business days. Websites: 2–3 weeks. Shopify Stores: 3–4 weeks. Express delivery available on request.</span>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════
+     CTA
+══════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-pill de">Kostenlos &amp; unverbindlich</div>
+    <div class="cta-pill en">Free &amp; non-binding</div>
+    <h2>
+      <span class="de">Starten Sie noch heute</span>
+      <span class="en">Start Today</span>
+    </h2>
+    <p>
+      <span class="de">Sichern Sie sich einen der letzten freien Projektplätze im Juni. Kostenloses Erstgespräch, kein Commitment.</span>
+      <span class="en">Secure one of the last available project slots in June. Free discovery call, no commitment.</span>
+    </p>
+    <div class="cta-btns">
+      <a href="contact.html" class="btn btn-primary btn-lg">
+        <span class="de">Kostenloses Gespräch buchen →</span>
+        <span class="en">Book Free Call →</span>
+      </a>
+    </div>
+    <div class="urgency" style="justify-content:center;">
+      <div class="urgency-dot"></div>
+      <span class="de">Nur noch 3 Plätze verfügbar</span>
+      <span class="en">Only 3 slots remaining</span>
+    </div>
+  </div>
+</section>
+
+<div id="footer-placeholder"></div>
+<script src="nav.js"></script>
+<script>
+(function () {
+  var selectedSetup  = null;
+  var setupCards     = document.querySelectorAll('.svc-setup-card[data-setup-name]');
+  var retainerBtns   = document.querySelectorAll('.retainer-svc-btn');
+  var reqBox         = document.getElementById('svcReqBox');
+  var reqTextDe      = document.getElementById('svcReqTextDe');
+  var reqTextEn      = document.getElementById('svcReqTextEn');
+
+  function lockBtns() {
+    retainerBtns.forEach(function (btn) {
+      btn.classList.add('locked');
+      var wrap = btn.closest('.retainer-svc-wrap');
+      if (wrap) wrap.classList.add('btn-locked');
+    });
+  }
+
+  function unlockBtns() {
+    retainerBtns.forEach(function (btn) {
+      btn.classList.remove('locked');
+      var wrap = btn.closest('.retainer-svc-wrap');
+      if (wrap) wrap.classList.remove('btn-locked');
+    });
+  }
+
+  function updateReq(name, price) {
+    if (reqBox) reqBox.classList.add('satisfied');
+    if (reqTextDe) reqTextDe.textContent = '✓ Gewählt: ' + name + ' — €' + price;
+    if (reqTextEn) reqTextEn.textContent = '✓ Selected: ' + name + ' — €' + price;
+  }
+
+  function resetReq() {
+    if (reqBox) reqBox.classList.remove('satisfied');
+    if (reqTextDe) reqTextDe.textContent = '⚠ Bitte zuerst Website wählen';
+    if (reqTextEn) reqTextEn.textContent = '⚠ Please first select your website type';
+  }
+
+  /* Init: pulse cards + lock buttons */
+  setupCards.forEach(function (c) { c.classList.add('pulsing'); });
+  lockBtns();
+
+  /* Setup card click */
+  setupCards.forEach(function (card) {
+    card.addEventListener('click', function () {
+      var alreadySelected = card.classList.contains('selected');
+
+      setupCards.forEach(function (c) {
+        c.classList.remove('selected');
+        c.classList.add('pulsing');
+      });
+
+      if (alreadySelected) {
+        selectedSetup = null;
+        lockBtns();
+        resetReq();
+      } else {
+        card.classList.remove('pulsing');
+        card.classList.add('selected');
+        var name  = card.querySelector('.svc-setup-name').textContent.trim();
+        var price = card.dataset.setupPrice;
+        selectedSetup = { name: card.dataset.setupName, price: price };
+        unlockBtns();
+        updateReq(name, price);
+      }
+    });
+  });
+
+  /* Retainer button click: build URL with both selections */
+  retainerBtns.forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (!selectedSetup) return;
+      var url = btn.dataset.href
+        + '&setup='        + selectedSetup.name
+        + '&setup_preis=' + selectedSetup.price;
+      window.location.href = url;
+    });
+  });
+})();
+</script>
+</body>
+</html>

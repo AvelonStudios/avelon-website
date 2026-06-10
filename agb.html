@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AGB — AvèlonStudios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --black: #0a0a0a;
+      --dark-grey: #1a1a1a;
+      --mid-grey: #2e2e2e;
+      --border: #2a2a2a;
+      --silver: #8a8a8a;
+      --silver-light: #b0b0b0;
+      --white: #f5f5f0;
+      --white-pure: #ffffff;
+      --accent: #c9b97a;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--black);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      line-height: 1.75;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 1.5rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1.4rem;
+      letter-spacing: 0.12em;
+      color: var(--white);
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-logo span { color: var(--accent); }
+
+    .nav-back {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav-back::before {
+      content: '←';
+      font-size: 0.85rem;
+      transition: transform 0.3s;
+    }
+
+    .nav-back:hover { color: var(--white); }
+    .nav-back:hover::before { transform: translateX(-4px); }
+
+    /* ── HERO ── */
+    .page-hero {
+      margin-top: 73px;
+      padding: 5rem 3rem 3rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .page-hero::before {
+      content: 'AGB';
+      position: absolute;
+      right: 3rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(6rem, 14vw, 12rem);
+      font-weight: 300;
+      color: rgba(255,255,255,0.03);
+      letter-spacing: 0.1em;
+      pointer-events: none;
+    }
+
+    .page-hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .page-hero .subtitle {
+      margin-top: 0.75rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    /* ── TOC ── */
+    .toc {
+      background: var(--dark-grey);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      padding: 2rem 2.5rem;
+      margin-bottom: 4rem;
+      animation: fadeUp 0.6s ease 0.1s both;
+    }
+
+    .toc-title {
+      font-size: 0.68rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .toc ol {
+      list-style: none;
+      counter-reset: toc;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .toc ol li {
+      counter-increment: toc;
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .toc ol li::before {
+      content: counter(toc, decimal-leading-zero);
+      font-size: 0.65rem;
+      color: var(--silver);
+      letter-spacing: 0.1em;
+      min-width: 1.5rem;
+    }
+
+    .toc ol li a {
+      font-size: 0.85rem;
+      color: var(--silver-light);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .toc ol li a:hover { color: var(--accent); }
+
+    /* ── MAIN ── */
+    main {
+      flex: 1;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 5rem 3rem 6rem;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .legal-section {
+      margin-bottom: 4rem;
+      animation: fadeUp 0.6s ease both;
+    }
+
+    .legal-section:nth-child(2)  { animation-delay: 0.1s; }
+    .legal-section:nth-child(3)  { animation-delay: 0.15s; }
+    .legal-section:nth-child(4)  { animation-delay: 0.2s; }
+    .legal-section:nth-child(5)  { animation-delay: 0.25s; }
+    .legal-section:nth-child(6)  { animation-delay: 0.3s; }
+    .legal-section:nth-child(7)  { animation-delay: 0.35s; }
+    .legal-section:nth-child(8)  { animation-delay: 0.4s; }
+    .legal-section:nth-child(9)  { animation-delay: 0.45s; }
+    .legal-section:nth-child(10) { animation-delay: 0.5s; }
+    .legal-section:nth-child(11) { animation-delay: 0.55s; }
+
+    .section-number {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .legal-section h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600;
+      font-size: 1.6rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--white-pure);
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .legal-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 0;
+      width: 40px; height: 1px;
+      background: var(--accent);
+    }
+
+    .legal-section h3 {
+      font-family: 'Jost', sans-serif;
+      font-weight: 500;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin: 2rem 0 0.75rem;
+    }
+
+    p {
+      font-size: 0.91rem;
+      color: var(--silver-light);
+      line-height: 1.9;
+      margin-bottom: 1rem;
+    }
+
+    p:last-child { margin-bottom: 0; }
+
+    ul.agb-list {
+      list-style: none;
+      margin: 0.75rem 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    ul.agb-list li {
+      font-size: 0.91rem;
+      color: var(--silver-light);
+      line-height: 1.75;
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    ul.agb-list li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: 0.8rem;
+    }
+
+    .info-box {
+      background: var(--dark-grey);
+      border: 1px solid var(--border);
+      border-left: 2px solid var(--accent);
+      padding: 1.5rem 2rem;
+      margin: 1.5rem 0;
+    }
+
+    .info-box p {
+      font-size: 0.88rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .price-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 1px;
+      background: var(--border);
+      margin: 1.5rem 0;
+      border: 1px solid var(--border);
+    }
+
+    .price-cell {
+      background: var(--dark-grey);
+      padding: 1rem 1.25rem;
+    }
+
+    .price-cell .label {
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-bottom: 0.3rem;
+    }
+
+    .price-cell .value {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      color: var(--white);
+      letter-spacing: 0.05em;
+    }
+
+    .price-cell.header {
+      background: var(--mid-grey);
+    }
+
+    .price-cell.header .value {
+      font-size: 0.72rem;
+      font-family: 'Jost', sans-serif;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    a:hover { opacity: 0.7; }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--silver);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .footer-links a:hover,
+    .footer-links a[aria-current="page"] { color: var(--accent); }
+
+    .footer-copy {
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      color: var(--mid-grey);
+      text-transform: uppercase;
+      width: 100%;
+      text-align: center;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      nav { padding: 1.25rem 1.5rem; }
+      .page-hero { padding: 4rem 1.5rem 2.5rem; }
+      main { padding: 3rem 1.5rem 5rem; }
+      .toc { padding: 1.5rem; }
+      .price-grid { grid-template-columns: 1fr; }
+      footer { padding: 2rem 1.5rem; flex-direction: column; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Avèlon<span>Studios</span></a>
+    <a href="index.html" class="nav-back">Zurück zur Website</a>
+  </nav>
+
+  <!-- HERO -->
+  <div class="page-hero">
+    <h1>Allgemeine Geschäftsbedingungen</h1>
+    <p class="subtitle">AvèlonStudios — Can Papenheim · Stand Juni 2025</p>
+  </div>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- TOC -->
+    <div class="toc">
+      <p class="toc-title">Inhaltsverzeichnis</p>
+      <ol>
+        <li><a href="#s1">Geltungsbereich</a></li>
+        <li><a href="#s2">Vertragsschluss</a></li>
+        <li><a href="#s3">Leistungsumfang</a></li>
+        <li><a href="#s4">Mitwirkungspflichten des Auftraggebers</a></li>
+        <li><a href="#s5">Revisionen und Änderungswünsche</a></li>
+        <li><a href="#s6">Lieferung und Übergabe</a></li>
+        <li><a href="#s7">Vergütung und Zahlung</a></li>
+        <li><a href="#s8">Urheberrecht und Nutzungsrechte</a></li>
+        <li><a href="#s9">Gewährleistung und Haftung</a></li>
+        <li><a href="#s10">Vertraulichkeit</a></li>
+        <li><a href="#s11">Schlussbestimmungen</a></li>
+      </ol>
+    </div>
+
+    <!-- § 1 -->
+    <section class="legal-section" id="s1">
+      <p class="section-number">§ 01</p>
+      <h2>Geltungsbereich</h2>
+      <p>
+        Diese Allgemeinen Geschäftsbedingungen (nachfolgend „AGB") gelten für alle Verträge zwischen
+        Can Papenheim, AvèlonStudios, Peterstraße 10A, 59067 Hamm (nachfolgend „Auftragnehmer") und
+        seinen Auftraggebern über die Erbringung von Web-Design-, Branding- und digitalen
+        Gestaltungsleistungen.
+      </p>
+      <p>
+        Abweichende, entgegenstehende oder ergänzende Allgemeine Geschäftsbedingungen des Auftraggebers
+        werden nicht Vertragsbestandteil, es sei denn, ihrer Geltung wird ausdrücklich schriftlich zugestimmt.
+      </p>
+    </section>
+
+    <!-- § 2 -->
+    <section class="legal-section" id="s2">
+      <p class="section-number">§ 02</p>
+      <h2>Vertragsschluss</h2>
+      <p>
+        Ein Vertrag kommt zustande, wenn der Auftraggeber ein Angebot des Auftragnehmers schriftlich —
+        per E-Mail oder über das Kontaktformular auf der Website — annimmt oder eine Auftragsbestätigung
+        unterzeichnet.
+      </p>
+      <p>
+        Mündliche Nebenabreden bedürfen der schriftlichen Bestätigung durch den Auftragnehmer, um
+        Gültigkeit zu erlangen. Angebote sind freibleibend und unverbindlich, sofern nicht ausdrücklich
+        eine Bindungsfrist angegeben ist.
+      </p>
+    </section>
+
+    <!-- § 3 -->
+    <section class="legal-section" id="s3">
+      <p class="section-number">§ 03</p>
+      <h2>Leistungsumfang</h2>
+      <p>
+        Der genaue Leistungsumfang ergibt sich aus dem jeweiligen Angebot bzw. der Auftragsbestätigung.
+        AvèlonStudios bietet folgende Hauptleistungen an:
+      </p>
+
+      <h3>Web Design (einmalig)</h3>
+      <div class="price-grid">
+        <div class="price-cell header"><p class="value">Paket</p></div>
+        <div class="price-cell header"><p class="value">Preis</p></div>
+        <div class="price-cell header"><p class="value">Revisionen</p></div>
+        <div class="price-cell"><p class="label">Basic</p><p class="value">€ 399</p></div>
+        <div class="price-cell"><p class="value">€ 399,–</p></div>
+        <div class="price-cell"><p class="value">2 Runden</p></div>
+        <div class="price-cell"><p class="label">Standard</p></div>
+        <div class="price-cell"><p class="value">€ 599,–</p></div>
+        <div class="price-cell"><p class="value">2 Runden</p></div>
+        <div class="price-cell"><p class="label">Premium</p></div>
+        <div class="price-cell"><p class="value">€ 799,–</p></div>
+        <div class="price-cell"><p class="value">3 Runden</p></div>
+      </div>
+
+      <h3>Web Design mit Betreuung</h3>
+      <div class="price-grid">
+        <div class="price-cell header"><p class="value">Paket</p></div>
+        <div class="price-cell header"><p class="value">Preis</p></div>
+        <div class="price-cell header"><p class="value">Revisionen</p></div>
+        <div class="price-cell"><p class="label">Basic</p></div>
+        <div class="price-cell"><p class="value">€ 199,–</p></div>
+        <div class="price-cell"><p class="value">2 Runden</p></div>
+        <div class="price-cell"><p class="label">Standard</p></div>
+        <div class="price-cell"><p class="value">€ 349,–</p></div>
+        <div class="price-cell"><p class="value">2 Runden</p></div>
+        <div class="price-cell"><p class="label">Premium</p></div>
+        <div class="price-cell"><p class="value">€ 499,–</p></div>
+        <div class="price-cell"><p class="value">3 Runden</p></div>
+      </div>
+
+      <h3>Aktive Store Betreuung (monatlich)</h3>
+      <div class="price-grid">
+        <div class="price-cell header"><p class="value">Paket</p></div>
+        <div class="price-cell header"><p class="value">Preis/Mo</p></div>
+        <div class="price-cell header"><p class="value">Laufzeit</p></div>
+        <div class="price-cell"><p class="label">Starter</p></div>
+        <div class="price-cell"><p class="value">€ 299,–</p></div>
+        <div class="price-cell"><p class="value">3 Monate</p></div>
+        <div class="price-cell"><p class="label">Professional</p></div>
+        <div class="price-cell"><p class="value">€ 249,–</p></div>
+        <div class="price-cell"><p class="value">6 Monate</p></div>
+        <div class="price-cell"><p class="label">Premium</p></div>
+        <div class="price-cell"><p class="value">€ 199,–</p></div>
+        <div class="price-cell"><p class="value">12 Monate</p></div>
+      </div>
+
+      <p>
+        Hosting ist ausschließlich bei Buchung eines Store Betreuungs-Pakets Bestandteil der Leistung.
+        Bei allen anderen Paketen wird der fertige Code übergeben; Hosting und Deployment obliegen dem
+        Auftraggeber.
+      </p>
+    </section>
+
+    <!-- § 4 -->
+    <section class="legal-section" id="s4">
+      <p class="section-number">§ 04</p>
+      <h2>Mitwirkungspflichten des Auftraggebers</h2>
+      <p>
+        Der Auftraggeber ist verpflichtet, alle für die Leistungserbringung erforderlichen Inhalte,
+        Informationen und Materialien (Texte, Bilder, Logos, Zugangsdaten etc.) vollständig und
+        rechtzeitig bereitzustellen.
+      </p>
+      <p>
+        Verzögert sich die Leistungserbringung durch verspätete oder unvollständige Zulieferung seitens
+        des Auftraggebers, verlängern sich vereinbarte Lieferfristen entsprechend. Mehraufwand, der durch
+        fehlerhafte oder nachträglich geänderte Inhalte des Auftraggebers entsteht, wird gesondert
+        in Rechnung gestellt.
+      </p>
+      <p>
+        Der Auftraggeber versichert, dass alle von ihm bereitgestellten Materialien frei von Rechten
+        Dritter sind und deren Nutzung keine gesetzlichen Bestimmungen verletzt. Für Rechtsverletzungen
+        durch bereitgestellte Inhalte haftet ausschließlich der Auftraggeber.
+      </p>
+    </section>
+
+    <!-- § 5 -->
+    <section class="legal-section" id="s5">
+      <p class="section-number">§ 05</p>
+      <h2>Revisionen und Änderungswünsche</h2>
+      <p>
+        Im vereinbarten Leistungsumfang sind Revisionsrunden gemäß § 3 enthalten. Eine Revisionsrunde
+        umfasst die schriftliche Zusammenfassung aller Änderungswünsche in einer einzigen Mitteilung.
+      </p>
+      <p>
+        Änderungswünsche, die über den vereinbarten Umfang hinausgehen oder inhaltliche Neuausrichtungen
+        darstellen, werden nach Aufwand zum Stundensatz von <strong style="color:var(--white);">€ 75,– netto</strong> berechnet.
+        Der Auftragnehmer weist auf Mehrkosten hin, bevor er mit der Umsetzung beginnt.
+      </p>
+      <p>
+        Grundlegende Konzeptänderungen nach Freigabe eines Entwurfs gelten als neuer Auftrag und werden
+        gesondert angeboten.
+      </p>
+    </section>
+
+    <!-- § 6 -->
+    <section class="legal-section" id="s6">
+      <p class="section-number">§ 06</p>
+      <h2>Lieferung und Übergabe</h2>
+      <p>
+        Die Lieferung erfolgt digital per E-Mail oder über einen vereinbarten Dateiübertragungsweg.
+        Lieferfristen sind unverbindlich, sofern nicht schriftlich als verbindlich vereinbart. Bei
+        verbindlichen Terminen ist der Auftragnehmer nur dann in Verzug, wenn er eine schriftliche
+        Mahnung erhalten hat.
+      </p>
+      <p>
+        Die Abnahme gilt als erteilt, wenn der Auftraggeber das Werk nicht innerhalb von
+        <strong style="color:var(--white);">14 Tagen</strong> nach Übergabe schriftlich und unter Angabe
+        konkreter Mängel zurückweist. Nach Ablauf dieser Frist gilt das Werk als abgenommen.
+      </p>
+      <p>
+        Bei Paketen ohne Hosting-Leistung erhält der Auftraggeber nach vollständiger Zahlung den
+        kompletten Quellcode zur eigenständigen Verwendung.
+      </p>
+    </section>
+
+    <!-- § 7 -->
+    <section class="legal-section" id="s7">
+      <p class="section-number">§ 07</p>
+      <h2>Vergütung und Zahlung</h2>
+      <p>
+        Die Vergütung richtet sich nach dem vereinbarten Angebot. Alle Preise verstehen sich als
+        Nettopreise zuzüglich der gesetzlichen Umsatzsteuer, sofern diese anfällt.
+      </p>
+      <p>
+        Die Zahlung ist bei Übergabe des fertigen Werks fällig. Rechnungen sind innerhalb von
+        <strong style="color:var(--white);">14 Tagen</strong> nach Rechnungsstellung ohne Abzug zu begleichen.
+      </p>
+      <p>
+        Bei monatlichen Betreuungspaketen ist die Vergütung jeweils zum Monatsbeginn im Voraus fällig.
+        Bei Zahlungsverzug ist der Auftragnehmer berechtigt, die laufende Leistung bis zum Ausgleich
+        der offenen Beträge auszusetzen.
+      </p>
+      <div class="info-box">
+        <p>
+          Bis zur vollständigen Bezahlung verbleiben alle erstellten Materialien, Dateien und Codes
+          im Eigentum des Auftragnehmers. Eine Nutzung vor Zahlungseingang ist nicht gestattet.
+        </p>
+      </div>
+    </section>
+
+    <!-- § 8 -->
+    <section class="legal-section" id="s8">
+      <p class="section-number">§ 08</p>
+      <h2>Urheberrecht und Nutzungsrechte</h2>
+      <p>
+        Alle im Rahmen des Auftrags erstellten Werke — insbesondere Designs, Code, Grafiken und
+        Konzepte — sind urheberrechtlich geschützte Leistungen des Auftragnehmers.
+      </p>
+      <p>
+        Mit vollständiger Zahlung der vereinbarten Vergütung überträgt der Auftragnehmer dem
+        Auftraggeber das einfache, nicht übertragbare Nutzungsrecht zur Verwendung der erstellten
+        Materialien für die vereinbarten Zwecke. Eine Weiterveräußerung oder Unterlizenzierung
+        an Dritte ist ohne ausdrückliche schriftliche Genehmigung nicht gestattet.
+      </p>
+      <p>
+        Der Auftragnehmer behält das Recht, die erstellten Arbeiten im eigenen Portfolio, auf der
+        Website sowie in sozialen Medien als Referenz zu verwenden, sofern der Auftraggeber nicht
+        ausdrücklich widerspricht.
+      </p>
+    </section>
+
+    <!-- § 9 -->
+    <section class="legal-section" id="s9">
+      <p class="section-number">§ 09</p>
+      <h2>Gewährleistung und Haftung</h2>
+      <p>
+        Der Auftragnehmer gewährleistet, dass die erbrachten Leistungen den vereinbarten
+        Spezifikationen entsprechen. Mängel sind unverzüglich, spätestens innerhalb von
+        <strong style="color:var(--white);">14 Tagen</strong> nach Abnahme schriftlich anzuzeigen.
+      </p>
+      <p>
+        Die Haftung des Auftragnehmers für leichte Fahrlässigkeit ist — soweit gesetzlich zulässig —
+        ausgeschlossen. Dies gilt nicht für Schäden aus der Verletzung von Leben, Körper oder
+        Gesundheit sowie für Schäden aus der Verletzung wesentlicher Vertragspflichten.
+      </p>
+      <p>
+        Der Auftragnehmer übernimmt keine Haftung für die wirtschaftliche Eignung der erstellten
+        Website für die Zwecke des Auftraggebers sowie für Ausfälle oder Fehler durch Drittanbieter
+        (Hosting, Domain, Plugins).
+      </p>
+    </section>
+
+    <!-- § 10 -->
+    <section class="legal-section" id="s10">
+      <p class="section-number">§ 10</p>
+      <h2>Vertraulichkeit</h2>
+      <p>
+        Beide Parteien verpflichten sich, alle im Rahmen der Zusammenarbeit erlangten vertraulichen
+        Informationen der jeweils anderen Partei — insbesondere Geschäftsdaten, Strategien und
+        technische Details — vertraulich zu behandeln und nicht an Dritte weiterzugeben.
+      </p>
+      <p>
+        Diese Verpflichtung gilt auch nach Beendigung des Vertragsverhältnisses für einen Zeitraum
+        von <strong style="color:var(--white);">3 Jahren</strong>.
+      </p>
+    </section>
+
+    <!-- § 11 -->
+    <section class="legal-section" id="s11">
+      <p class="section-number">§ 11</p>
+      <h2>Schlussbestimmungen</h2>
+      <p>
+        Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand für alle Streitigkeiten aus
+        oder im Zusammenhang mit diesen AGB ist, soweit gesetzlich zulässig, Hamm.
+      </p>
+      <p>
+        Sollten einzelne Bestimmungen dieser AGB unwirksam sein oder werden, bleibt die Wirksamkeit
+        der übrigen Bestimmungen unberührt. Die unwirksame Bestimmung ist durch eine wirksame zu
+        ersetzen, die dem wirtschaftlichen Zweck der unwirksamen Bestimmung am nächsten kommt.
+      </p>
+      <p>
+        Änderungen und Ergänzungen dieser AGB bedürfen der Schriftform. Dies gilt auch für die
+        Aufhebung des Schriftformerfordernisses selbst.
+      </p>
+      <div class="info-box" style="margin-top:2rem;">
+        <p><strong style="color:var(--accent);">Stand:</strong> Juni 2025</p>
+        <p><strong style="color:var(--accent);">Anbieter:</strong> Can Papenheim · AvèlonStudios · Peterstraße 10A · 59067 Hamm</p>
+        <p><strong style="color:var(--accent);">Kontakt:</strong> <a href="mailto:avelon.business1@gmail.com">avelon.business1@gmail.com</a></p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-brand">Avèlon Studios</span>
+    <ul class="footer-links">
+      <li><a href="index.html">Start</a></li>
+      <li><a href="services.html">Leistungen</a></li>
+      <li><a href="contact.html">Kontakt</a></li>
+      <li><a href="impressum.html">Impressum</a></li>
+      <li><a href="datenschutz.html">Datenschutz</a></li>
+      <li><a href="agb.html" aria-current="page">AGB</a></li>
+    </ul>
+    <p class="footer-copy">© 2025 AvèlonStudios — Can Papenheim. Alle Rechte vorbehalten.</p>
+  </footer>
+
+</body>
+</html>
