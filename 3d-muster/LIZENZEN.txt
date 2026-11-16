@@ -1,0 +1,16 @@
+3D-Rundgang Musterwohnung – AvèlonStudios
+
+Dieser Ordner lädt nichts von fremden Servern: Programmbibliothek und Schriften liegen lokal.
+
+Software
+- three.js r170 (lib/three.module.min.js) – MIT-Lizenz, © 2010–2024 three.js authors, https://threejs.org
+
+Schriften (fonts/)
+- Cormorant Garamond – SIL Open Font License 1.1, © Christian Thalmann / Catharsis Fonts
+- Jost – SIL Open Font License 1.1, © Owen Earl / indestructible type*
+
+3D-Modelle in den Bildern (farblich verändert), Khronos glTF Sample Assets
+- "Glam Velvet Sofa", "Iridescent Dish with Olives" – © Wayfair, LLC, CC BY 4.0
+- "Diffuse Transmission Plant" – © Darmstadt Graphics Group GmbH, CC BY 4.0
+- "Sheen Chair" (Wayfair), "Glass Vase Flowers" – CC0
+https://github.com/KhronosGroup/glTF-Sample-Assets

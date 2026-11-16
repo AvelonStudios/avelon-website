@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#060606">
+<title>3D-Rundgang · Musterwohnung · AvèlonStudios</title>
+<style>
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/cormorant-garamond-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Cormorant Garamond";font-style:italic;font-weight:500;font-display:swap;src:url(fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2")}
+@font-face{font-family:"Jost";font-style:normal;font-weight:300;font-display:swap;src:url(fonts/jost-latin-300-normal.woff2) format("woff2")}
+@font-face{font-family:"Jost";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/jost-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Jost";font-style:normal;font-weight:500;font-display:swap;src:url(fonts/jost-latin-500-normal.woff2) format("woff2")}
+</style>
+<style>
+:root{--gold:#c9b97a;--ink:#060606;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;touch-action:manipulation;background:var(--ink);font-family:"Jost",system-ui,sans-serif;color:#f1ece0;-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+#stage{position:fixed;inset:0}
+#stage canvas{display:block;touch-action:none;cursor:grab}
+#stage canvas:active{cursor:grabbing}
+.top{position:fixed;top:0;left:0;right:0;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:calc(18px + env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) 40px max(22px,env(safe-area-inset-left));pointer-events:none;background:linear-gradient(rgba(6,6,6,.6),rgba(6,6,6,0));z-index:3}
+.brand{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--gold);font-weight:500}
+.title{font-family:"Cormorant Garamond",serif;font-size:27px;font-weight:500;margin-top:4px;color:#fff;line-height:1.1}
+.title i{color:var(--gold)}
+.meta{font-size:12.5px;color:#ddd6c6;margin-top:3px}
+.mode{pointer-events:auto;display:flex;border:1px solid rgba(201,185,122,.65);border-radius:2px;overflow:hidden;flex:0 0 auto}
+.mode button{background:rgba(6,6,6,.55);color:#efe8d6;border:0;padding:10px 15px;font:500 11px "Jost",sans-serif;letter-spacing:1.6px;text-transform:uppercase;cursor:pointer}
+.mode button.on{background:var(--gold);color:var(--ink)}
+.bottom{position:fixed;left:0;right:0;bottom:0;padding:40px max(16px,env(safe-area-inset-right)) calc(16px + env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left));background:linear-gradient(rgba(6,6,6,0),rgba(6,6,6,.72));z-index:3}
+.rooms{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none}
+.rooms::-webkit-scrollbar{display:none}
+.rooms button{flex:0 0 auto;background:rgba(6,6,6,.6);color:#efe8d6;border:1px solid rgba(201,185,122,.45);border-radius:2px;padding:9px 13px;font:400 13px "Jost",sans-serif;cursor:pointer;white-space:nowrap}
+.rooms button span{color:var(--gold);margin-left:6px;font-size:12px}
+.rooms button.on{border-color:var(--gold);background:rgba(201,185,122,.2)}
+.foot{display:flex;justify-content:space-between;gap:12px;margin-top:10px;font-size:11px;color:#bfb7a4}
+.foot a{color:#bfb7a4}
+#hs{position:fixed;inset:0;pointer-events:none;z-index:2}
+.hot{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px}
+.hot .ring{width:46px;height:46px;border-radius:50%;border:2px solid #fff;background:rgba(201,185,122,.35);box-shadow:0 0 0 6px rgba(255,255,255,.12),0 4px 18px rgba(0,0,0,.35);transition:transform .2s,background .2s}
+.hot:hover .ring{transform:scale(1.12);background:rgba(201,185,122,.7)}
+.hot .lab{font-size:12px;letter-spacing:.4px;background:rgba(6,6,6,.7);padding:4px 9px;border-radius:2px;white-space:nowrap}
+#plan{position:fixed;inset:0;background:radial-gradient(ellipse at center,#24221e 0%,#0b0a09 75%);display:none;z-index:1}
+#plan img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:110px 20px 120px}
+.pl{position:absolute;transform:translate(-50%,-50%);background:rgba(250,248,242,.94);color:#141414;border:0;border-radius:2px;padding:7px 12px;font:500 13px "Jost",sans-serif;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);white-space:nowrap}
+.pl span{display:block;font-weight:400;font-size:11.5px;color:#8a7434}
+.pl.na{cursor:default;opacity:.85}
+.hint{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);background:rgba(6,6,6,.72);border:1px solid rgba(201,185,122,.5);padding:14px 20px;font-size:13px;text-align:center;pointer-events:none;transition:opacity .6s;line-height:1.6;z-index:4}
+.hint b{color:var(--gold);font-weight:500}
+#fade{position:fixed;inset:0;background:#000;opacity:0;pointer-events:none;transition:opacity .35s;z-index:1}
+#load{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:var(--ink);font-family:"Cormorant Garamond",serif;font-size:24px;color:var(--gold);transition:opacity .6s;z-index:9}
+#load small{font-family:"Jost";font-size:12px;color:#9c9584;letter-spacing:2px;text-transform:uppercase}
+#info{position:fixed;right:16px;bottom:calc(100px + env(safe-area-inset-bottom));max-width:360px;background:rgba(6,6,6,.88);border:1px solid rgba(201,185,122,.4);padding:14px 16px;font-size:12px;line-height:1.55;color:#d8d1c1;display:none;z-index:5}
+@media (max-width:640px){.pl{font-size:11px;padding:4px 7px}.pl span{display:none}.top{padding:calc(12px + env(safe-area-inset-top)) 14px 34px;gap:8px}.meta{font-size:11.5px}.title{font-size:20px}.brand{font-size:9.5px;letter-spacing:2.6px}.mode{flex-direction:column}.mode button{padding:9px 11px;font-size:9.5px;letter-spacing:1.3px}.foot{flex-direction:column;gap:3px}#plan img{padding:120px 8px 130px}.rooms button{padding:10px 13px}.bottom{padding-top:30px}.hot .ring{width:40px;height:40px}}
+</style>
+<script type="importmap">{"imports": {"three": "./lib/three.module.min.js"}}</script>
+</head>
+<body>
+<div id="load">Rundgang wird geladen …<small>AvèlonStudios</small></div>
+<div id="stage"></div>
+<div id="hs"></div>
+<div id="plan"><img id="planImg" alt="3D-Grundriss der Musterwohnung"></div>
+<div id="fade"></div>
+<div class="top">
+  <div>
+    <div class="brand">AvèlonStudios · 3D-Inserat</div>
+    <div class="title">3-Zimmer-Wohnung <i>mit Südbalkon</i></div>
+    <div class="meta">ca. 89 m² · 3 Zimmer · Musterobjekt</div>
+  </div>
+  <div class="mode"><button id="mWalk" class="on">Rundgang</button><button id="mPlan">3D-Grundriss</button></div>
+</div>
+<div class="hint" id="hint"><b>Ziehen</b> zum Umsehen · <b>Kreise</b> antippen zum Weitergehen<span id="hintZoom"><br><b>Zwei Finger</b> zum Zoomen</span><br><span style="color:#bfb7a4">oder einen Raum unten wählen</span></div>
+<div class="bottom">
+  <div class="rooms" id="rooms"></div>
+  <div class="foot"><span>Fiktives Musterobjekt · 3D-Visualisierung auf Basis von Grundriss und Fotos</span><span><a href="#" id="infoBtn">Bildnachweis</a> · <a href="/impressum">Impressum</a> · <a href="/datenschutz">Datenschutz</a> · <a href="/">avelonstudios.de</a></span></div>
+</div>
+<div id="info">Visualisierung: AvèlonStudios. Einzelne 3D-Modelle aus dem Khronos glTF Sample Assets Repository, farblich verändert: Sofa „Glam Velvet Sofa" und Schale „Iridescent Dish with Olives" © Wayfair, LLC; Pflanze „Diffuse Transmission Plant" © Darmstadt Graphics Group GmbH – jeweils CC BY 4.0. Sessel „Sheen Chair" (Wayfair) und Vase „Glass Vase Flowers" CC0.</div>
+<script type="module">
+import * as THREE from 'three';
+const DATA = {"eye": 1.52, "start": "p_wohnen", "order": ["p_wohnen", "p_kueche", "p_schlafen", "p_bad", "p_arbeit", "p_diele"], "panos": {"p_wohnen": {"name": "Wohnen", "area": "27,0 m²", "pos": [3.35, 1.45], "look": [4.3, 4.4], "img": "pano/p_wohnen.jpg", "imgMid": "pano/p_wohnen_6k.jpg", "imgHQ": "pano/p_wohnen_hq.jpg", "hqW": 8192, "links": [{"to": "p_kueche", "at": [3.25, 3.25]}, {"to": "p_diele", "at": [5.15, 4.5]}]}, "p_kueche": {"name": "Kochen & Essen", "area": "27,0 m²", "pos": [3.25, 3.25], "look": [5.6, 0.6], "img": "pano/p_kueche.jpg", "imgMid": "pano/p_kueche_6k.jpg", "imgHQ": "pano/p_kueche_hq.jpg", "hqW": 8192, "links": [{"to": "p_wohnen", "at": [3.35, 1.45]}, {"to": "p_diele", "at": [5.15, 4.5]}]}, "p_diele": {"name": "Diele", "area": "11,2 m²", "pos": [5.35, 6.3], "look": [5.2, 3.5], "img": "pano/p_diele.jpg", "imgMid": "pano/p_diele_6k.jpg", "imgHQ": "pano/p_diele_hq.jpg", "hqW": 8192, "links": [{"to": "p_kueche", "at": [5.15, 4.5]}, {"to": "p_schlafen", "at": [6.5, 4.5]}, {"to": "p_bad", "at": [7.0, 6.95]}, {"to": "p_arbeit", "at": [3.8, 5.68]}]}, "p_schlafen": {"name": "Schlafen", "area": "22,5 m²", "pos": [8.35, 1.25], "look": [8.5, 4.4], "img": "pano/p_schlafen.jpg", "imgMid": "pano/p_schlafen_6k.jpg", "imgHQ": "pano/p_schlafen_hq.jpg", "hqW": 8192, "links": [{"to": "p_diele", "at": [6.5, 4.5]}]}, "p_bad": {"name": "Bad", "area": "9,1 m²", "pos": [7.95, 6.25], "look": [9.5, 5.9], "img": "pano/p_bad.jpg", "imgMid": "pano/p_bad_6k.jpg", "imgHQ": "pano/p_bad_hq.jpg", "hqW": 8192, "links": [{"to": "p_diele", "at": [7.0, 6.95]}]}, "p_arbeit": {"name": "Arbeiten", "area": "13,3 m²", "pos": [2.05, 6.55], "look": [0.3, 6.3], "img": "pano/p_arbeit.jpg", "imgMid": "pano/p_arbeit_6k.jpg", "imgHQ": "pano/p_arbeit_hq.jpg", "hqW": 8192, "links": [{"to": "p_diele", "at": [3.8, 5.68]}]}}, "plan": {"img": "grundriss.webp", "w": 3200, "h": 2080, "labels": {"wohnen": [0.2867, 0.4431], "schlafen": [0.5736, 0.7243], "arbeit": [0.4321, 0.2391], "diele": [0.59, 0.366], "bad": [0.7337, 0.4899], "ankleide": [0.8423, 0.5519], "balkon": [0.2657, 0.6881]}, "rooms": {"wohnen": {"name": "Wohnen · Essen · Kochen", "area": "27,0 m²", "pano": "p_wohnen"}, "schlafen": {"name": "Schlafen", "area": "22,5 m²", "pano": "p_schlafen"}, "arbeit": {"name": "Arbeiten", "area": "13,3 m²", "pano": "p_arbeit"}, "diele": {"name": "Diele", "area": "11,2 m²", "pano": "p_diele"}, "bad": {"name": "Bad", "area": "9,1 m²", "pano": "p_bad"}, "ankleide": {"name": "Ankleide", "area": "4,9 m²", "pano": null}, "balkon": {"name": "Balkon", "area": "5,1 m²", "pano": null}}}};
+
+// ---------- Projektion: Blender-Richtung -> Kugelpunkt ----------
+// Blender-Panorama (Kamera Blick +Y): u = 0.5 + atan2(dx, dy)/2π, v = 0.5 - elev/π
+function dirToPoint(dx, dy, dz, r = 1) {
+  const u = 0.5 + Math.atan2(dx, dy) / (2 * Math.PI);
+  const th = Math.PI / 2 - Math.atan2(dz, Math.hypot(dx, dy));
+  const ph = 2 * Math.PI * u;
+  return new THREE.Vector3(Math.cos(ph) * Math.sin(th) * r, Math.cos(th) * r, Math.sin(ph) * Math.sin(th) * r);
+}
+
+const stage = document.getElementById('stage');
+const touch = matchMedia('(pointer: coarse)').matches;
+if (!touch) document.getElementById('hintZoom').remove();
+// Handy: volle Displayauflösung (bis 3x) – Kantenglättung bringt bei einer Bildkugel nichts und kostet nur Speicher.
+const renderer = new THREE.WebGLRenderer({ antialias: !touch, powerPreference: 'high-performance' });
+renderer.setPixelRatio(Math.min(devicePixelRatio, touch ? 3 : 2));
+renderer.setSize(innerWidth, innerHeight);
+renderer.outputColorSpace = THREE.SRGBColorSpace;
+stage.appendChild(renderer.domElement);
+const scene = new THREE.Scene();
+// Hochformat: größerer Bildwinkel, damit man den Raum sieht statt eines schmalen, stark vergrößerten Ausschnitts.
+const portrait = () => innerWidth < innerHeight;
+const baseFov = () => portrait() ? 94 : 72;
+let base = baseFov();
+const camera = new THREE.PerspectiveCamera(base, innerWidth / innerHeight, 0.1, 100);
+
+const geo = new THREE.SphereGeometry(50, 96, 64); geo.scale(-1, 1, 1);
+const matA = new THREE.MeshBasicMaterial({ transparent: true, opacity: 1, depthWrite: false });
+const matB = new THREE.MeshBasicMaterial({ transparent: true, opacity: 0, depthWrite: false });
+const sphA = new THREE.Mesh(geo, matA), sphB = new THREE.Mesh(geo, matB);
+sphB.renderOrder = 1; sphB.visible = false; scene.add(sphA, sphB);
+
+const loader = new THREE.TextureLoader();
+// Qualitätsstufen: 0 = 4K, 1 = 6K, 2 = 8K. Standard (4K) erscheint sofort, die beste passende Stufe wird nachgeladen.
+const maxTex = renderer.capabilities.maxTextureSize;
+const store = {
+  get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { v === null ? sessionStorage.removeItem(k) : sessionStorage.setItem(k, v); } catch (e) {} }
+};
+let tier = maxTex >= 8192 ? 2 : 0;
+if (touch) {
+  const lowMem = navigator.deviceMemory && navigator.deviceMemory < 4, saver = navigator.connection && navigator.connection.saveData;
+  if (lowMem || saver || devicePixelRatio < 2.5) tier = Math.min(tier, 1);   // 8K nur für hochauflösende Displays mit genug Speicher
+}
+// Absturzschutz: War beim letzten Laden eine Stufe in Arbeit, als die Seite abbrach, bleibt diese Sitzung eine Stufe darunter.
+const tried = store.get('av_try');
+if (tried !== null) { store.set('av_cap', String(Math.max(0, +tried - 1))); store.set('av_try', null); }
+if (store.get('av_cap') !== null) tier = Math.min(tier, +store.get('av_cap'));
+addEventListener('pagehide', () => store.set('av_try', null));   // normales Verlassen ist kein Absturz
+const best = p => (tier >= 2 && p.imgHQ && maxTex >= p.hqW) ? p.imgHQ : (tier >= 1 && p.imgMid && maxTex >= 6144) ? p.imgMid : p.img;
+const cache = {};   // url -> { p: Promise<Texture>, t: Texture|null }
+function loadUrl(url) {
+  if (!cache[url]) {
+    const e = cache[url] = { t: null, p: null };
+    e.p = new Promise((res, rej) => loader.load(url, t => { t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = renderer.capabilities.getMaxAnisotropy(); e.t = t; res(t); }, undefined, rej));
+    e.p.catch(() => { if (cache[url] === e) delete cache[url]; });
+  }
+  return cache[url];
+}
+// Vorladen der Nachbarräume: am Handy nur in 4K, damit nie zwei große Bilder gleichzeitig im Speicher liegen.
+const pre = id => loadUrl(touch ? DATA.panos[id].img : best(DATA.panos[id])).p;
+function evict(nb) {   // nur aktueller Raum und Nachbarn bleiben im Speicher
+  const keep = new Set([best(DATA.panos[cur]), DATA.panos[cur].img]);
+  nb.forEach(i => keep.add(touch ? DATA.panos[i].img : best(DATA.panos[i])));
+  for (const u of Object.keys(cache)) if (!keep.has(u)) { const e = cache[u]; delete cache[u]; e.p.then(t => t.dispose()).catch(() => {}); }
+}
+const setMap = t => { matA.map = t; matA.needsUpdate = true; };
+// Zeigt sofort die schnellste verfügbare Stufe. Desktop: beste Stufe wird parallel geladen und eingetauscht.
+async function texFor(id) {
+  const p = DATA.panos[id], u = best(p);
+  if (u === p.img) return loadUrl(u).p;
+  if (cache[u] && cache[u].t) return cache[u].t;
+  if (touch) return loadUrl(p.img).p;   // Handy: beste Stufe folgt erst nach dem Raumwechsel (upgrade)
+  const b = loadUrl(u);
+  const first = await Promise.race([b.p, loadUrl(p.img).p]);
+  if (first !== b.t) b.p.then(t => { if (cur === id && !busy) setMap(t); else pendingHQ = { id, t }; }).catch(() => {});
+  return first;
+}
+// Handy: beste Stufe für den aktuellen Raum nachladen, nachdem der vorherige Raum freigegeben wurde.
+function upgrade(id) {
+  const p = DATA.panos[id], u = best(p);
+  if (!touch || u === p.img) return;
+  store.set('av_try', String(tier));
+  loadUrl(u).p.then(t => {
+    if (cur !== id || busy) return;
+    setMap(t); setTimeout(() => store.set('av_try', null), 2500);
+  }).catch(() => store.set('av_try', null));
+}
+let pendingHQ = null;
+
+let cur = null, lon = 0, lat = 0, fov = camera.fov;
+function lookAtPlan(id, target) {
+  const p = DATA.panos[id], t = target || p.look;
+  const v = dirToPoint(t[0] - p.pos[0], t[1] - p.pos[1], 0);
+  lon = Math.atan2(v.z, v.x); lat = portrait() ? -0.16 : -0.28;
+}
+
+// ---------- Hotspots ----------
+const hsLayer = document.getElementById('hs');
+let spots = [];
+function buildSpots(id) {
+  hsLayer.innerHTML = ''; spots = [];
+  const p = DATA.panos[id];
+  for (const l of p.links) {
+    const d = dirToPoint(l.at[0] - p.pos[0], l.at[1] - p.pos[1], -DATA.eye, 40);
+    const el = document.createElement('div'); el.className = 'hot';
+    el.innerHTML = `<div class="ring"></div><div class="lab">${DATA.panos[l.to].name}</div>`;
+    el.onclick = e => { e.stopPropagation(); go(l.to, true); };
+    hsLayer.appendChild(el); spots.push({ el, pos: d });
+  }
+}
+
+// ---------- Raumwechsel ----------
+const fadeEl = document.getElementById('fade');
+let busy = false;
+async function go(id, fromSpot = false, target = null) {
+  if (busy || id === cur) return; busy = true; hideHint();
+  pendingHQ = null;
+  const t = await texFor(id);
+  if (cur === null) {
+    matA.map = (pendingHQ && pendingHQ.id === id) ? pendingHQ.t : t; matA.needsUpdate = true; pendingHQ = null; cur = id; lookAtPlan(id, target); buildSpots(id); markRoom(id); busy = false; upgrade(id); return;
+  }
+  // Übergang: neue Kugel einblenden, leichter Zoom in Blickrichtung
+  matB.map = t; matB.needsUpdate = true; matB.opacity = 0; sphB.visible = true;
+  hsLayer.style.opacity = 0;
+  const f0 = fov, start = performance.now();
+  await new Promise(res => {
+    (function step(now) {
+      const k = Math.min(1, (now - start) / 650), e = k < .5 ? 2 * k * k : 1 - Math.pow(-2 * k + 2, 2) / 2;
+      matB.opacity = e; fov = f0 - (fromSpot ? 14 * Math.sin(k * Math.PI) : 0);
+      k < 1 ? requestAnimationFrame(step) : res();
+    })(start);
+  });
+  matA.map = (pendingHQ && pendingHQ.id === id) ? pendingHQ.t : t; matA.needsUpdate = true; matB.opacity = 0; sphB.visible = false; fov = f0; pendingHQ = null;
+  cur = id; lookAtPlan(id, target); vLon = vLat = 0;
+  buildSpots(id); markRoom(id); hsLayer.style.opacity = 1; busy = false;
+  // nächste Räume vorladen, alle anderen aus dem Speicher nehmen
+  const nb = DATA.panos[id].links.map(l => l.to);
+  evict(nb); nb.forEach(i => pre(i).catch(() => {})); upgrade(id);
+}
+
+// ---------- Raumleiste ----------
+const bar = document.getElementById('rooms');
+const order = DATA.order;
+order.forEach(id => {
+  const p = DATA.panos[id];
+  const b = document.createElement('button'); b.dataset.id = id;
+  b.innerHTML = `${p.name}<span>${p.area}</span>`;
+  b.onclick = () => { setMode('walk'); go(id, false, p.look); };
+  bar.appendChild(b);
+});
+function markRoom(id) { [...bar.children].forEach(b => b.classList.toggle('on', b.dataset.id === id)); }
+
+// ---------- Umsehen ----------
+let drag = null, vLon = 0, vLat = 0, pinch = 0;
+const cv = renderer.domElement, pts = new Map();
+// Zoomgrenze: nur so weit hinein, wie das geladene Bild scharf bleibt (höchstens ca. 2,2-fache Vergrößerung).
+const fmin = () => { const w = matA.map ? matA.map.image.width : 4096; return Math.max(32, Math.min(60, innerHeight * renderer.getPixelRatio() * 360 / (2.2 * w))); };
+const clampFov = f => Math.max(fmin(), Math.min(portrait() ? 104 : 95, f));
+cv.style.touchAction = 'none';
+cv.addEventListener('pointerdown', e => {
+  pts.set(e.pointerId, { x: e.clientX, y: e.clientY }); cv.setPointerCapture(e.pointerId); hideHint();
+  if (pts.size === 1) { drag = { x: e.clientX, y: e.clientY }; vLon = vLat = 0; }
+  else { drag = null; const [a, b] = [...pts.values()]; pinch = Math.hypot(a.x - b.x, a.y - b.y); }
+});
+cv.addEventListener('pointermove', e => {
+  if (!pts.has(e.pointerId)) return;
+  pts.set(e.pointerId, { x: e.clientX, y: e.clientY });
+  if (pts.size >= 2) {
+    const [a, b] = [...pts.values()], d = Math.hypot(a.x - b.x, a.y - b.y);
+    if (pinch > 0 && d > 0) fov = clampFov(fov * pinch / d); pinch = d; return;
+  }
+  if (!drag) return;
+  const k = touch ? (fov * Math.PI / 180) / innerHeight * 1.5 : (fov / 72) * 0.0042;   // Handy: Bild folgt dem Finger
+  vLon = -(e.clientX - drag.x) * k; vLat = (e.clientY - drag.y) * k;
+  lon += vLon; lat = Math.max(-1.35, Math.min(1.35, lat + vLat)); drag = { x: e.clientX, y: e.clientY };
+});
+const endPt = e => { pts.delete(e.pointerId); pinch = 0; if (pts.size === 1) { const a = [...pts.values()][0]; drag = { x: a.x, y: a.y }; vLon = vLat = 0; } else if (pts.size === 0) drag = null; };
+cv.addEventListener('pointerup', endPt); cv.addEventListener('pointercancel', endPt);
+cv.addEventListener('wheel', e => { e.preventDefault(); fov = clampFov(fov + e.deltaY * 0.04); }, { passive: false });
+addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft') lon -= 0.08; if (e.key === 'ArrowRight') lon += 0.08;
+  if (e.key === 'ArrowUp') lat = Math.min(1.35, lat + 0.06); if (e.key === 'ArrowDown') lat = Math.max(-1.35, lat - 0.06);
+});
+
+// ---------- 3D-Grundriss ----------
+const plan = document.getElementById('plan'), planImg = document.getElementById('planImg');
+planImg.src = DATA.plan.img;
+const planLabels = [];
+for (const [rid, [x, y]] of Object.entries(DATA.plan.labels)) {
+  const r = DATA.plan.rooms[rid]; if (!r) continue;
+  const b = document.createElement('button'); b.className = 'pl' + (r.pano ? '' : ' na');
+  b.innerHTML = `${r.name}<span>${r.area}</span>`;
+  if (r.pano) b.onclick = () => { setMode('walk'); go(r.pano, false, DATA.panos[r.pano].look); };
+  plan.appendChild(b); planLabels.push({ b, x, y });
+}
+function placePlanLabels() {
+  const W = planImg.clientWidth, Hh = planImg.clientHeight;
+  const cs = getComputedStyle(planImg);
+  const pl = parseFloat(cs.paddingLeft), pr = parseFloat(cs.paddingRight), pt = parseFloat(cs.paddingTop), pb = parseFloat(cs.paddingBottom);
+  const bw = W - pl - pr, bh = Hh - pt - pb, ar = DATA.plan.w / DATA.plan.h;
+  let w = bw, h = bw / ar; if (h > bh) { h = bh; w = bh * ar; }
+  const ox = pl + (bw - w) / 2, oy = pt + (bh - h) / 2;
+  planLabels.forEach(l => { l.b.style.left = (ox + l.x * w) + 'px'; l.b.style.top = (oy + l.y * h) + 'px'; });
+}
+let mode = 'walk';
+function setMode(m) {
+  mode = m; plan.style.display = m === 'plan' ? 'block' : 'none'; hsLayer.style.display = m === 'plan' ? 'none' : 'block';
+  document.getElementById('mWalk').classList.toggle('on', m === 'walk');
+  document.getElementById('mPlan').classList.toggle('on', m === 'plan');
+  if (m === 'plan') { placePlanLabels(); hideHint(); }
+}
+document.getElementById('mWalk').onclick = () => setMode('walk');
+document.getElementById('mPlan').onclick = () => setMode('plan');
+planImg.onload = () => mode === 'plan' && placePlanLabels();
+
+// ---------- Info / Hinweis ----------
+const info = document.getElementById('info');
+document.getElementById('infoBtn').onclick = e => { e.preventDefault(); info.style.display = info.style.display === 'block' ? 'none' : 'block'; };
+let hinted = false;
+function hideHint() { if (hinted) return; hinted = true; document.getElementById('hint').style.opacity = 0; }
+setTimeout(hideHint, 7000);
+
+addEventListener('resize', () => {
+  renderer.setSize(innerWidth, innerHeight); camera.aspect = innerWidth / innerHeight; camera.updateProjectionMatrix();
+  const nb = baseFov(); if (nb !== base) { fov = clampFov(fov * nb / base); base = nb; }   // Hoch-/Querformat gewechselt
+  if (mode === 'plan') placePlanLabels();
+});
+
+// ---------- Grafikspeicher verloren (z. B. Handy unter Speicherdruck): eine Stufe tiefer weitermachen ----------
+cv.addEventListener('webglcontextlost', e => { e.preventDefault(); if (tier > 0) { tier--; store.set('av_cap', String(tier)); } });
+cv.addEventListener('webglcontextrestored', async () => {
+  for (const u of Object.keys(cache)) delete cache[u];
+  const id = cur; if (id === null) return;
+  try { const t = await texFor(id); if (cur === id) { setMap(t); upgrade(id); } } catch (e) {}
+});
+
+// ---------- Renderloop ----------
+const tmp = new THREE.Vector3(), bottomEl = document.querySelector('.bottom'), topEl = document.querySelector('.top > div');
+let uiTop = 0, uiBottom = 1e9;
+function measureUi() {
+  uiBottom = innerHeight - (bottomEl.offsetHeight - parseFloat(getComputedStyle(bottomEl).paddingTop)) - 40;
+  uiTop = topEl.getBoundingClientRect().bottom + 30;
+}
+measureUi(); addEventListener('resize', measureUi);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measureUi);
+function frame() {
+  if (!drag && (Math.abs(vLon) > 1e-5 || Math.abs(vLat) > 1e-5)) {   // sanftes Nachschwingen
+    lon += vLon; lat = Math.max(-1.35, Math.min(1.35, lat + vLat)); vLon *= 0.92; vLat *= 0.92;
+  }
+  camera.fov += (fov - camera.fov) * 0.25; camera.updateProjectionMatrix();
+  camera.lookAt(Math.cos(lon) * Math.cos(lat), Math.sin(lat), Math.sin(lon) * Math.cos(lat));
+  renderer.render(scene, camera);
+  if (mode === 'walk') for (const s of spots) {
+    tmp.copy(s.pos).project(camera);
+    const py = (1 - tmp.y) / 2 * innerHeight;   // Wegpunkte nie unter der Raumleiste oder im Titelbereich zeigen
+    const vis = tmp.z < 1 && Math.abs(tmp.x) < 0.96 && py > uiTop && py < uiBottom;
+    s.el.style.display = vis ? 'flex' : 'none';
+    if (vis) { s.el.style.left = ((tmp.x + 1) / 2 * innerWidth) + 'px'; s.el.style.top = py + 'px'; }
+  }
+  requestAnimationFrame(frame);
+}
+go(DATA.start).then(() => {
+  frame();
+  const ld = document.getElementById('load'); ld.style.opacity = 0; setTimeout(() => ld.remove(), 700);
+  window.__ready = true;
+  window.__q = () => ({ w: matA.map.image.width, tier, cached: Object.keys(cache).length, room: cur, dpr: renderer.getPixelRatio(), fov: Math.round(camera.fov), gl: renderer.getContext() });
+  DATA.panos[DATA.start].links.forEach(l => pre(l.to).catch(() => {}));
+});
+</script>
+</body>
+</html>

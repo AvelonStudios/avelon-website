@@ -144,6 +144,9 @@
     .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; }
     .footer-text { font-size: 12px; color: var(--muted); }
     .footer-text a { color: #C8A84B; text-decoration: none; font-weight: 600; }
+    .footer-legal { width: 100%; display: flex; align-items: center; justify-content: center; gap: 20px; font-size: 11px; color: rgba(255,255,255,0.28); border-top: 1px solid rgba(255,255,255,0.05); margin-top: 10px; padding-top: 10px; flex-wrap: wrap; letter-spacing: 0.03em; }
+    .footer-legal a { color: rgba(255,255,255,0.28); text-decoration: none; transition: color 0.2s; }
+    .footer-legal a:hover { color: #C8A84B; }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
@@ -421,6 +424,11 @@
   <div class="footer-inner">
     <div class="footer-text">© 2025 Meister Bau & Renovierung · Alle Rechte vorbehalten</div>
     <div class="footer-text">Website by <a href="https://avelonstudios.de" target="_blank">AVÈLON STUDIOS</a></div>
+    <div class="footer-legal">
+      <span>Demo-Website von <a href="https://avelonstudios.de" target="_blank">AvèlonStudios</a></span>
+      <a href="/impressum.html">Impressum</a>
+      <a href="/datenschutz.html">Datenschutz</a>
+    </div>
   </div>
 </footer>
 

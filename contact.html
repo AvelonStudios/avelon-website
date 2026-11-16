@@ -4,11 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kontakt — AVÈLON STUDIOS</title>
-  <meta name="description" content="Kostenloses Erstgespräch buchen. Nur 3 Projektplätze verfügbar im Juni. Avèlon Studios — Premium Brand & Web Design." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
+  <meta name="description" content="Kostenloses Erstgespräch buchen. Nur 3 Projektplätze verfügbar im Juni. Avèlon Studios — Premium Brand & Web Design." />  <link rel="stylesheet" href="style.css" />
   <script>
     (function(){ var l=localStorage.getItem('avelon-lang')||'de'; document.documentElement.dataset.lang=l; })();
   </script>
@@ -170,7 +166,10 @@
           </div>
         </div>
 
-        <form id="contactForm" action="#" method="POST" novalidate>
+        <form id="contactForm" name="kontakt" data-netlify="true" netlify-honeypot="bot-field" action="/" method="POST" novalidate>
+
+          <!-- Netlify hidden fields -->
+          <input type="hidden" name="form-name" value="kontakt" />
 
           <!-- Hidden package field -->
           <input type="hidden" id="selectedPackage" name="paket" />
@@ -235,8 +234,8 @@
             <div class="form-note en">What is your brand? Who is your target audience? What do you want to achieve?</div>
           </div>
 
-          <!-- Honeypot anti-spam -->
-          <input type="text" name="_honeypot" style="display:none;" tabindex="-1" autocomplete="off" />
+          <!-- Netlify honeypot -->
+          <p style="display:none;"><label>Nicht ausfüllen: <input name="bot-field" /></label></p>
 
           <button type="submit" class="btn btn-primary btn-full btn-lg" id="submitBtn">
             <span class="de">Anfrage senden →</span>
@@ -265,6 +264,19 @@
           <p style="color:var(--white-muted);font-size:0.9rem;line-height:1.7;">
             <span class="de">Vielen Dank. Wir melden uns innerhalb von 24 Stunden bei dir.</span>
             <span class="en">Thank you. We'll get back to you within 24 hours.</span>
+          </p>
+        </div>
+
+        <!-- Error message -->
+        <div id="errorMsg" style="display:none;text-align:center;padding:32px;background:rgba(232,107,107,0.05);border:1px solid rgba(232,107,107,0.2);border-radius:var(--r-md);margin-top:16px;">
+          <div style="font-size:1.6rem;margin-bottom:10px;">⚠</div>
+          <h4 style="color:#e86b6b;margin-bottom:8px;">
+            <span class="de">Etwas ist schiefgelaufen.</span>
+            <span class="en">Something went wrong.</span>
+          </h4>
+          <p style="color:var(--white-muted);font-size:0.875rem;line-height:1.75;">
+            <span class="de">Bitte schreib uns direkt an <a href="mailto:avelon.business1@gmail.com" style="color:#E8C96B;">avelon.business1@gmail.com</a></span>
+            <span class="en">Please write us directly at <a href="mailto:avelon.business1@gmail.com" style="color:#E8C96B;">avelon.business1@gmail.com</a></span>
           </p>
         </div>
 
@@ -528,6 +540,7 @@
   /* ── Form submission handler ── */
   var form       = document.getElementById('contactForm');
   var successMsg = document.getElementById('successMsg');
+  var errorMsg   = document.getElementById('errorMsg');
   var submitBtn  = document.getElementById('submitBtn');
 
   if (!form) return;
@@ -550,11 +563,24 @@
     submitBtn.disabled = true;
     submitBtn.style.opacity = '0.6';
 
-    setTimeout(function () {
+    var formData = new FormData(form);
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(formData).toString()
+    })
+    .then(function (response) {
+      if (!response.ok) throw new Error('Network response was not ok');
       form.style.display = 'none';
-      if (packageBox) packageBox.style.display = 'none';
+      if (packageArea) packageArea.style.display = 'none';
       if (successMsg) successMsg.style.display = 'block';
-    }, 800);
+    })
+    .catch(function () {
+      submitBtn.disabled = false;
+      submitBtn.style.opacity = '';
+      if (errorMsg) errorMsg.style.display = 'block';
+    });
   });
 
   form.querySelectorAll('.form-input, .form-textarea').forEach(function (el) {
