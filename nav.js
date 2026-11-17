@@ -99,7 +99,7 @@
     +         '<div class="footer-col-head de">Kontakt</div>'
     +         '<div class="footer-col-head en">Contact</div>'
     +         '<div class="footer-links" style="color:var(--white-muted);font-size:0.875rem;">'
-    +           '<span>avelon.business1@gmail.com</span>'
+    +           '<span>kontakt@avelonstudios.de</span>'
     +           '<span class="de">Hamm, Deutschland</span>'
     +           '<span class="en">Hamm, Germany</span>'
     +         '</div>'
