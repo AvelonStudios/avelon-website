@@ -1,188 +1,175 @@
 /* =========================================
-   AVÈLON STUDIOS — nav.js
-   Shared navigation, footer & lang toggle
+   AVÈLON STUDIOS — nav.js v20261118
+   Shared navigation & footer
    ========================================= */
 (function () {
   'use strict';
 
-  /* ── Detect active page ── */
-  var page = window.location.pathname.split('/').pop() || 'index.html';
-  if (page === '') page = 'index.html';
-
   var navItems = [
-    { href: 'index.html',        de: 'Home',        en: 'Home' },
-    { href: 'services.html',     de: 'Leistungen',  en: 'Services' },
-    { href: 'portfolio.html',    de: 'Portfolio',   en: 'Portfolio' },
-    { href: 'about.html',         de: 'Über uns',    en: 'About' },
-    { href: 'contact.html',      de: 'Kontakt',     en: 'Contact' },
+    { id: 'start',      href: 'index.html',       label: 'Home' },
+    { id: 'leistungen', href: 'services.html',     label: 'Leistungen' },
+    { id: 'arbeiten',   href: 'portfolio.html',    label: 'Webdesign' },
+    { id: 'inserate',   href: '3d-inserate.html',  label: '3D-Inserate' },
+    { id: 'ueber',      href: 'about.html',        label: 'Über uns' }
   ];
 
-  function navLinksHTML() {
+  var pageId = (function () {
+    var p = window.location.pathname.split('/').pop() || 'index.html';
+    if (p === '' || p === '/') return 'index.html';
+    return p;
+  })();
+
+  function getActiveId() {
+    var map = {
+      'index.html':      'start',
+      'services.html':   'leistungen',
+      'portfolio.html':  'arbeiten',
+      '3d-inserate.html':'inserate',
+      'about.html':      'ueber',
+      'contact.html':    'kontakt'
+    };
+    return map[pageId] || '';
+  }
+
+  function navLinksHTML(activeId) {
     return navItems.map(function (item) {
-      var active = (page === item.href) ? ' active' : '';
-      return '<a href="' + item.href + '" class="' + active.trim() + '">'
-        + '<span class="de">' + item.de + '</span>'
-        + '<span class="en">' + item.en + '</span>'
-        + '</a>';
+      var cls = item.id === activeId ? ' class="active"' : '';
+      return '<a href="' + item.href + '"' + cls + '>' + item.label + '</a>';
     }).join('');
   }
 
   function mobileLinksHTML() {
     return navItems.map(function (item) {
-      return '<a href="' + item.href + '">'
-        + '<span class="de">' + item.de + '</span>'
-        + '<span class="en">' + item.en + '</span>'
-        + '</a>';
+      return '<a href="' + item.href + '">' + item.label + '</a>';
     }).join('');
   }
 
-  /* ── Nav HTML ── */
-  var navHTML = ''
-    + '<div class="scarcity-bar">'
-    +   '<span class="de">🔥 Nur 3 Projektplätze verfügbar im Juni &mdash; <strong><a href="contact.html">Jetzt sichern</a></strong></span>'
-    +   '<span class="en">🔥 Only 3 project slots available in June &mdash; <strong><a href="contact.html">Secure yours now</a></strong></span>'
-    + '</div>'
-    + '<nav class="nav">'
-    +   '<div class="nav-inner">'
-    +     '<a href="index.html" class="nav-logo">AV&Egrave;L<span class="accent">&Ocirc;</span>N STUDIOS</a>'
-    +     '<div class="nav-links">' + navLinksHTML() + '</div>'
-    +     '<div class="nav-right">'
-    +       '<button class="lang-toggle" id="langToggle" aria-label="Toggle language">EN</button>'
-    +       '<a href="contact.html" class="btn btn-primary"><span class="de">Projekt starten</span><span class="en">Start Project</span></a>'
-    +     '</div>'
-    +     '<button class="hamburger" id="hamburger" aria-label="Open menu">'
-    +       '<span></span><span></span><span></span>'
+  var activeId = getActiveId();
+
+  var headerHTML = ''
+    + '<header class="site-header">'
+    +   '<div class="container header-inner">'
+    +     '<a href="index.html" class="logo-mark" aria-label="AvèlonStudios – Startseite">'
+    +       'Avèlon<span class="logo-studios">Studios</span>'
+    +     '</a>'
+    +     '<nav class="desktop-nav" aria-label="Hauptnavigation">'
+    +       navLinksHTML(activeId)
+    +     '</nav>'
+    +     '<a href="contact.html" class="nav-cta">Kontakt</a>'
+    +     '<button class="burger-btn" id="burgerBtn" aria-expanded="false" aria-controls="mobileOverlay" aria-label="Menü öffnen">'
+    +       '<span class="burger-line"></span>'
+    +       '<span class="burger-line"></span>'
+    +       '<span class="burger-line"></span>'
     +     '</button>'
     +   '</div>'
-    + '</nav>'
-    + '<div class="mobile-nav" id="mobileNav" role="dialog" aria-modal="true">'
-    +   '<button class="mobile-nav-close" id="mobileClose" aria-label="Close menu">&times;</button>'
-    +   mobileLinksHTML()
-    +   '<a href="contact.html" class="btn btn-primary btn-lg"><span class="de">Projekt starten</span><span class="en">Start Project</span></a>'
-    +   '<button class="lang-toggle" id="langToggleMobile">EN</button>'
+    + '</header>'
+    + '<div class="mobile-overlay" id="mobileOverlay" role="dialog" aria-modal="true" aria-label="Navigation">'
+    +   '<div class="mobile-overlay-top">'
+    +     '<a href="index.html" class="logo-mark" aria-hidden="true" tabindex="-1">'
+    +       'Avèlon<span class="logo-studios">Studios</span>'
+    +     '</a>'
+    +     '<button class="mobile-close-btn" id="mobileCloseBtn" aria-label="Menü schließen">✕</button>'
+    +   '</div>'
+    +   '<nav class="mobile-nav-links" aria-label="Mobile Navigation">'
+    +     mobileLinksHTML()
+    +   '</nav>'
+    +   '<a href="contact.html" class="mobile-cta">Kontakt</a>'
     + '</div>';
 
-  /* ── Footer HTML ── */
   var footerHTML = ''
-    + '<footer class="footer">'
-    +   '<div class="container">'
-    +     '<div class="footer-grid">'
-    +       '<div>'
-    +         '<div class="footer-logo">AV&Egrave;L<span class="text-gold">&Ocirc;</span>N STUDIOS</div>'
-    +         '<p class="footer-desc de">Premium Brand &amp; Web Design Agentur aus Berlin. Wir erschaffen Marken, die begeistern, und Websites, die konvertieren.</p>'
-    +         '<p class="footer-desc en">Premium Brand &amp; Web Design Agency based in Berlin. We create brands that inspire and websites that convert.</p>'
-    +         '<div class="footer-socials">'
-    +           '<a href="#" class="footer-social" aria-label="Instagram">IG</a>'
-    +           '<a href="#" class="footer-social" aria-label="LinkedIn">LI</a>'
-    +           '<a href="#" class="footer-social" aria-label="Behance">BE</a>'
-    +           '<a href="#" class="footer-social" aria-label="Pinterest">PI</a>'
-    +         '</div>'
+    + '<footer class="site-footer">'
+    +   '<div class="container footer-inner">'
+    +     '<div class="footer-brand">'
+    +       '<div class="footer-logo">Avèlon<span>Studios</span></div>'
+    +       '<div class="footer-rule"></div>'
+    +       '<p class="footer-desc">Webdesign und 3D-Inserate für Unternehmen und Makler – aus Hamm, für ganz Deutschland.</p>'
+    +     '</div>'
+    +     '<div class="footer-nav">'
+    +       '<div class="footer-col">'
+    +         '<div class="footer-col-head">Studio</div>'
+    +         '<a href="services.html">Leistungen</a>'
+    +         '<a href="portfolio.html">Webdesign</a>'
+    +         '<a href="3d-inserate.html">3D-Inserate</a>'
+    +         '<a href="about.html">Über uns</a>'
     +       '</div>'
-    +       '<div>'
-    +         '<div class="footer-col-head de">Leistungen</div>'
-    +         '<div class="footer-col-head en">Services</div>'
-    +         '<div class="footer-links">'
-    +           '<a href="services.html#web"><span class="de">Web Design</span><span class="en">Web Design</span></a>'
-    +           '<a href="management.html"><span class="de">Website Management</span><span class="en">Website Management</span></a>'
-    +           '<a href="about.html"><span class="de">Über uns</span><span class="en">About</span></a>'
-    +         '</div>'
+    +       '<div class="footer-col">'
+    +         '<div class="footer-col-head">Kontakt</div>'
+    +         '<a href="mailto:kontakt@avelonstudios.de">kontakt@avelonstudios.de</a>'
+    +         '<a href="contact.html">Anfrageformular</a>'
+    +         '<span class="footer-location">Hamm · NRW</span>'
     +       '</div>'
-    +       '<div>'
-    +         '<div class="footer-col-head de">Agentur</div>'
-    +         '<div class="footer-col-head en">Agency</div>'
-    +         '<div class="footer-links">'
-    +           '<a href="portfolio.html"><span class="de">Portfolio</span><span class="en">Portfolio</span></a>'
-    +           '<a href="contact.html"><span class="de">Kontakt</span><span class="en">Contact</span></a>'
-    +         '</div>'
-    +       '</div>'
-    +       '<div>'
-    +         '<div class="footer-col-head de">Kontakt</div>'
-    +         '<div class="footer-col-head en">Contact</div>'
-    +         '<div class="footer-links" style="color:var(--white-muted);font-size:0.875rem;">'
-    +           '<span>kontakt@avelonstudios.de</span>'
-    +           '<span class="de">Hamm, Deutschland</span>'
-    +           '<span class="en">Hamm, Germany</span>'
-    +         '</div>'
+    +       '<div class="footer-col">'
+    +         '<div class="footer-col-head">Rechtliches</div>'
+    +         '<a href="impressum.html">Impressum</a>'
+    +         '<a href="datenschutz.html">Datenschutz</a>'
+    +         '<a href="agb.html">AGB</a>'
     +       '</div>'
     +     '</div>'
-    +     '<div class="footer-bottom">'
-    +       '<div><span class="de">&copy; 2026 Av&egrave;lon Studios. Alle Rechte vorbehalten.</span><span class="en">&copy; 2026 Av&egrave;lon Studios. All rights reserved.</span></div>'
-    +       '<div class="footer-legal">'
-    +         '<a href="datenschutz.html"><span class="de">Datenschutz</span><span class="en">Privacy Policy</span></a>'
-    +         '<a href="impressum.html"><span class="de">Impressum</span><span class="en">Imprint</span></a>'
-    +         '<a href="agb.html"><span class="de">AGB</span><span class="en">Terms</span></a>'
-    +       '</div>'
+    +   '</div>'
+    +   '<div class="footer-bottom">'
+    +     '<div class="container footer-bottom-inner">'
+    +       '<span>© 2026 AvèlonStudios</span>'
+    +       '<span>Gestaltet und entwickelt in Hamm</span>'
     +     '</div>'
     +   '</div>'
     + '</footer>';
 
-  /* ── Inject on DOM ready ── */
   function init() {
-    var navEl = document.getElementById('nav-placeholder');
+    var navEl  = document.getElementById('nav-placeholder');
     var footEl = document.getElementById('footer-placeholder');
-    if (navEl)  navEl.innerHTML  = navHTML;
+    if (navEl)  navEl.innerHTML  = headerHTML;
     if (footEl) footEl.innerHTML = footerHTML;
 
-    /* Lang from localStorage */
-    var savedLang = localStorage.getItem('avelon-lang') || 'de';
-    document.documentElement.dataset.lang = savedLang;
-    syncLangButtons(savedLang);
+    var burger      = document.getElementById('burgerBtn');
+    var overlay     = document.getElementById('mobileOverlay');
+    var closeBtn    = document.getElementById('mobileCloseBtn');
 
-    /* Hamburger */
-    document.addEventListener('click', function (e) {
-      var target = e.target;
+    function openMenu() {
+      if (!overlay || !burger) return;
+      overlay.classList.add('is-open');
+      burger.classList.add('is-active');
+      burger.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      var firstLink = overlay.querySelector('a[href], button');
+      if (firstLink) firstLink.focus();
+    }
 
-      /* Lang toggles */
-      if (target.id === 'langToggle' || target.id === 'langToggleMobile') {
-        var cur  = document.documentElement.dataset.lang || 'de';
-        var next = cur === 'de' ? 'en' : 'de';
-        document.documentElement.dataset.lang = next;
-        localStorage.setItem('avelon-lang', next);
-        syncLangButtons(next);
-        return;
-      }
+    function closeMenu() {
+      if (!overlay || !burger) return;
+      overlay.classList.remove('is-open');
+      burger.classList.remove('is-active');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      burger.focus();
+    }
 
-      /* Hamburger open */
-      if (target.id === 'hamburger' || target.closest('#hamburger')) {
-        var mob = document.getElementById('mobileNav');
-        var ham = document.getElementById('hamburger');
-        if (mob) mob.classList.add('open');
-        if (ham) ham.classList.add('open');
-        document.body.style.overflow = 'hidden';
-        return;
-      }
+    if (burger) {
+      burger.addEventListener('click', function () {
+        if (overlay && overlay.classList.contains('is-open')) {
+          closeMenu();
+        } else {
+          openMenu();
+        }
+      });
+    }
 
-      /* Mobile close */
-      if (target.id === 'mobileClose') {
-        closeMobileNav();
-        return;
-      }
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMenu);
+    }
 
-      /* Click on mobile nav link → close */
-      if (target.closest && target.closest('.mobile-nav') && target.tagName === 'A') {
-        closeMobileNav();
-      }
-    });
-
-    /* ESC closes mobile nav */
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') closeMobileNav();
+      if (e.key === 'Escape' && overlay && overlay.classList.contains('is-open')) {
+        closeMenu();
+      }
     });
-  }
 
-  function closeMobileNav() {
-    var mob = document.getElementById('mobileNav');
-    var ham = document.getElementById('hamburger');
-    if (mob) mob.classList.remove('open');
-    if (ham) ham.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  function syncLangButtons(lang) {
-    var label = lang === 'de' ? 'EN' : 'DE';
-    document.querySelectorAll('#langToggle, #langToggleMobile').forEach(function (btn) {
-      btn.textContent = label;
-    });
+    if (overlay) {
+      overlay.addEventListener('click', function (e) {
+        if (e.target && e.target.tagName === 'A') {
+          closeMenu();
+        }
+      });
+    }
   }
 
   if (document.readyState === 'loading') {

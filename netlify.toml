@@ -12,14 +12,39 @@
 [[headers]]
   for = "*.css"
   [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
+    Cache-Control = "public, max-age=0, must-revalidate"
 
 [[headers]]
   for = "*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"
+
+[[headers]]
+  for = "/fonts/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/images/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[redirects]]
   from = "/home"
   to   = "/"
+  status = 301
+
+[[redirects]]
+  from = "/templates.html"
+  to   = "/portfolio.html"
+  status = 301
+
+[[redirects]]
+  from = "/templates"
+  to   = "/portfolio.html"
+  status = 301
+
+[[redirects]]
+  from = "/management.html"
+  to   = "/services.html#betreuung"
   status = 301

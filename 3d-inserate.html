@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D-Inserate für Makler – AvèlonStudios</title>
+  <meta name="description" content="Begehbare 3D-Inserate für Immobilienmakler: 360°-Rundgang, 3D-Grundriss und Inserat-PDF. Musterinserat ansehen.">
+  <meta property="og:title" content="3D-Inserate – AvèlonStudios">
+  <meta property="og:description" content="Begehbare 3D-Inserate für Immobilienmakler: 360°-Rundgang, 3D-Grundriss und Inserat-PDF.">
+  <meta property="og:image" content="/images/site/hero-wohnen.jpg">
+  <link rel="preload" href="fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css?v=20261118">
+</head>
+<body>
+<div id="nav-placeholder"></div>
+
+<main>
+
+  <!-- Page header -->
+  <section style="max-width:1280px;margin:0 auto;padding:88px 32px 48px;display:flex;flex-direction:column;gap:22px">
+    <div class="eyebrow">3D-Inserate für Makler</div>
+    <h1 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(42px,5vw,68px);line-height:1.04;max-width:900px">Die Wohnung besichtigen, <em style="color:#A6863B">bevor</em> der Termin steht.</h1>
+    <p style="margin:0;font-size:18px;line-height:1.65;color:#5F5B54;max-width:660px">Aus Grundriss und Fotos entsteht ein begehbarer Rundgang mit 3D-Grundriss und Inserat-PDF. Interessenten verstehen die Immobilie sofort – Sie führen weniger Besichtigungen ohne Abschluss.</p>
+  </section>
+
+  <!-- Hero banner -->
+  <section style="max-width:1280px;margin:0 auto;padding:0 32px 96px">
+    <a href="https://avelonstudios.de/3d-muster/" style="display:block;position:relative;text-decoration:none;color:#FFFFFF">
+      <img src="/images/site/hero-wohnen.jpg" alt="Startansicht des 3D-Rundgangs: Wohnzimmer der Musterwohnung" width="1280" height="549" loading="lazy" decoding="async" style="width:100%;aspect-ratio:21/9;object-fit:cover;display:block">
+      <div style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,18,17,0) 45%,rgba(18,18,17,0.62) 100%)"></div>
+      <div style="position:absolute;left:40px;right:40px;bottom:36px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:20px">
+        <div style="display:flex;flex-direction:column;gap:6px">
+          <span style="font-size:12px;letter-spacing:0.28em;text-transform:uppercase;color:#E3C878">Live · 360°-Rundgang</span>
+          <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:36px;font-weight:500">Musterwohnung · 4 Zimmer · 89 m²</span>
+        </div>
+        <span style="display:inline-flex;align-items:center;gap:12px;min-height:52px;padding:0 26px;background:#C5A55A;color:#141412;font-size:15px;font-weight:500">▶&#xFE0E;&#160; Rundgang starten</span>
+      </div>
+    </a>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:24px;margin-top:28px;font-size:14px;color:#5F5B54">
+      <span>Funktioniert auf Handy, Tablet und Desktop</span>
+      <span>Keine App, kein Download</span>
+      <span>Per Link oder QR-Code teilbar</span>
+      <span>Einbettbar in Website und Exposé</span>
+    </div>
+  </section>
+
+  <!-- Raum für Raum / Room tabs -->
+  <section style="border-top:1px solid #E2DCCD;background:#FFFFFF">
+    <div style="max-width:1280px;margin:0 auto;padding:96px 32px;display:flex;flex-direction:column;gap:44px">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px">
+        <div style="display:flex;flex-direction:column;gap:14px">
+          <div class="eyebrow">Raum für Raum</div>
+          <h2 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(34px,3.6vw,48px);line-height:1.1">Ansichten aus dem Rundgang</h2>
+        </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px" role="tablist" aria-label="Raum auswählen" id="roomTabBar">
+          <button class="filter-btn active" role="tab" aria-selected="true" data-room="wohnen" data-img="/images/site/hero-wohnen.jpg" data-alt="3D-Ansicht: Wohnzimmer mit Balkontür">Wohnen</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-room="kueche" data-img="/images/site/kueche.jpg" data-alt="3D-Ansicht: Küche mit Marmorrückwand">Küche</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-room="essen" data-img="/images/site/essen.jpg" data-alt="3D-Ansicht: Essbereich">Essen</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-room="schlafen" data-img="/images/site/schlafen.jpg" data-alt="3D-Ansicht: Schlafzimmer">Schlafen</button>
+          <button class="filter-btn" role="tab" aria-selected="false" data-room="bad" data-img="/images/site/bad.jpg" data-alt="3D-Ansicht: Badezimmer">Bad</button>
+        </div>
+      </div>
+      <img id="roomImg" src="/images/site/hero-wohnen.jpg" alt="3D-Ansicht: Wohnzimmer mit Balkontür" width="1280" height="640" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/8;object-fit:cover;display:block">
+    </div>
+  </section>
+
+  <!-- Musterinserat -->
+  <section style="max-width:1280px;margin:0 auto;padding:104px 32px;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+    <div style="flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:18px">
+      <div class="eyebrow">Das Musterinserat</div>
+      <h2 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(34px,3.6vw,48px);line-height:1.1">So sieht Ihr <em style="color:#A6863B">fertiges Inserat</em> aus.</h2>
+      <p style="margin:0;font-size:16px;line-height:1.7;color:#5F5B54">Zwei Seiten, druckfertig: Titelansicht, Eckdaten, Raumansichten, 3D-Grundriss – und ein QR-Code, der direkt in den Rundgang führt.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:14px;margin-top:8px">
+        <a href="/AvelonStudios_Musterinserat_3D.pdf" download style="display:inline-flex;align-items:center;min-height:48px;padding:0 24px;background:#C5A55A;color:#141412;text-decoration:none;font-size:15px;font-weight:500;transition:background 0.2s" onmouseover="this.style.background='#B8974C'" onmouseout="this.style.background='#C5A55A'">Musterinserat als PDF</a>
+        <a href="https://avelonstudios.de/3d-muster/" style="display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border:1px solid #CFC7B4;color:#141412;text-decoration:none;font-size:15px;transition:border-color 0.2s" onmouseover="this.style.borderColor='#C5A55A'" onmouseout="this.style.borderColor='#CFC7B4'">Rundgang öffnen</a>
+      </div>
+    </div>
+    <div style="flex:1 1 620px;min-width:0;display:flex;gap:24px;align-items:flex-start">
+      <img src="/images/site/musterinserat-seite-1.jpg" alt="Seite 1 des Musterinserats" width="537" height="760" loading="lazy" decoding="async" style="flex:1 1 0;min-width:0;aspect-ratio:1075/1521;object-fit:cover;display:block;box-shadow:0 24px 48px -24px rgba(20,20,18,0.35);border:1px solid #C5A55A">
+      <img src="/images/site/musterinserat-seite-2.jpg" alt="Seite 2 des Musterinserats mit 3D-Grundriss und QR-Code" width="537" height="760" loading="lazy" decoding="async" style="flex:1 1 0;min-width:0;aspect-ratio:1075/1521;object-fit:cover;display:block;margin-top:56px;box-shadow:0 24px 48px -24px rgba(20,20,18,0.35);border:1px solid #C5A55A">
+    </div>
+  </section>
+
+  <!-- 3D-Grundriss -->
+  <section style="background:#121211;color:#EDEAE3;border-top:1px solid #C5A55A">
+    <div style="max-width:1280px;margin:0 auto;padding:96px 32px;display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+      <div style="flex:1 1 600px;min-width:0;background:#F4F1EA;padding:20px;border:1px solid #C5A55A">
+        <img src="/images/site/grundriss-3d.jpg" alt="3D-Grundriss der Musterwohnung mit Möblierung und Maßangaben" width="800" height="600" loading="lazy" decoding="async" style="width:100%;display:block">
+      </div>
+      <div style="flex:1 1 340px;min-width:0;display:flex;flex-direction:column;gap:18px">
+        <div class="eyebrow-dark">3D-Grundriss</div>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(34px,3.6vw,46px);line-height:1.1">Wohnfläche <em style="color:#E3C878">auf einen Blick</em>.</h2>
+        <p style="margin:0;font-size:16px;line-height:1.7;color:#A8A39A">Möbliert, maßstäblich und verständlich – auch für Interessenten, die keine Grundrisse lesen.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ablauf -->
+  <section style="max-width:1280px;margin:0 auto;padding:104px 32px;display:flex;flex-direction:column;gap:48px">
+    <div style="display:flex;flex-direction:column;gap:14px">
+      <div class="eyebrow">Ablauf</div>
+      <h2 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(34px,3.6vw,48px);line-height:1.1">In drei Schritten zum 3D-Inserat</h2>
+    </div>
+    <ol style="list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:40px">
+      <li style="display:flex;flex-direction:column;gap:12px;border-top:2px solid #C5A55A;padding-top:22px">
+        <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;color:#A6863B" aria-hidden="true">01</span>
+        <span style="font-size:19px;font-weight:500">Unterlagen senden</span>
+        <span style="font-size:15px;line-height:1.65;color:#5F5B54">Grundriss, Fotos und Eckdaten der Immobilie – mehr brauchen wir nicht.</span>
+      </li>
+      <li style="display:flex;flex-direction:column;gap:12px;border-top:2px solid #C5A55A;padding-top:22px">
+        <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;color:#A6863B" aria-hidden="true">02</span>
+        <span style="font-size:19px;font-weight:500">Wir bauen &amp; gestalten</span>
+        <span style="font-size:15px;line-height:1.65;color:#5F5B54">3D-Modell, Einrichtung, Rundgang und Inserat-PDF in Ihrem Look.</span>
+      </li>
+      <li style="display:flex;flex-direction:column;gap:12px;border-top:2px solid #C5A55A;padding-top:22px">
+        <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;color:#A6863B" aria-hidden="true">03</span>
+        <span style="font-size:19px;font-weight:500">Freigeben &amp; veröffentlichen</span>
+        <span style="font-size:15px;line-height:1.65;color:#5F5B54">Sie erhalten Link, QR-Code und PDF – bereit für Portal und Exposé.</span>
+      </li>
+    </ol>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:#EEE9DE">
+    <div style="max-width:1280px;margin:0 auto;padding:96px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:32px">
+      <h2 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(32px,3.4vw,46px);line-height:1.1;max-width:680px">Testen Sie es mit einer Ihrer Immobilien.</h2>
+      <a href="contact.html" style="display:inline-flex;align-items:center;min-height:52px;padding:0 30px;background:#C5A55A;color:#141412;text-decoration:none;font-size:15px;font-weight:500;transition:background 0.2s" onmouseover="this.style.background='#B8974C'" onmouseout="this.style.background='#C5A55A'">3D-Inserat anfragen</a>
+    </div>
+  </section>
+
+</main>
+
+<div id="footer-placeholder"></div>
+<script src="nav.js?v=20261118"></script>
+<script>
+(function() {
+  var tabs = document.querySelectorAll('#roomTabBar [role="tab"]');
+  var img = document.getElementById('roomImg');
+  if (!img) return;
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      this.classList.add('active');
+      this.setAttribute('aria-selected', 'true');
+      img.src = this.getAttribute('data-img');
+      img.alt = this.getAttribute('data-alt');
+    });
+  });
+})();
+</script>
+</body>
+</html>

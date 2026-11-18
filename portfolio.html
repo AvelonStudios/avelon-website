@@ -1,979 +1,158 @@
 <!DOCTYPE html>
-<html data-lang="de" lang="de">
+<html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portfolio — AVÈLON STUDIOS</title>
-  <meta name="description" content="Brand Identity · Web Design · Shopify Stores — ausgewählte Projekte von AVÈLON STUDIOS." />  <link rel="stylesheet" href="style.css" />
-  <script>(function(){ var l=localStorage.getItem('avelon-lang')||'de'; document.documentElement.dataset.lang=l; })();</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webdesign &amp; Arbeiten – AvèlonStudios</title>
+  <meta name="description" content="Live-Demos und 3D-Musterinserat von AvèlonStudios. Entwürfe für Handwerk, Friseursalon, Nagelstudio, Fitnessstudio und Immobilien.">
+  <meta property="og:title" content="Webdesign &amp; Arbeiten – AvèlonStudios">
+  <meta property="og:description" content="Live-Demos und 3D-Musterinserat von AvèlonStudios.">
+  <meta property="og:image" content="/images/site/hero-wohnen.jpg">
+  <link rel="preload" href="fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/jost-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css?v=20261118">
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ══ HERO ══ */
-    .pf-hero {
-      padding: 140px 0 72px;
-      text-align: center;
-    }
-    .pf-eyebrow {
-      display: block;
-      font-size: 0.56rem;
-      font-weight: 700;
-      letter-spacing: 0.36em;
-      text-transform: uppercase;
-      color: #E8C96B;
-      margin-bottom: 16px;
-    }
-    .pf-hero-line {
-      display: block;
-      width: 40px;
-      height: 1px;
-      background: #E8C96B;
-      margin: 0 auto 28px;
-    }
-    .pf-hero h1 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(56px, 9.5vw, 108px);
-      font-weight: 700;
-      line-height: 0.9;
-      letter-spacing: -0.02em;
-      color: #fff;
-      margin-bottom: 20px;
-    }
-    .pf-hero-sub {
-      font-size: 0.78rem;
-      color: rgba(255,255,255,0.32);
-      letter-spacing: 0.1em;
-      margin-bottom: 52px;
-    }
-
-    /* ══ FILTER ══ */
-    .filter-wrap {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    .filter-pill {
-      padding: 9px 22px;
-      border-radius: 999px;
-      border: 1px solid #222;
-      background: transparent;
-      color: rgba(255,255,255,0.38);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.73rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s, background 0.2s;
-      white-space: nowrap;
-    }
-    .filter-pill:hover { border-color: rgba(232,201,107,0.4); color: #E8C96B; }
-    .filter-pill.active {
-      background: #E8C96B;
-      border-color: #E8C96B;
-      color: #080808;
-      font-weight: 600;
-    }
-
-    /* ══ SECTION HEADER ══ */
-    .section-header {
-      max-height: 200px;
-      overflow: hidden;
-      transition: opacity 0.38s ease, max-height 0.42s ease;
-    }
-    .section-header.hidden {
-      opacity: 0;
-      max-height: 0;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .section-header-inner {
-      max-width: 1320px;
-      margin: 0 auto;
-      padding: 28px 24px 8px;
-    }
-    .section-header-text {
-      font-size: 14px;
-      color: rgba(255,255,255,0.5);
-      line-height: 1.7;
-      max-width: 600px;
-      border-left: 2px solid #E8C96B;
-      padding-left: 16px;
-      font-family: 'DM Sans', sans-serif;
-    }
-
-    /* ══ CARDS STACK ══ */
-    .cards-wrap { display: flex; flex-direction: column; gap: 4px; }
-
-    /* card */
-    .pf-card {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      cursor: pointer;
-      background: #0d0d0d;
-      transition: opacity 0.38s ease, max-height 0.42s ease;
-    }
-    .pf-card.hidden {
-      opacity: 0;
-      max-height: 0 !important;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    .pf-card img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-      transition: transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      will-change: transform;
-    }
-    /* bottom gradient */
-    .pf-card::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 200px;
-      background: linear-gradient(to top, rgba(0,0,0,0.88) 0%, transparent 100%);
-      z-index: 1;
-      pointer-events: none;
-    }
-    /* hover overlay */
-    .pf-card-hover {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      background: rgba(5,5,5,0.52);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-    .pf-card-hover span {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      color: #fff;
-      border-bottom: 1px solid rgba(255,255,255,0.35);
-      padding-bottom: 2px;
-      transition: color 0.2s, border-color 0.2s;
-    }
-    /* category label — top-left */
-    .pf-card-tag {
-      position: absolute;
-      top: 0; left: 0;
-      z-index: 2;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: #E8C96B;
-      background: rgba(8,8,8,0.85);
-      padding: 8px 16px;
-      border-radius: 0 0 4px 0;
-      transition: opacity 0.25s;
-    }
-    /* number */
-    .pf-card-num {
-      position: absolute;
-      bottom: 60px; right: 22px;
-      z-index: 2;
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 0.72rem;
-      font-weight: 400;
-      color: rgba(255,255,255,0.2);
-      letter-spacing: 0.04em;
-      transition: opacity 0.25s;
-    }
-    /* hover states */
-    .pf-card:hover img { transform: scale(1.04); }
-    .pf-card:hover .pf-card-hover { opacity: 1; }
-    .pf-card:hover .pf-card-hover span { color: #E8C96B; border-color: #E8C96B; }
-    .pf-card:hover .pf-card-tag { opacity: 0; }
-    .pf-card:hover .pf-card-num { opacity: 0; }
-    .pf-card:hover .demo-btn { opacity: 1; }
-
-    /* ══ DEMO BUTTON ══ */
-    .demo-btn {
-      position: absolute;
-      bottom: 16px; right: 16px;
-      z-index: 4;
-      background: rgba(8,8,8,0.85);
-      border: 1px solid #E8C96B;
-      color: #E8C96B;
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      padding: 8px 20px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      font-weight: 500;
-      backdrop-filter: blur(6px);
-      transition: background 0.2s;
-    }
-    .demo-btn:hover { background: rgba(232,201,107,0.15); }
-
-    /* gold separator */
-    .gold-separator {
-      width: 100%;
-      height: 3px;
-      background: linear-gradient(90deg, transparent 0%, #C8A84B 20%, #F5DFA0 50%, #C8A84B 80%, transparent 100%);
-      position: relative;
-      overflow: hidden;
-      margin: 0;
-      transition: opacity 0.38s ease, max-height 0.42s ease;
-    }
-    .gold-separator.hidden { opacity: 0; max-height: 0; overflow: hidden; pointer-events: none; }
-    .gold-shimmer {
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 60%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.8), rgba(255,240,150,0.9), rgba(255,255,255,0.8), transparent);
-      animation: shimmer 2.5s ease-in-out infinite;
-    }
-    @keyframes shimmer {
-      0%   { left: -60%; }
-      100% { left: 160%; }
-    }
-
-    /* ══ POPUP ══ */
-    .popup-overlay {
-      position: fixed;
-      inset: 0;
-      width: 100vw;
-      height: 100vh;
-      z-index: 9999;
-      visibility: hidden;
-      pointer-events: none;
-      overflow: hidden;
-    }
-    .popup-overlay.open {
-      visibility: visible;
-      pointer-events: all;
-    }
-    .popup-overlay.reset { visibility: visible; }
-    .popup-overlay.reset .pf-stagger {
-      opacity: 0 !important;
-      transform: translateY(20px) !important;
-      transition: none !important;
-    }
-    .popup-overlay.reset .pop-divider {
-      transform: scaleX(0) !important;
-      transition: none !important;
-    }
-    .popup-panel {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      clip-path: inset(50% 50% 50% 50% round 4px);
-      transition: clip-path 0.6s cubic-bezier(0.77, 0, 0.175, 1);
-    }
-    .popup-overlay.open .popup-panel {
-      clip-path: inset(0% 0% 0% 0% round 0px);
-    }
-    .popup-left {
-      flex: 0 0 55%;
-      background: #0a0a0a;
-      position: relative;
-      overflow: hidden;
-      cursor: pointer;
-    }
-    .popup-left img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center center;
-      display: block;
-      pointer-events: none;
-    }
-    .popup-right {
-      flex: 0 0 45%;
-      background: #080808;
-      border-left: 0.5px solid #1a1a1a;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 40px 44px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(255,255,255,0.06) transparent;
-    }
-    .popup-right::-webkit-scrollbar { width: 3px; }
-    .popup-right::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); }
-    .popup-close {
-      position: fixed;
-      top: 22px; right: 26px;
-      z-index: 10000;
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(10,10,10,0.85);
-      color: rgba(255,255,255,0.55);
-      font-size: 0.85rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      backdrop-filter: blur(8px);
-      opacity: 0;
-      pointer-events: none;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .popup-overlay.open .popup-close {
-      opacity: 1;
-      pointer-events: all;
-      transition: opacity 0.25s ease 0.52s, border-color 0.2s, color 0.2s;
-    }
-    .popup-close:hover { border-color: #E8C96B; color: #E8C96B; }
-    .pf-stagger {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.45s ease, transform 0.45s ease;
-    }
-    .popup-overlay.open .pf-stagger { opacity: 1; transform: translateY(0); }
-    .pop-num {
-      font-size: 0.58rem;
-      font-weight: 700;
-      letter-spacing: 0.2em;
-      color: #E8C96B;
-      margin-bottom: 10px;
-    }
-    .pop-cat {
-      font-size: 0.56rem;
-      font-weight: 700;
-      letter-spacing: 0.28em;
-      text-transform: uppercase;
-      color: rgba(232,201,107,0.65);
-      margin-bottom: 12px;
-    }
-    .pop-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 28px;
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.18;
-      margin-bottom: 18px;
-    }
-    .pop-divider {
-      width: 40px;
-      height: 1px;
-      background: #E8C96B;
-      transform-origin: left center;
-      transform: scaleX(0);
-      transition: transform 0.5s cubic-bezier(0.77,0,0.175,1);
-      margin-bottom: 20px;
-    }
-    .popup-overlay.open .pop-divider { transform: scaleX(1); }
-    .pop-desc {
-      font-size: 13px;
-      color: rgba(255,255,255,0.48);
-      line-height: 1.7;
-      margin-bottom: 22px;
-    }
-    .pop-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 28px;
-    }
-    .pop-tag {
-      padding: 4px 12px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.1);
-      font-size: 0.6rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      color: rgba(255,255,255,0.38);
-    }
-    .pop-cta {
-      display: block;
-      width: 100%;
-      padding: 13px;
-      text-align: center;
-      background: #E8C96B;
-      color: #080808;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      border-radius: 5px;
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .pop-cta:hover { background: #d4b355; }
-    .popup-demo-btn {
-      display: block;
-      width: 100%;
-      padding: 11px;
-      text-align: center;
-      background: transparent;
-      border: 1px solid rgba(232,201,107,0.3);
-      color: #E8C96B;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.06em;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: border-color 0.2s, background 0.2s;
-      margin-top: 10px;
-      text-decoration: none;
-    }
-    .popup-demo-btn:hover { border-color: #E8C96B; background: rgba(232,201,107,0.06); }
-
-    /* ══ CTA SECTION ══ */
-    .pf-cta {
-      border-top: 1px solid #121212;
-      text-align: center;
-      padding: 88px 24px 100px;
-    }
-    .pf-cta-eye {
-      font-size: 0.55rem;
-      font-weight: 700;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: #E8C96B;
-      display: block;
-      margin-bottom: 18px;
-    }
-    .pf-cta h2 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: clamp(28px, 4.5vw, 50px);
-      font-weight: 700;
-      color: #fff;
-      line-height: 1.1;
-      margin-bottom: 14px;
-    }
-    .pf-cta p {
-      font-size: 0.84rem;
-      color: rgba(255,255,255,0.32);
-      margin-bottom: 32px;
-      max-width: 380px;
-      margin-left: auto;
-      margin-right: auto;
-      line-height: 1.65;
-    }
-    .pf-cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
-    /* ══ DEMO OVERLAY ══ */
-    .demo-overlay {
-      position: fixed; inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 10001;
-      display: flex; align-items: center; justify-content: center;
-      opacity: 0; pointer-events: none;
-      transition: opacity 0.3s ease;
-      padding: 24px;
-    }
-    .demo-overlay.open { opacity: 1; pointer-events: all; }
-    .demo-modal {
-      background: #0d0d0d;
-      border: 0.5px solid rgba(232,201,107,0.2);
-      border-radius: 12px;
-      padding: 32px;
-      width: 100%; max-width: 600px;
-      position: relative;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-      max-height: 90vh; overflow-y: auto;
-      scrollbar-width: thin; scrollbar-color: rgba(255,255,255,0.06) transparent;
-    }
-    .demo-overlay.open .demo-modal { transform: translateY(0); }
-    .demo-close {
-      position: absolute; top: 16px; right: 16px;
-      width: 32px; height: 32px; border-radius: 50%;
-      border: 0.5px solid rgba(255,255,255,0.15);
-      background: rgba(255,255,255,0.04);
-      color: rgba(255,255,255,0.5);
-      font-size: 13px; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      transition: border-color 0.2s, color 0.2s;
-    }
-    .demo-close:hover { border-color: #E8C96B; color: #E8C96B; }
-    .demo-modal-label {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: #E8C96B; display: block; margin-bottom: 10px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .demo-modal-line { width: 40px; height: 1px; background: #E8C96B; margin-bottom: 16px; }
-    .demo-modal-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 22px; font-weight: 700; color: #fff; margin-bottom: 8px;
-    }
-    .demo-modal-sub {
-      font-size: 13px; color: rgba(255,255,255,0.38);
-      margin-bottom: 24px; line-height: 1.65;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .demo-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin-bottom: 20px;
-    }
-    .demo-card {
-      background: #111; border: 0.5px solid #1a1a1a;
-      border-radius: 8px; padding: 16px 16px 32px;
-      text-decoration: none; display: block;
-      position: relative;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .demo-card:hover { border-color: #E8C96B; transform: translateY(-2px); }
-    .demo-card-icon { font-size: 24px; margin-bottom: 8px; display: block; }
-    .demo-card-title { font-size: 13px; color: #fff; font-weight: 500; font-family: 'DM Sans', sans-serif; margin-bottom: 4px; }
-    .demo-card-desc { font-size: 11px; color: rgba(255,255,255,0.38); font-family: 'DM Sans', sans-serif; line-height: 1.5; }
-    .demo-card-arrow { position: absolute; bottom: 12px; right: 14px; color: #E8C96B; font-size: 12px; font-family: 'DM Sans', sans-serif; }
-    .demo-modal-note {
-      font-size: 11px; color: rgba(232,201,107,0.55);
-      font-family: 'DM Sans', sans-serif; text-align: center;
-    }
-
-    /* ══ PORTFOLIO DEMO BAR ══ */
-    .portfolio-demo-bar {
-      border: 0.5px solid rgba(232,201,107,0.2);
-      border-radius: 8px; padding: 20px 24px;
-      background: #0d0d0d; margin-bottom: 32px;
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 16px; flex-wrap: wrap;
-    }
-    .portfolio-demo-bar-label {
-      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: #E8C96B; display: block; margin-bottom: 6px;
-      font-family: 'DM Sans', sans-serif;
-    }
-    .portfolio-demo-bar-title {
-      font-size: 14px; font-weight: 500; color: #fff;
-      margin-bottom: 4px; font-family: 'DM Sans', sans-serif;
-    }
-    .portfolio-demo-bar-sub {
-      font-size: 12px; color: rgba(255,255,255,0.32);
-      font-family: 'DM Sans', sans-serif; line-height: 1.5;
-    }
-    .demo-bar-btn {
-      background: #E8C96B; color: #080808; border: none;
-      padding: 10px 22px; border-radius: 6px;
-      font-size: 12px; font-weight: 600; letter-spacing: 0.04em;
-      font-family: 'DM Sans', sans-serif; cursor: pointer;
-      white-space: nowrap; transition: background 0.2s;
-    }
-    .demo-bar-btn:hover { background: #f5dfa0; }
-
-    /* ══ RESPONSIVE ══ */
-    @media (max-width: 700px) {
-      .pf-hero { padding: 110px 0 52px; }
-      .pf-card[data-height="440"] { height: 260px !important; }
-      .pf-card[data-height="300"] { height: 220px !important; }
-      .popup-panel { flex-direction: column; }
-      .popup-left { flex: 0 0 40%; cursor: default; }
-      .popup-right { flex: 0 0 60%; padding: 24px 20px; justify-content: flex-start; overflow-y: auto; }
-      .popup-close { top: 12px; right: 12px; }
-      .pop-title { font-size: 20px; }
-      .demo-grid { grid-template-columns: 1fr; }
-      .portfolio-demo-bar { flex-direction: column; align-items: flex-start; }
-    }
+    .card { display:flex;flex-direction:column;gap:18px;text-decoration:none;color:#141412 }
+    .card-frame { overflow:hidden;border:1px solid #E2DCCD;background:#FFFFFF;position:relative }
+    .card-frame img { transition:transform 0.6s ease }
+    .card:hover .card-frame { border-color:#C5A55A }
+    .card:hover .card-frame img { transform:scale(1.03) }
+    .card-badge { position:absolute;top:16px;left:16px;display:inline-flex;align-items:center;min-height:28px;padding:0 12px;background:#141412;color:#E3C878;font-size:11px;letter-spacing:0.2em;text-transform:uppercase }
   </style>
 </head>
 <body>
-
 <div id="nav-placeholder"></div>
 
-<!-- ══ HERO ══ -->
-<div style="max-width:1320px;margin:0 auto;padding:0 24px;">
-  <section class="pf-hero">
-    <span class="pf-eyebrow">Our Work</span>
-    <span class="pf-hero-line"></span>
-    <h1>Portfolio</h1>
-    <p class="pf-hero-sub">Web Design · Brand Identity · Shopify Stores</p>
-    <div class="filter-wrap" id="filterBar">
-      <button class="filter-pill active" data-filter="all">
-        <span class="de">Alle</span><span class="en">All</span>
-      </button>
-      <button class="filter-pill" data-filter="web">Web Design</button>
-      <button class="filter-pill" data-filter="brand">Brand Identity</button>
+<main>
+
+  <!-- Page header + filter -->
+  <section style="max-width:1280px;margin:0 auto;padding:88px 32px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px">
+    <div style="display:flex;flex-direction:column;gap:22px;max-width:780px">
+      <div class="eyebrow">Webdesign &amp; Arbeiten</div>
+      <h1 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(42px,5vw,70px);line-height:1.04">Entwürfe, die zeigen, <em style="color:#A6863B">wie wir denken</em>.</h1>
+      <p style="margin:0;font-size:18px;line-height:1.65;color:#5F5B54;max-width:620px">Jede Website für ihre Branche entworfen – und unser 3D-Inserat als Beispiel dafür, was im Web heute möglich ist. Klicken Sie sich durch die Live-Demos.</p>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:8px" id="filterBar" role="group" aria-label="Arbeiten filtern">
+      <button class="filter-btn active" data-filter="alle">Alle</button>
+      <button class="filter-btn" data-filter="web">Websites</button>
+      <button class="filter-btn" data-filter="3d">3D-Inserate</button>
     </div>
   </section>
-</div>
 
-<!-- ══ DEMO BAR ══ -->
-<div style="max-width:1320px;margin:0 auto;padding:0 24px;">
-  <div class="portfolio-demo-bar">
-    <div>
-      <span class="portfolio-demo-bar-label">Live Demos</span>
-      <div class="portfolio-demo-bar-title">Schau dir echte Website-Demos an — für verschiedene Branchen</div>
-      <div class="portfolio-demo-bar-sub">Klicke auf eine Demo um zu sehen was wir für dein Unternehmen bauen können.</div>
-    </div>
-    <button class="demo-bar-btn" id="demoBtnBar">Demos ansehen →</button>
-  </div>
-</div>
+  <!-- Portfolio grid -->
+  <section style="max-width:1280px;margin:0 auto;padding:24px 32px 112px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(min(380px,100%),1fr));gap:56px 32px" id="portfolioGrid">
 
-<!-- ══ CARDS ══ -->
-<div class="cards-wrap" id="cardsWrap">
-
-  <!-- ── Web Design section header ── -->
-  <div class="section-header" id="header-web" data-section="web">
-    <div class="section-header-inner">
-      <p class="section-header-text">
-        <span class="de">Wir bauen Websites die verkaufen — maßgeschneidert für dein Unternehmen, optimiert für Wachstum.</span>
-        <span class="en">We build websites that sell — tailored for your business, optimized for growth.</span>
-      </p>
-    </div>
-  </div>
-
-  <!-- Card 01 — Shopify Store — web — 440px -->
-  <div class="pf-card" data-filter="web" data-popup="popup-01" data-height="440" style="height:440px;">
-    <img src="images/portfolio/shopify-store.jpeg" alt="Shopify Store" loading="eager" />
-    <div class="pf-card-hover">
-      <span><span class="de">Projekt ansehen →</span><span class="en">View Project →</span></span>
-    </div>
-    <span class="pf-card-tag">Premium Websites für dein Unternehmen</span>
-    <span class="pf-card-num">01</span>
-    <button class="demo-btn" data-open-demos>DEMO →</button>
-  </div>
-
-  <!-- Separator within Web section -->
-  <div class="gold-separator" id="sep-web-inner"><div class="gold-shimmer"></div></div>
-
-  <!-- Card 02 — Website Design — web — 300px -->
-  <div class="pf-card" data-filter="web" data-popup="popup-02" data-height="300" style="height:300px;">
-    <img src="images/portfolio/website-mockup.jpg" alt="Website Design" loading="lazy" onerror="this.src='images/portfolio/brand-identity.jpeg'" />
-    <div class="pf-card-hover">
-      <span><span class="de">Projekt ansehen →</span><span class="en">View Project →</span></span>
-    </div>
-    <span class="pf-card-tag">Website Design</span>
-    <span class="pf-card-num">02</span>
-    <button class="demo-btn" data-open-demos>DEMO →</button>
-  </div>
-
-  <!-- Section separator (web → brand) -->
-  <div class="gold-separator" id="sep-sections"><div class="gold-shimmer"></div></div>
-
-  <!-- ── Brand Identity section header ── -->
-  <div class="section-header" id="header-brand" data-section="brand">
-    <div class="section-header-inner">
-      <p class="section-header-text">
-        <span class="de">Deine Marke ist mehr als ein Logo — wir erschaffen eine komplette visuelle Identität die in Erinnerung bleibt.</span>
-        <span class="en">Your brand is more than a logo — we create a complete visual identity that leaves a lasting impression.</span>
-      </p>
-    </div>
-  </div>
-
-  <!-- Card 03 — Brand Identity — brand — 440px -->
-  <div class="pf-card" data-filter="brand" data-popup="popup-03" data-height="440" style="height:440px;">
-    <img src="images/portfolio/brand-identity.jpeg" alt="Brand Identity" loading="lazy" />
-    <div class="pf-card-hover">
-      <span><span class="de">Projekt ansehen →</span><span class="en">View Project →</span></span>
-    </div>
-    <span class="pf-card-tag">Brand Identity</span>
-    <span class="pf-card-num">03</span>
-    <button class="demo-btn" data-open-demos>DEMO →</button>
-  </div>
-
-</div>
-
-<!-- ══ CTA ══ -->
-<div class="pf-cta">
-  <span class="pf-cta-eye">
-    <span class="de">Dein Projekt ist als Nächstes</span>
-    <span class="en">Your project is next</span>
-  </span>
-  <h2>
-    <span class="de">Lass uns etwas<br>Bleibendes schaffen</span>
-    <span class="en">Let's build something<br>that lasts</span>
-  </h2>
-  <p>
-    <span class="de">Jedes Projekt beginnt mit einem Gespräch. Kostenlos &amp; unverbindlich.</span>
-    <span class="en">Every project starts with a conversation. Free &amp; no commitment.</span>
-  </p>
-  <div class="pf-cta-btns">
-    <a href="contact.html" class="btn btn-primary btn-lg">
-      <span class="de">Kostenloses Gespräch buchen →</span>
-      <span class="en">Book Free Call →</span>
-    </a>
-    <a href="services.html" class="btn btn-outline btn-lg">
-      <span class="de">Preise ansehen</span>
-      <span class="en">View Pricing</span>
-    </a>
-  </div>
-</div>
-
-<!-- ══════════════════════════════
-     POPUP 01 — SHOPIFY STORE
-══════════════════════════════ -->
-<div class="popup-overlay" id="popup-01">
-  <button class="popup-close" data-close>✕</button>
-  <div class="popup-panel">
-    <div class="popup-left">
-      <img src="images/portfolio/shopify-store.jpeg" alt="Shopify Store" />
-    </div>
-    <div class="popup-right">
-      <div class="pf-stagger pop-num" style="transition-delay:0.30s;">01 / 03</div>
-      <div class="pf-stagger pop-cat" style="transition-delay:0.35s;">Premium Websites</div>
-      <div class="pf-stagger pop-title" style="transition-delay:0.40s;">Premium Websites für dein Unternehmen</div>
-      <div class="pop-divider" style="transition-delay:0.45s;"></div>
-      <div class="pf-stagger pop-desc" style="transition-delay:0.50s;">
-        <span class="de">Premium Websites für dein Unternehmen — maßgeschneidert, conversion-optimiert und bereit zum Wachsen.</span>
-        <span class="en">Premium websites for your business — tailored, conversion-optimised and ready to grow.</span>
-      </div>
-      <div class="pf-stagger pop-tags" style="transition-delay:0.55s;">
-        <span class="pop-tag">Shopify</span>
-        <span class="pop-tag">E-Commerce</span>
-        <span class="pop-tag">KI-Chatbot</span>
-        <span class="pop-tag">Launch Ready</span>
-      </div>
-      <div class="pf-stagger" style="transition-delay:0.60s;">
-        <a href="contact.html?paket=Premium&amp;preis=799" class="pop-cta">
-          <span class="de">Projekt anfragen →</span>
-          <span class="en">Request Project →</span>
-        </a>
-        <button class="popup-demo-btn" data-open-demos>
-          <span class="de">Shop Demo ansehen →</span>
-          <span class="en">View Shop Demo →</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════
-     POPUP 02 — WEBSITE DESIGN
-══════════════════════════════ -->
-<div class="popup-overlay" id="popup-02">
-  <button class="popup-close" data-close>✕</button>
-  <div class="popup-panel">
-    <div class="popup-left">
-      <img src="images/portfolio/website-mockup.jpg" alt="Website Design" onerror="this.src='images/portfolio/brand-identity.jpeg'" />
-    </div>
-    <div class="popup-right">
-      <div class="pf-stagger pop-num" style="transition-delay:0.30s;">02 / 03</div>
-      <div class="pf-stagger pop-cat" style="transition-delay:0.35s;">Website Design</div>
-      <div class="pf-stagger pop-title" style="transition-delay:0.40s;">Premium Website Design</div>
-      <div class="pop-divider" style="transition-delay:0.45s;"></div>
-      <div class="pf-stagger pop-desc" style="transition-delay:0.50s;">
-        <span class="de">Custom Website Design — mobil optimiert, SEO-ready, conversion-fokussiert. Gebaut für Unternehmen die online wachsen wollen.</span>
-        <span class="en">Custom website design — mobile optimised, SEO-ready, conversion-focused. Built for businesses that want to grow online.</span>
-      </div>
-      <div class="pf-stagger pop-tags" style="transition-delay:0.55s;">
-        <span class="pop-tag">Web Design</span>
-        <span class="pop-tag">Mobile First</span>
-        <span class="pop-tag">SEO</span>
-        <span class="pop-tag">Custom Layout</span>
-      </div>
-      <div class="pf-stagger" style="transition-delay:0.60s;">
-        <a href="contact.html?paket=Website+Design&amp;preis=599" class="pop-cta">
-          <span class="de">Projekt anfragen →</span>
-          <span class="en">Request Project →</span>
-        </a>
-        <button class="popup-demo-btn" data-open-demos>
-          <span class="de">Website Demo ansehen →</span>
-          <span class="en">View Website Demo →</span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══════════════════════════════
-     POPUP 03 — BRAND IDENTITY
-══════════════════════════════ -->
-<div class="popup-overlay" id="popup-03">
-  <button class="popup-close" data-close>✕</button>
-  <div class="popup-panel">
-    <div class="popup-left">
-      <img src="images/portfolio/brand-identity.jpeg" alt="Brand Identity" />
-    </div>
-    <div class="popup-right">
-      <div class="pf-stagger pop-num" style="transition-delay:0.30s;">03 / 03</div>
-      <div class="pf-stagger pop-cat" style="transition-delay:0.35s;">Brand Identity</div>
-      <div class="pf-stagger pop-title" style="transition-delay:0.40s;">Premium Brand Identity</div>
-      <div class="pop-divider" style="transition-delay:0.45s;"></div>
-      <div class="pf-stagger pop-desc" style="transition-delay:0.50s;">
-        <span class="de">Vollständige Brand Identity — Logo, Visitenkarten, Farbpalette, Style Guide &amp; Brand Guidelines. Jedes Detail auf Premium-Niveau.</span>
-        <span class="en">Complete brand identity — logo, business cards, colour palette, style guide &amp; brand guidelines. Every detail at premium level.</span>
-      </div>
-      <div class="pf-stagger pop-tags" style="transition-delay:0.55s;">
-        <span class="pop-tag">Logo Design</span>
-        <span class="pop-tag">Brand Identity</span>
-        <span class="pop-tag">Style Guide</span>
-        <span class="pop-tag">Stationery</span>
-      </div>
-      <div class="pf-stagger" style="transition-delay:0.60s;">
-        <a href="contact.html?paket=Brand+Identity&amp;preis=599" class="pop-cta">
-          <span class="de">Projekt anfragen →</span>
-          <span class="en">Request Project →</span>
-        </a>
-        <a href="demos/nails.html" target="_blank" class="popup-demo-btn">
-          <span class="de">Brand Demo ansehen →</span>
-          <span class="en">View Brand Demo →</span>
-        </a>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ══ DEMO OVERLAY ══ -->
-<div class="demo-overlay" id="demoOverlay">
-  <div class="demo-modal">
-    <button class="demo-close" id="demoClose">✕</button>
-    <span class="demo-modal-label">Live Demos</span>
-    <div class="demo-modal-line"></div>
-    <div class="demo-modal-title">Wähle eine Demo</div>
-    <p class="demo-modal-sub">Echte Website-Demos für verschiedene Branchen — gebaut von AVÈLON STUDIOS</p>
-    <div class="demo-grid">
-      <a href="demos/nails.html" target="_blank" class="demo-card">
-        <span class="demo-card-icon">🌸</span>
-        <div class="demo-card-title">Nagelstudio</div>
-        <div class="demo-card-desc">Luxe Nails Studio — Premium Nagelpflege</div>
-        <span class="demo-card-arrow">→</span>
+      <a class="card" href="https://avelonstudios.de/demos/handwerk.html" data-cat="web">
+        <div class="card-frame">
+          <img src="/images/site/demo-handwerk.jpg" alt="Demo-Website eines Handwerksbetriebs" width="760" height="475" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block">
+          <span class="card-badge">Website · Demo</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:500">Handwerksbetrieb</span>
+          <span style="font-size:15px;line-height:1.6;color:#5F5B54">Klare Leistungsübersicht, Referenzen und schnelle Anfrage per Formular.</span>
+          <span style="font-size:14px;color:#7E6427;border-bottom:1px solid #C5A55A;align-self:flex-start;padding-bottom:2px;margin-top:4px">Live-Demo öffnen</span>
+        </div>
       </a>
-      <a href="demos/handwerk.html" target="_blank" class="demo-card">
-        <span class="demo-card-icon">🔨</span>
-        <div class="demo-card-title">Handwerk</div>
-        <div class="demo-card-desc">Meister Bau — Renovierung & Bau</div>
-        <span class="demo-card-arrow">→</span>
+
+      <a class="card" href="3d-inserate.html" data-cat="3d">
+        <div class="card-frame">
+          <img src="/images/site/hero-wohnen.jpg" alt="Wohnzimmer der Musterwohnung als 3D-Visualisierung" width="760" height="475" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block">
+          <span class="card-badge">3D · Muster</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:500">Musterwohnung</span>
+          <span style="font-size:15px;line-height:1.6;color:#5F5B54">89 m², vier Zimmer: 360°-Rundgang, 3D-Grundriss und Inserat-PDF mit QR-Code.</span>
+          <span style="font-size:14px;color:#7E6427;border-bottom:1px solid #C5A55A;align-self:flex-start;padding-bottom:2px;margin-top:4px">Inserat ansehen</span>
+        </div>
       </a>
-      <a href="demos/friseur.html" target="_blank" class="demo-card">
-        <span class="demo-card-icon">✂️</span>
-        <div class="demo-card-title">Friseursalon</div>
-        <div class="demo-card-desc">Atelier Hair — Premium Haardesign</div>
-        <span class="demo-card-arrow">→</span>
+
+      <a class="card" href="https://avelonstudios.de/demos/friseur.html" data-cat="web">
+        <div class="card-frame">
+          <img src="/images/site/demo-friseur.jpg" alt="Demo-Website eines Friseursalons" width="760" height="475" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block">
+          <span class="card-badge">Website · Demo</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:500">Friseursalon</span>
+          <span style="font-size:15px;line-height:1.6;color:#5F5B54">Stilvoller Auftritt mit Leistungen, Team und Online-Terminanfrage.</span>
+          <span style="font-size:14px;color:#7E6427;border-bottom:1px solid #C5A55A;align-self:flex-start;padding-bottom:2px;margin-top:4px">Live-Demo öffnen</span>
+        </div>
       </a>
-      <a href="demos/fitness.html" target="_blank" class="demo-card">
-        <span class="demo-card-icon">💪</span>
-        <div class="demo-card-title">Fitness</div>
-        <div class="demo-card-desc">Elite Performance — Personal Training</div>
-        <span class="demo-card-arrow">→</span>
+
+      <a class="card" href="https://avelonstudios.de/demos/nails.html" data-cat="web">
+        <div class="card-frame">
+          <img src="/images/site/demo-nails.jpg" alt="Demo-Website eines Nagelstudios" width="760" height="475" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block">
+          <span class="card-badge">Website · Demo</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:500">Nagelstudio</span>
+          <span style="font-size:15px;line-height:1.6;color:#5F5B54">Zarte Bildsprache, Leistungsübersicht und Buchungsweg in zwei Klicks.</span>
+          <span style="font-size:14px;color:#7E6427;border-bottom:1px solid #C5A55A;align-self:flex-start;padding-bottom:2px;margin-top:4px">Live-Demo öffnen</span>
+        </div>
       </a>
+
+      <a class="card" href="https://avelonstudios.de/demos/fitness.html" data-cat="web">
+        <div class="card-frame">
+          <img src="/images/site/demo-fitness.jpg" alt="Demo-Website eines Fitnessstudios" width="760" height="475" loading="lazy" decoding="async" style="width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;display:block">
+          <span class="card-badge">Website · Demo</span>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <span style="font-family:'Cormorant Garamond',Georgia,serif;font-size:30px;font-weight:500">Fitnessstudio</span>
+          <span style="font-size:15px;line-height:1.6;color:#5F5B54">Kraftvolles Design mit Kursplan, Mitgliedschaften und Probetraining.</span>
+          <span style="font-size:14px;color:#7E6427;border-bottom:1px solid #C5A55A;align-self:flex-start;padding-bottom:2px;margin-top:4px">Live-Demo öffnen</span>
+        </div>
+      </a>
+
     </div>
-    <p class="demo-modal-note">✦ Jede Demo zeigt wie deine Website aussehen könnte</p>
-  </div>
-</div>
+  </section>
+
+  <!-- 3D focus dark section -->
+  <section style="background:#121211;color:#EDEAE3;border-top:1px solid #C5A55A">
+    <div style="max-width:1280px;margin:0 auto;padding:96px 32px;display:flex;flex-wrap:wrap;gap:48px;align-items:center">
+      <div style="flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px">
+        <div class="eyebrow-dark">Im Fokus</div>
+        <h2 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(36px,3.6vw,50px);line-height:1.08">Webdesign trifft <em style="color:#E3C878">3D</em>.</h2>
+        <p style="margin:0;font-size:16px;line-height:1.7;color:#A8A39A">Unser Rundgang ist selbst gebaut: schnell geladen, scharf auf jedem Display, eingebettet in jede Website oder per QR-Code im Exposé.</p>
+        <a href="3d-inserate.html" style="align-self:flex-start;margin-top:8px;display:inline-flex;align-items:center;min-height:48px;padding:0 24px;background:#C5A55A;color:#121211;text-decoration:none;font-size:15px;font-weight:500;transition:background 0.2s" onmouseover="this.style.background='#B8974C'" onmouseout="this.style.background='#C5A55A'">Zum Musterinserat</a>
+      </div>
+      <div style="flex:1 1 560px;min-width:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px">
+        <img src="/images/site/kueche.jpg" alt="Küche der Musterwohnung" width="380" height="285" loading="lazy" decoding="async" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+        <img src="/images/site/bad.jpg" alt="Bad der Musterwohnung" width="380" height="285" loading="lazy" decoding="async" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+        <img src="/images/site/arbeit.jpg" alt="Arbeitsbereich der Musterwohnung" width="380" height="285" loading="lazy" decoding="async" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+        <img src="/images/site/essen.jpg" alt="Essbereich der Musterwohnung" width="380" height="285" loading="lazy" decoding="async" style="width:100%;aspect-ratio:4/3;object-fit:cover;display:block">
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:#EEE9DE">
+    <div style="max-width:1280px;margin:0 auto;padding:96px 32px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:32px">
+      <h2 style="margin:0;font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(32px,3.4vw,46px);line-height:1.1;max-width:640px">Ihre Branche ist nicht dabei? <em style="color:#A6863B">Wir entwerfen sie.</em></h2>
+      <a href="contact.html" style="display:inline-flex;align-items:center;min-height:54px;padding:0 32px;background:#C5A55A;color:#141412;text-decoration:none;font-size:15px;font-weight:500;transition:background 0.2s" onmouseover="this.style.background='#B8974C'" onmouseout="this.style.background='#C5A55A'">Projekt anfragen</a>
+    </div>
+  </section>
+
+</main>
 
 <div id="footer-placeholder"></div>
-<script src="nav.js"></script>
+<script src="nav.js?v=20261118"></script>
 <script>
-/* ── Filter ── */
-(function () {
-  var pills      = document.querySelectorAll('.filter-pill');
-  var cards      = document.querySelectorAll('.pf-card');
-  var headers    = document.querySelectorAll('.section-header');
-  var sepWebInner  = document.getElementById('sep-web-inner');
-  var sepSections  = document.getElementById('sep-sections');
-
-  pills.forEach(function (pill) {
-    pill.addEventListener('click', function () {
-      var f = pill.dataset.filter;
-      pills.forEach(function (p) { p.classList.remove('active'); });
-      pill.classList.add('active');
-
-      /* cards */
-      cards.forEach(function (card) {
-        var match = f === 'all' || card.dataset.filter === f;
-        if (match) {
-          card.classList.remove('hidden');
-          card.style.maxHeight = card.dataset.height + 'px';
+(function() {
+  var btns = document.querySelectorAll('#filterBar .filter-btn');
+  var cards = document.querySelectorAll('#portfolioGrid .card');
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var filter = this.getAttribute('data-filter');
+      btns.forEach(function(b) { b.classList.remove('active'); });
+      this.classList.add('active');
+      cards.forEach(function(card) {
+        if (filter === 'alle' || card.getAttribute('data-cat') === filter) {
+          card.style.display = '';
         } else {
-          card.classList.add('hidden');
-          card.style.maxHeight = '0';
+          card.style.display = 'none';
         }
       });
-
-      /* section headers */
-      headers.forEach(function (h) {
-        var match = f === 'all' || h.dataset.section === f;
-        h.classList.toggle('hidden', !match);
-      });
-
-      /* sep within web section: show when web cards are visible */
-      if (sepWebInner) sepWebInner.classList.toggle('hidden', f === 'brand');
-      /* sep between sections: show only when all */
-      if (sepSections) sepSections.classList.toggle('hidden', f !== 'all');
     });
-  });
-})();
-
-/* ── Popup system ── */
-(function () {
-  var active = null;
-
-  function open(id) {
-    var el = document.getElementById(id);
-    if (!el) return;
-    el.classList.remove('open');
-    el.classList.add('reset');
-    void el.offsetHeight;
-    el.classList.remove('reset');
-    el.classList.add('open');
-    active = el;
-    document.body.style.overflow = 'hidden';
-  }
-
-  function close() {
-    if (!active) return;
-    active.classList.remove('open');
-    document.body.style.overflow = '';
-    active = null;
-  }
-
-  /* cards → popups */
-  document.querySelectorAll('.pf-card[data-popup]').forEach(function (card) {
-    card.addEventListener('click', function () { open(card.dataset.popup); });
-  });
-
-  /* X button */
-  document.querySelectorAll('.popup-close[data-close]').forEach(function (btn) {
-    btn.addEventListener('click', function (e) { e.stopPropagation(); close(); });
-  });
-
-  /* click image side to close */
-  document.querySelectorAll('.popup-left').forEach(function (left) {
-    left.addEventListener('click', function () { close(); });
-  });
-
-  /* ESC */
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') close();
-  });
-})();
-
-/* ── Demo Overlay ── */
-(function () {
-  var overlay  = document.getElementById('demoOverlay');
-  var closeBtn = document.getElementById('demoClose');
-  var barBtn   = document.getElementById('demoBtnBar');
-
-  function openDemo() {
-    if (!overlay) return;
-    overlay.classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeDemo() {
-    if (!overlay) return;
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  /* card DEMO buttons + popup demo buttons */
-  document.querySelectorAll('[data-open-demos]').forEach(function (btn) {
-    btn.addEventListener('click', function (e) {
-      e.stopPropagation();
-      openDemo();
-    });
-  });
-
-  if (barBtn) barBtn.addEventListener('click', openDemo);
-  if (closeBtn) closeBtn.addEventListener('click', closeDemo);
-  if (overlay) overlay.addEventListener('click', function (e) {
-    if (e.target === overlay) closeDemo();
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeDemo();
   });
 })();
 </script>
