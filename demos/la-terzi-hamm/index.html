@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>La Terzi Napoli · Hamm – Website-Konzept von AvèlonStudios</title>
+<meta name="description" content="Konzept-Entwurf von AvèlonStudios: Website für La Terzi Napoli in Hamm – neapolitanische Pizza aus dem Steinofen.">
+<link rel="preload" href="fonts/cinzel-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/allura-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Allura";src:url(fonts/allura-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Cinzel";src:url(fonts/cinzel-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Cinzel";src:url(fonts/cinzel-latin-600-normal.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url(fonts/cormorant-garamond-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Cormorant Garamond";src:url(fonts/cormorant-garamond-latin-500-italic.woff2) format("woff2");font-weight:500;font-style:italic;font-display:swap}
+@font-face{font-family:"Jost";src:url(fonts/jost-latin-300-normal.woff2) format("woff2");font-weight:300;font-display:swap}
+@font-face{font-family:"Jost";src:url(fonts/jost-latin-400-normal.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Jost";src:url(fonts/jost-latin-500-normal.woff2) format("woff2");font-weight:500;font-display:swap}
+
+:root{
+  --ink:#0E0C0A; --ink-2:#17140F; --ink-3:#221D16;
+  --cream:#F3EADB; --cream-2:#E9DCC6; --muted:#B5AA97; --muted-2:#8C826F;
+  --gold:#C9A55C; --gold-l:#E2C483; --gold-d:#9C7C38;
+  --basil:#3E6B45; --tomato:#B8392B;
+  --line:rgba(201,165,92,.22);
+  --serif:"Cormorant Garamond",Georgia,serif; --caps:"Cinzel","Times New Roman",serif; --script:"Allura",cursive; --sans:"Jost",system-ui,sans-serif;
+  --wrap:1240px; --pad:32px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--ink);color:var(--cream);font-family:var(--sans);font-weight:300;font-size:17px;line-height:1.65;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--pad)}
+.eyebrow{font-family:var(--caps);font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:34px;height:1px;background:var(--gold)}
+.eyebrow.center{justify-content:center}
+.eyebrow.center::after{content:"";width:34px;height:1px;background:var(--gold)}
+h1,h2,h3{font-weight:500;margin:0}
+h2{font-family:var(--caps);font-size:clamp(30px,3.6vw,48px);line-height:1.12;letter-spacing:.04em}
+h2 em,h1 em{font-family:var(--script);font-style:normal;font-weight:400;color:var(--gold-l);letter-spacing:0;text-transform:none;font-size:1.25em;line-height:.8}
+.lead{font-family:var(--serif);font-size:clamp(20px,1.8vw,24px);line-height:1.5;color:var(--cream-2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 28px;font-family:var(--caps);font-size:13px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;border:1px solid transparent;transition:background .25s,color .25s,border-color .25s;cursor:pointer}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover{background:var(--gold-l)}
+.btn-line{border-color:rgba(243,234,219,.35);color:var(--cream)}
+.btn-line:hover{border-color:var(--gold);color:var(--gold-l)}
+:focus-visible{outline:2px solid var(--gold-l);outline-offset:3px}
+.check{height:10px;background:repeating-conic-gradient(var(--tomato) 0 25%,var(--cream) 0 50%) 0 0/20px 20px;opacity:.9}
+
+/* Demo-Hinweis */
+.demo-bar{background:var(--cream);color:var(--ink);font-size:13px;text-align:center;padding:9px 16px;letter-spacing:.02em}
+.demo-bar b{font-weight:500}
+.demo-bar a{color:var(--gold-d);font-weight:500}
+
+/* Navigation */
+.nav{position:sticky;top:0;z-index:50;background:rgba(14,12,10,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:84px}
+.brand{display:flex;flex-direction:column;align-items:center;text-decoration:none;line-height:1}
+.brand .s{font-family:var(--script);font-size:38px;color:var(--cream);margin-bottom:-6px}
+.brand .c{font-family:var(--caps);font-size:11px;letter-spacing:.42em;color:var(--gold);padding-left:.42em}
+.nav-links{display:flex;align-items:center;gap:30px;font-family:var(--caps);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.nav-links a{text-decoration:none;color:var(--cream-2);padding:6px 0;border-bottom:1px solid transparent}
+.nav-links a:hover{color:var(--gold-l);border-color:var(--gold)}
+.nav .btn{min-height:44px;padding:0 20px;font-size:12px}
+.burger{display:none;background:none;border:0;color:var(--cream);width:44px;height:44px;cursor:pointer}
+.burger span{display:block;width:24px;height:1.5px;background:currentColor;margin:6px auto;transition:transform .3s,opacity .3s}
+.mobile-menu{display:none}
+
+/* Hero */
+.hero{position:relative;overflow:hidden}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;padding-top:72px;padding-bottom:88px}
+.hero h1{font-family:var(--caps);font-size:clamp(40px,5vw,72px);line-height:1.06;letter-spacing:.03em;margin:22px 0 24px}
+.hero h1 em{display:block;font-size:1.15em;margin:6px 0 2px}
+.hero .actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px}
+.hero-img{position:relative}
+.hero-img img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 85%}
+.hero-img::before{content:"";position:absolute;inset:18px -18px -18px 18px;border:1px solid var(--gold);z-index:-1}
+.badge{position:absolute;left:-34px;bottom:44px;width:128px;height:128px;border-radius:50%;background:var(--basil);border:2px solid var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;box-shadow:0 18px 40px -12px rgba(0,0,0,.6);transform:rotate(-8deg)}
+.badge small{font-family:var(--caps);font-size:9px;letter-spacing:.24em;color:var(--cream-2)}
+.badge b{font-family:var(--script);font-weight:400;font-size:34px;line-height:1;color:var(--cream)}
+.facts{border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--ink-2)}
+.facts .wrap{display:grid;grid-template-columns:repeat(3,1fr)}
+.fact{padding:26px 28px;display:flex;gap:16px;align-items:center;border-left:1px solid var(--line)}
+.fact:first-child{border-left:0;padding-left:0}
+.fact svg{flex:none;color:var(--gold)}
+.fact span{display:block;font-family:var(--caps);font-size:11px;letter-spacing:.24em;color:var(--muted-2);text-transform:uppercase}
+.fact strong{font-weight:400;font-size:17px;color:var(--cream)}
+.fact a{text-decoration:none}
+.fact a:hover strong{color:var(--gold-l)}
+
+/* Ofen / Story */
+.story{padding:120px 0}
+.story .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:center}
+.story-imgs{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.story-imgs img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.story-imgs img:last-child{margin-top:64px}
+.story h2{margin:20px 0 22px}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.pillar{padding:24px 20px 0 0}
+.pillar .n{font-family:var(--script);font-size:40px;color:var(--gold);line-height:1}
+.pillar h3{font-family:var(--caps);font-size:15px;letter-spacing:.14em;margin:8px 0 8px}
+.pillar p{margin:0;font-size:15px;color:var(--muted)}
+
+/* Speisekarte */
+.menu{background:var(--cream);color:var(--ink);padding:120px 0}
+.menu .eyebrow{color:var(--gold-d)}
+.menu .eyebrow::before,.menu .eyebrow::after{background:var(--gold-d)}
+.menu h2 em{color:var(--gold-d)}
+.menu-head{text-align:center;max-width:720px;margin:0 auto 48px}
+.menu-head h2{margin:18px 0 14px}
+.menu-head p{margin:0;color:#5E5546;font-family:var(--serif);font-size:21px}
+.tabs{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-bottom:56px}
+.tab{font-family:var(--caps);font-size:12px;letter-spacing:.2em;text-transform:uppercase;background:none;border:1px solid #CDBF9F;color:var(--ink);min-height:44px;padding:0 22px;cursor:pointer}
+.tab[aria-selected="true"]{background:var(--ink);color:var(--gold-l);border-color:var(--ink)}
+.menu-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:72px;align-items:start}
+.menu-photo{position:sticky;top:120px}
+.menu-photo img{width:100%;aspect-ratio:4/5;object-fit:cover}
+.menu-photo figcaption{font-family:var(--serif);font-style:italic;font-size:17px;color:#6B604E;margin-top:12px}
+.panel[hidden]{display:none}
+.dish{display:grid;grid-template-columns:1fr auto;gap:6px 24px;padding:22px 0;border-bottom:1px solid #D9CCB2}
+.dish:first-child{padding-top:0}
+.dish h3{font-family:var(--caps);font-size:18px;letter-spacing:.1em}
+.dish .tag{font-family:var(--caps);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--basil);align-self:center;border:1px solid rgba(62,107,69,.4);padding:3px 9px}
+.dish p{grid-column:1/-1;margin:0;color:#5E5546;font-size:15.5px}
+.menu-note{margin-top:28px;font-size:14px;color:#7A6F5C}
+.menu-note a{color:var(--gold-d)}
+
+/* Galerie */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
+.gallery img{width:100%;aspect-ratio:1/1;object-fit:cover;filter:saturate(1.02)}
+
+/* Reservierung */
+.reserve{padding:120px 0;background:radial-gradient(1200px 500px at 85% 0%,rgba(201,165,92,.10),transparent 60%),var(--ink)}
+.reserve .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:80px;align-items:start}
+.reserve h2{margin:18px 0 20px}
+.reserve .alt{margin-top:36px;padding:26px 28px;border:1px solid var(--line);background:var(--ink-2)}
+.reserve .alt p{margin:0 0 16px;color:var(--muted)}
+.wa{display:inline-flex;align-items:center;gap:12px;text-decoration:none;font-family:var(--caps);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--cream)}
+.wa svg{color:#4FBF6B}
+.wa:hover{color:var(--gold-l)}
+form.res{background:var(--ink-2);border:1px solid var(--line);border-top:3px solid var(--gold);padding:44px 40px;display:grid;grid-template-columns:1fr 1fr;gap:22px 24px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-family:var(--caps);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
+.field input,.field select,.field textarea{font:inherit;font-weight:400;font-size:16px;color:var(--cream);background:transparent;border:0;border-bottom:1px solid rgba(243,234,219,.25);padding:10px 0;min-height:46px;border-radius:0;outline:none;color-scheme:dark}
+.field textarea{min-height:90px;resize:vertical}
+.field select option{background:var(--ink-2)}
+.field input:focus,.field select:focus,.field textarea:focus{border-bottom-color:var(--gold)}
+form.res .btn{grid-column:1/-1;justify-self:start;margin-top:8px}
+.res-ok{grid-column:1/-1;display:none;padding:18px 20px;border:1px solid var(--gold);color:var(--cream-2);font-size:15px}
+.res-ok.show{display:block}
+
+/* Jobs */
+.jobs{background:var(--ink-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:110px 0}
+.jobs .head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:48px}
+.jobs .head h2{margin-top:18px}
+.job-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px}
+.job{background:var(--ink);border:1px solid var(--line);padding:38px 36px;display:flex;flex-direction:column;gap:14px;transition:border-color .3s}
+.job:hover{border-color:var(--gold)}
+.job .type{font-family:var(--caps);font-size:11px;letter-spacing:.24em;color:var(--gold);text-transform:uppercase}
+.job h3{font-family:var(--caps);font-size:24px;letter-spacing:.08em}
+.job p{margin:0;color:var(--muted);font-size:15.5px}
+.job a{margin-top:10px;align-self:flex-start;text-decoration:none;font-family:var(--caps);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);border-bottom:1px solid var(--gold);padding-bottom:4px}
+
+/* Kontakt */
+.contact{padding:120px 0 110px}
+.contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
+.contact h2{margin:18px 0 28px}
+.c-list{display:flex;flex-direction:column;border-top:1px solid var(--line)}
+.c-row{display:grid;grid-template-columns:150px 1fr;gap:20px;padding:20px 0;border-bottom:1px solid var(--line)}
+.c-row span{font-family:var(--caps);font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--muted-2);padding-top:4px}
+.c-row a,.c-row div{text-decoration:none;font-size:18px;color:var(--cream)}
+.c-row a:hover{color:var(--gold-l)}
+.map{position:relative;aspect-ratio:1/1;background:var(--ink-2);border:1px solid var(--line);overflow:hidden;display:flex;align-items:center;justify-content:center;text-decoration:none}
+.map::before{content:"";position:absolute;inset:0;background:
+  linear-gradient(90deg,transparent 49.6%,rgba(201,165,92,.18) 49.6% 50.4%,transparent 50.4%) 0 0/120px 120px,
+  linear-gradient(0deg,transparent 49.6%,rgba(201,165,92,.18) 49.6% 50.4%,transparent 50.4%) 0 0/120px 120px}
+.pin{position:relative;text-align:center}
+.pin .dot{width:18px;height:18px;border-radius:50%;background:var(--gold);margin:0 auto 18px;box-shadow:0 0 0 10px rgba(201,165,92,.18),0 0 0 22px rgba(201,165,92,.08)}
+.pin strong{display:block;font-family:var(--caps);font-size:20px;letter-spacing:.12em}
+.pin small{display:block;margin-top:6px;color:var(--muted);font-size:14px}
+.pin em{display:inline-block;margin-top:16px;font-style:normal;font-family:var(--caps);font-size:11px;letter-spacing:.22em;color:var(--gold-l);text-transform:uppercase;border-bottom:1px solid var(--gold);padding-bottom:3px}
+
+/* Footer */
+footer{background:#090807;border-top:1px solid var(--line);padding:56px 0 30px;font-size:14px;color:var(--muted-2)}
+footer .top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:24px;padding-bottom:30px;border-bottom:1px solid rgba(243,234,219,.08)}
+footer .soc{display:flex;gap:22px;font-family:var(--caps);font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+footer .soc a{text-decoration:none;color:var(--cream-2)}
+footer .soc a:hover{color:var(--gold-l)}
+footer .bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;padding-top:22px}
+footer .bottom a{color:var(--muted-2);text-decoration:none}
+footer .bottom a:hover{color:var(--gold-l)}
+.made{color:var(--muted)}
+.made a{color:var(--gold-l)!important}
+
+/* Mobile CTA */
+.m-cta{display:none}
+
+/* Reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s ease,transform .9s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{transition:none!important}}
+
+/* Responsive */
+@media (max-width:1020px){
+  .nav-links,.nav .btn{display:none}
+  .burger{display:block}
+  .mobile-menu{position:fixed;inset:0;z-index:60;background:var(--ink);display:flex;flex-direction:column;justify-content:center;align-items:center;gap:26px;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+  .mobile-menu.open{opacity:1;visibility:visible}
+  .mobile-menu a{font-family:var(--caps);font-size:22px;letter-spacing:.18em;text-decoration:none;text-transform:uppercase}
+  .mobile-menu .btn{font-size:13px;margin-top:10px}
+  .mobile-menu .close{position:absolute;top:22px;right:22px;background:none;border:0;color:var(--cream);font-size:34px;line-height:1;width:48px;height:48px;cursor:pointer}
+  .hero .wrap,.story .wrap,.reserve .wrap,.contact .wrap,.menu-grid{grid-template-columns:1fr;gap:56px}
+  .hero-img{max-width:560px}
+  .menu-photo{position:static;max-width:520px}
+  .story-imgs{order:2}
+}
+@media (max-width:720px){
+  :root{--pad:20px}
+  body{font-size:16px}
+  .nav .wrap{min-height:70px}
+  .brand .s{font-size:32px}
+  .hero .wrap{padding-top:44px;padding-bottom:64px;gap:48px}
+  .hero h1{font-size:33px;letter-spacing:.01em}
+  h2{font-size:28px;letter-spacing:.02em}
+  .eyebrow{font-size:11px;letter-spacing:.24em}
+  .hero .actions .btn{flex:1 1 100%}
+  .hero-img::before{inset:12px -10px -12px 12px}
+  .badge{left:auto;right:12px;bottom:-26px;width:104px;height:104px}
+  .badge b{font-size:28px}
+  .facts .wrap{grid-template-columns:1fr}
+  .fact{border-left:0;border-top:1px solid var(--line);padding:18px 0}
+  .fact:first-child{border-top:0}
+  .story,.menu,.reserve,.contact{padding:84px 0}
+  .jobs{padding:80px 0}
+  .pillars{grid-template-columns:1fr}
+  .pillar{padding:20px 0;border-bottom:1px solid var(--line)}
+  .gallery{grid-template-columns:repeat(2,1fr)}
+  form.res{grid-template-columns:1fr;padding:32px 22px}
+  form.res .btn{justify-self:stretch}
+  .job-grid{grid-template-columns:1fr}
+  .job{padding:30px 24px}
+  .c-row{grid-template-columns:1fr;gap:4px}
+  .m-cta{display:flex;position:fixed;left:12px;right:12px;bottom:12px;z-index:40;gap:8px}
+  .m-cta a{flex:1;min-height:52px;font-size:12px;padding:0 12px}
+  footer{padding-bottom:96px}
+}
+</style>
+</head>
+<body>
+
+<div class="demo-bar"><b>Konzept-Entwurf</b> von <a href="https://avelonstudios.de" target="_blank" rel="noopener">AvèlonStudios</a> für La Terzi Napoli Hamm – keine offizielle Seite. Beispielinhalte werden durch eure echten Daten ersetzt.</div>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="La Terzi Napoli – nach oben"><span class="s">La Terzi</span><span class="c">NAPOLI · HAMM</span></a>
+    <nav class="nav-links" aria-label="Hauptnavigation">
+      <a href="#ofen">Unser Ofen</a>
+      <a href="#karte">Speisekarte</a>
+      <a href="#reservieren">Reservieren</a>
+      <a href="#jobs">Jobs</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <a class="btn btn-gold" href="#reservieren">Tisch reservieren</a>
+    <button class="burger" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mmenu"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="mobile-menu" id="mmenu" role="dialog" aria-modal="true" aria-label="Menü">
+  <button class="close" aria-label="Menü schließen">×</button>
+  <a href="#ofen">Unser Ofen</a>
+  <a href="#karte">Speisekarte</a>
+  <a href="#reservieren">Reservieren</a>
+  <a href="#jobs">Jobs</a>
+  <a href="#kontakt">Kontakt</a>
+  <a class="btn btn-gold" href="#reservieren">Tisch reservieren</a>
+</div>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Neueröffnung · Oststraße 7 · Hamm</div>
+        <h1>Neapolitanische Pizza <em>im Herzen von</em> Hamm</h1>
+        <p class="lead">Frisch aus dem Steinofen. Gute Weine und echte Leidenschaft – komm vorbei und genieß Italien.</p>
+        <div class="actions">
+          <a class="btn btn-gold" href="#reservieren">Tisch reservieren</a>
+          <a class="btn btn-line" href="#karte">Zur Speisekarte</a>
+        </div>
+      </div>
+      <div class="hero-img reveal">
+        <img src="img/pizza-tisch.jpg" width="1120" height="1400" alt="Neapolitanische Pizza mit Aperitivo auf rot-weiß kariertem Tischtuch">
+        <div class="badge" aria-hidden="true"><small>PIZZA</small><b>Napoli</b><small>HAMM</small></div>
+      </div>
+    </div>
+    <div class="facts">
+      <div class="wrap">
+        <div class="fact"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><span>Adresse</span><strong>Oststraße 7, 59065 Hamm</strong></div></div>
+        <div class="fact"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div><span>Geöffnet</span><strong>Täglich ab 12:00 Uhr</strong></div></div>
+        <div class="fact"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><a href="tel:+4915116576273"><span>Telefon &amp; WhatsApp</span><strong>+49 151 16576273</strong></a></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="check" aria-hidden="true"></div>
+
+  <section class="story" id="ofen">
+    <div class="wrap">
+      <div class="story-imgs reveal">
+        <img src="img/ofen-schieber.jpg" width="799" height="1000" alt="Pizza wird mit dem Schieber aus dem Steinofen geholt" loading="lazy" decoding="async">
+        <img src="img/ofen.jpg" width="1100" height="1100" alt="Glühender Steinofen mit Pizza im Inneren" loading="lazy" decoding="async">
+      </div>
+      <div class="reveal">
+        <div class="eyebrow">Wie in Neapel</div>
+        <h2>Aus dem Steinofen <em>direkt</em> auf deinen Tisch</h2>
+        <p class="lead">Dünner Boden, luftiger Rand, frische Zutaten: Bei uns wird jede Pizza von Hand geformt und bei großer Hitze im Steinofen gebacken – so, wie sie in Neapel sein soll.</p>
+        <div class="pillars">
+          <div class="pillar"><div class="n">uno</div><h3>Steinofen</h3><p>Große Hitze, kurze Backzeit – für den typischen Cornicione.</p></div>
+          <div class="pillar"><div class="n">due</div><h3>Frische Zutaten</h3><p>Tomaten, Fior di Latte, Basilikum – ehrlich und hochwertig.</p></div>
+          <div class="pillar"><div class="n">tre</div><h3>Leidenschaft</h3><p>Gute Weine, echte Gastfreundschaft, italienisches Lebensgefühl.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="menu" id="karte">
+    <div class="wrap">
+      <div class="menu-head reveal">
+        <div class="eyebrow center">La Carta</div>
+        <h2>Unsere <em>Speisekarte</em></h2>
+        <p>Klassiker aus Neapel – frisch zubereitet, mit Liebe serviert.</p>
+      </div>
+      <div class="tabs" role="tablist" aria-label="Speisekarte">
+        <button class="tab" role="tab" aria-selected="true" aria-controls="p-pizze" id="t-pizze" data-img="img/pizza-diavola.jpg" data-cap="Pizza Diavola – scharf und unwiderstehlich">Pizze</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-anti" id="t-anti" tabindex="-1" data-img="img/bruschetta.jpg" data-cap="Bruschetta – der perfekte Start">Antipasti</button>
+        <button class="tab" role="tab" aria-selected="false" aria-controls="p-dolci" id="t-dolci" tabindex="-1" data-img="img/espresso.jpg" data-cap="Espresso – zum krönenden Abschluss">Dolci &amp; Caffè</button>
+      </div>
+      <div class="menu-grid">
+        <figure class="menu-photo reveal" style="margin:0">
+          <img id="menuImg" src="img/pizza-diavola.jpg" width="1200" height="960" alt="Pizza Diavola auf kariertem Tischtuch" loading="lazy" decoding="async">
+          <figcaption id="menuCap">Pizza Diavola – scharf und unwiderstehlich</figcaption>
+        </figure>
+        <div>
+          <div class="panel" role="tabpanel" id="p-pizze" aria-labelledby="t-pizze">
+            <div class="dish"><h3>Margherita</h3><span class="tag">Klassiker</span><p>San-Marzano-Tomaten, Fior di Latte, frisches Basilikum, Olivenöl</p></div>
+            <div class="dish"><h3>Marinara</h3><span class="tag">Vegan</span><p>Tomaten, Knoblauch, Oregano, Olivenöl</p></div>
+            <div class="dish"><h3>Diavola</h3><span class="tag">Scharf</span><p>Tomaten, Fior di Latte, scharfe Salami, Basilikum</p></div>
+            <div class="dish"><h3>Bufalina</h3><span class="tag">Beliebt</span><p>Tomaten, Büffelmozzarella, Kirschtomaten, Basilikum</p></div>
+            <div class="dish"><h3>Salsiccia e Friarielli</h3><span class="tag">Neapel</span><p>Fior di Latte, italienische Salsiccia, Friarielli, Parmigiano</p></div>
+            <div class="dish"><h3>Quattro Formaggi</h3><span class="tag">Vegetarisch</span><p>Fior di Latte, Gorgonzola, Parmigiano, Provola</p></div>
+          </div>
+          <div class="panel" role="tabpanel" id="p-anti" aria-labelledby="t-anti" hidden>
+            <div class="dish"><h3>Bruschetta</h3><span class="tag">Vegan</span><p>Geröstetes Brot, Tomaten, Knoblauch, Basilikum, Olivenöl</p></div>
+            <div class="dish"><h3>Burrata</h3><span class="tag">Vegetarisch</span><p>Cremige Burrata, Kirschtomaten, Rucola, Pesto</p></div>
+            <div class="dish"><h3>Tagliere Misto</h3><span class="tag">Zum Teilen</span><p>Italienische Salumi, Käse, Oliven und Focaccia</p></div>
+          </div>
+          <div class="panel" role="tabpanel" id="p-dolci" aria-labelledby="t-dolci" hidden>
+            <div class="dish"><h3>Tiramisù</h3><span class="tag">Hausgemacht</span><p>Mascarpone, Savoiardi, Espresso, Kakao</p></div>
+            <div class="dish"><h3>Pizza Nutella</h3><span class="tag">Zum Teilen</span><p>Aus dem Steinofen, mit Nutella und Puderzucker</p></div>
+            <div class="dish"><h3>Espresso &amp; Caffè</h3><span class="tag">Italia</span><p>Espresso, Cappuccino und Caffè Latte</p></div>
+          </div>
+          <p class="menu-note">Beispielkarte im Entwurf – in der fertigen Seite steht hier eure echte Karte, inklusive Preisen und Allergenen.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="gallery" aria-label="Eindrücke">
+    <img src="img/pizza-spritz.jpg" width="800" height="1000" alt="Pizza und Aperitivo auf der Terrasse" loading="lazy" decoding="async">
+    <img src="img/pizzakarton.jpg" width="1000" height="1000" alt="La-Terzi-Pizzakarton mit frischem Basilikum" loading="lazy" decoding="async">
+    <img src="img/bruschetta.jpg" width="719" height="900" alt="Bruschetta auf Schieferbrett" loading="lazy" decoding="async">
+    <img src="img/ofen.jpg" width="1100" height="1100" alt="Steinofen" loading="lazy" decoding="async">
+  </div>
+
+  <section class="reserve" id="reservieren">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Prenota</div>
+        <h2>Deinen Tisch <em>reservieren</em></h2>
+        <p class="lead">Gerade nach der Eröffnung ist es voll – reserviere deinen Tisch am besten vorher. Wir bestätigen dir die Reservierung kurz per Telefon oder WhatsApp.</p>
+        <div class="alt">
+          <p>Lieber direkt schreiben? Reservierungen gehen auch ganz einfach per WhatsApp.</p>
+          <a class="wa" href="https://wa.me/4915116576273" target="_blank" rel="noopener"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.1 5.1 0 0 0 1.1 2.7 11.7 11.7 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3z"/></svg>Per WhatsApp reservieren</a>
+        </div>
+      </div>
+      <form class="res reveal" novalidate>
+        <div class="field"><label for="r-name">Name</label><input id="r-name" type="text" autocomplete="name" placeholder="Vor- und Nachname" required></div>
+        <div class="field"><label for="r-tel">Telefon</label><input id="r-tel" type="tel" autocomplete="tel" placeholder="Für die Bestätigung" required></div>
+        <div class="field"><label for="r-date">Datum</label><input id="r-date" type="date" required></div>
+        <div class="field"><label for="r-time">Uhrzeit</label>
+          <select id="r-time" required><option value="">Bitte wählen</option><option>12:00</option><option>13:00</option><option>14:00</option><option>17:00</option><option>18:00</option><option>19:00</option><option>20:00</option><option>21:00</option></select></div>
+        <div class="field"><label for="r-pers">Personen</label>
+          <select id="r-pers" required><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7–10</option><option>Größere Gruppe</option></select></div>
+        <div class="field"><label for="r-occ">Anlass (optional)</label>
+          <select id="r-occ"><option value="">–</option><option>Geburtstag</option><option>Date</option><option>Familie</option><option>Firma</option></select></div>
+        <div class="field full"><label for="r-msg">Wünsche (optional)</label><textarea id="r-msg" placeholder="Kinderstuhl, Terrasse, Allergien …"></textarea></div>
+        <button class="btn btn-gold" type="submit">Reservierung anfragen</button>
+        <div class="res-ok" role="status" aria-live="polite">Demo: In der fertigen Seite landet diese Anfrage direkt bei La Terzi. In diesem Entwurf werden keine Daten gesendet.</div>
+      </form>
+    </div>
+  </section>
+
+  <section class="jobs" id="jobs">
+    <div class="wrap">
+      <div class="head reveal">
+        <div><div class="eyebrow">Lavora con noi</div><h2>Werde Teil der <em>Famiglia</em></h2></div>
+        <p class="lead" style="max-width:420px;margin:0">Für unser neues Team in Hamm suchen wir Verstärkung – ab sofort.</p>
+      </div>
+      <div class="job-grid">
+        <article class="job reveal"><span class="type">Vollzeit · m/w/d</span><h3>Pizzabäcker</h3><p>Du liebst Teig, Feuer und echte neapolitanische Pizza – und arbeitest gern am Steinofen.</p><a href="https://wa.me/4915116576273" target="_blank" rel="noopener">Per WhatsApp bewerben</a></article>
+        <article class="job reveal"><span class="type">m/w/d</span><h3>Kellner/-in</h3><p>Du bist herzlich, aufmerksam und sorgst dafür, dass sich jeder Gast wie in Italien fühlt.</p><a href="https://wa.me/4915116576273" target="_blank" rel="noopener">Per WhatsApp bewerben</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="kontakt">
+    <div class="wrap">
+      <div class="reveal">
+        <div class="eyebrow">Vieni a trovarci</div>
+        <h2>So findest <em>du uns</em></h2>
+        <div class="c-list">
+          <div class="c-row"><span>Adresse</span><div>Oststraße 7<br>59065 Hamm</div></div>
+          <div class="c-row"><span>Öffnungszeiten</span><div>Täglich ab 12:00 Uhr</div></div>
+          <div class="c-row"><span>Telefon</span><a href="tel:+4915116576273">+49 151 16576273</a></div>
+          <div class="c-row"><span>Instagram</span><a href="https://www.instagram.com/laterzi.napoli/" target="_blank" rel="noopener">@laterzi.napoli</a></div>
+        </div>
+      </div>
+      <a class="map reveal" href="https://www.google.com/maps/search/?api=1&amp;query=Oststra%C3%9Fe+7+59065+Hamm" target="_blank" rel="noopener" aria-label="Route zu Oststraße 7 in Hamm in Google Maps öffnen">
+        <div class="pin"><div class="dot"></div><strong>La Terzi Napoli</strong><small>Oststraße 7 · Hamm Innenstadt</small><em>Route planen</em></div>
+      </a>
+    </div>
+  </section>
+</main>
+
+<div class="check" aria-hidden="true"></div>
+<footer>
+  <div class="wrap">
+    <div class="top">
+      <a class="brand" href="#top" aria-label="Nach oben"><span class="s">La Terzi</span><span class="c">NAPOLI · HAMM</span></a>
+      <div class="soc"><a href="https://www.instagram.com/laterzi.napoli/" target="_blank" rel="noopener">Instagram</a><a href="https://wa.me/4915116576273" target="_blank" rel="noopener">WhatsApp</a><a href="#reservieren">Reservieren</a></div>
+    </div>
+    <div class="bottom">
+      <span>© 2026 La Terzi Napoli · Hamm &nbsp;·&nbsp; <a href="#" onclick="return false">Impressum</a> &nbsp;·&nbsp; <a href="#" onclick="return false">Datenschutz</a></span>
+      <span class="made">Website-Konzept von <a href="https://avelonstudios.de" target="_blank" rel="noopener">AvèlonStudios</a></span>
+    </div>
+  </div>
+</footer>
+
+<div class="m-cta"><a class="btn btn-gold" href="#reservieren">Reservieren</a><a class="btn btn-line" style="background:rgba(14,12,10,.92)" href="tel:+4915116576273">Anrufen</a></div>
+
+<script>
+(function(){
+  var burger=document.querySelector('.burger'), menu=document.getElementById('mmenu'), closeBtn=menu.querySelector('.close');
+  function setMenu(open){menu.classList.toggle('open',open);burger.setAttribute('aria-expanded',open);document.body.style.overflow=open?'hidden':'';if(open){closeBtn.focus()}else{burger.focus()}}
+  burger.addEventListener('click',function(){setMenu(true)});
+  closeBtn.addEventListener('click',function(){setMenu(false)});
+  menu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');document.body.style.overflow=''})});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menu.classList.contains('open'))setMenu(false)});
+
+  var tabs=[].slice.call(document.querySelectorAll('.tab')), img=document.getElementById('menuImg'), cap=document.getElementById('menuCap');
+  function select(t){tabs.forEach(function(x){var on=x===t;x.setAttribute('aria-selected',on);x.tabIndex=on?0:-1;document.getElementById(x.getAttribute('aria-controls')).hidden=!on});img.src=t.dataset.img;img.alt=t.dataset.cap;cap.textContent=t.dataset.cap}
+  tabs.forEach(function(t,i){t.addEventListener('click',function(){select(t)});t.addEventListener('keydown',function(e){var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(d){var n=tabs[(i+d+tabs.length)%tabs.length];n.focus();select(n)}})});
+
+  var form=document.querySelector('form.res'), ok=form.querySelector('.res-ok'), d=document.getElementById('r-date');
+  d.min=new Date().toISOString().slice(0,10);
+  form.addEventListener('submit',function(e){e.preventDefault();ok.classList.add('show')});
+
+  if('IntersectionObserver' in window){var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.12});document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)})}else{document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('in')})}
+})();
+</script>
+</body>
+</html>
